@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phần Mềm Thi Trắc Nghiệm Tiếng Anh Cho Trẻ Em</title>
+    <title>Chinh Phục Tiếng Anh - Vừa Học Vừa Chơi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #ec4899;
             --success: #10b981;
-            --danger: #ef4444;
+            --danger: #f43f5e;
             --warning: #f59e0b;
-            --bg-color: #f3f4f6;
+            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fae8ff 100%);
             --card-bg: #ffffff;
-            --text-color: #1f2937;
+            --text-color: #1e293b;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-gradient);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
@@ -32,9 +34,10 @@
             width: 100%;
             max-width: 850px;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            border: 4px solid #ffffff;
         }
 
         h1, h2, h3 {
@@ -42,84 +45,137 @@
             text-align: center;
         }
 
+        h1 {
+            font-weight: 800;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
         .screen {
             display: none;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         .screen.active {
             display: block;
         }
 
-        /* Màn hình chọn đề */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
         .exam-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 8px;
         }
 
         .exam-btn {
-            background: #e0e7ff;
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
             color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 15px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 10px;
+            border: 2px solid #c7d2fe;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
 
         .exam-btn:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-2px);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
         }
 
-        /* Màn hình làm bài */
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
         }
 
         .question-box {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #0f172a;
+            line-height: 1.5;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 6px solid var(--primary);
         }
 
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
             margin-bottom: 30px;
         }
 
         .option-item {
-            background: #f9fafb;
-            border: 2px solid #e5e7eb;
-            padding: 12px 18px;
-            border-radius: 8px;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s;
+            font-size: 17px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .option-item:hover {
-            background: #f3f4f6;
-            border-color: #d1d5db;
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateX(4px);
         }
 
         .option-item.selected {
-            background: #e0e7ff;
+            background: #eef2ff;
             border-color: var(--primary);
             color: var(--primary);
-            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
         }
 
         .quiz-footer {
@@ -132,59 +188,67 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 28px;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
+            font-weight: 700;
+            border-radius: 14px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
         button.btn:hover {
             background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
         }
 
         button.btn-secondary {
-            background: #9ca3af;
+            background: #cbd5e1;
+            color: #475569;
+            box-shadow: none;
         }
 
         button.btn-secondary:hover {
-            background: #6b7280;
+            background: #94a3b8;
+            box-shadow: none;
         }
 
-        /* Màn hình kết quả */
         .result-summary {
             text-align: center;
             margin-bottom: 25px;
         }
 
         .score-badge {
-            font-size: 32px;
-            font-weight: bold;
+            font-size: 42px;
+            font-weight: 800;
             color: var(--success);
             margin: 10px 0;
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
         }
 
         .analysis-box {
             background: #fffbeb;
-            border-left: 5px solid var(--warning);
-            padding: 15px;
+            border-left: 6px solid var(--warning);
+            padding: 20px;
             margin-bottom: 25px;
-            border-radius: 4px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.05);
         }
 
         .analysis-box h3 {
             color: #d97706;
             margin-top: 0;
             text-align: left;
+            font-size: 18px;
         }
 
         .detail-table-container {
-            max-height: 400px;
+            max-height: 350px;
             overflow-y: auto;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            border: 2px solid #f1f5f9;
+            border-radius: 16px;
+            margin-bottom: 25px;
         }
 
         table {
@@ -194,31 +258,34 @@
         }
 
         th, td {
-            padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 14px;
+            padding: 14px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 15px;
         }
 
         th {
-            background: #f9fafb;
+            background: #f8fafc;
             position: sticky;
             top: 0;
+            font-weight: 700;
+            color: #475569;
         }
 
         .text-correct {
             color: var(--success);
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .text-incorrect {
             color: var(--danger);
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .explanation {
-            font-size: 13px;
-            color: #4b5563;
-            margin-top: 4px;
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 6px;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -227,36 +294,40 @@
 <div class="container">
     <!-- MÀN HÌNH 1: CHỌN ĐỀ THI -->
     <div id="screen-select" class="screen active">
-        <h1>🌟 Phần Mềm Trắc Nghiệm Tiếng Anh Cho Trẻ Em 🌟</h1>
-        <p style="text-align: center; color: #6b7280;">Chọn một đề thi bên dưới để bắt đầu luyện tập (25 câu hỏi/đề)</p>
+        <h1>🚀 Chinh Phục Tiếng Anh Vui Nhộn 🌟</h1>
+        <div class="tab-container">
+            <button class="tab-btn active" id="tabMixed" onclick="switchTab('mixed')">🔥 20 Đề Tổng Hợp</button>
+            <button class="tab-btn" id="tabTopic" onclick="switchTab('topic')">🎯 7 Đề Chuyên Đề</button>
+        </div>
+        <p style="text-align: center; color: #64748b; font-weight: 600;" id="selectDesc">Chọn đề tổng hợp bên dưới để bắt đầu thử thách (25 câu phân bổ đều)</p>
         <div class="exam-grid" id="examGrid"></div>
     </div>
 
     <!-- MÀN HÌNH 2: LÀM BÀI THI -->
     <div id="screen-quiz" class="screen">
         <div class="quiz-header">
-            <span id="examTitle" style="font-weight: bold; color: var(--primary);">Đề thi</span>
-            <span id="questionCounter" style="font-weight: bold;">Câu 1 / 25</span>
+            <span id="examTitle" style="font-weight: 700; color: var(--primary); font-size: 17px;">Đề thi</span>
+            <span id="questionCounter" style="font-weight: 700; background: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 10px;">Câu 1 / 25</span>
         </div>
         <div class="question-box" id="questionText">Nội dung câu hỏi ở đây?</div>
         <div class="options-list" id="optionsList"></div>
         <div class="quiz-footer">
-            <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">Quay lại</button>
-            <button class="btn" id="nextBtn" onclick="nextQuestion()">Câu tiếp theo</button>
+            <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">⬅ Quay lại</button>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()">Câu tiếp theo ➡</button>
         </div>
     </div>
 
     <!-- MÀN HÌNH 3: KẾT QUẢ & PHÂN TÍCH -->
     <div id="screen-result" class="screen">
-        <h2>🎉 Hoàn Thành Bài Thi! 🎉</h2>
+        <h2>🎉 Hoàn Thành Xuất Sắc Thử Thách! 🎉</h2>
         <div class="result-summary">
-            <p>Số câu trả lời đúng của bạn:</p>
+            <p style="font-weight: 600; color: #64748b;">Số câu trả lời đúng của bạn:</p>
             <div class="score-badge" id="scoreBadge">22 / 25</div>
         </div>
 
         <div class="analysis-box" id="analysisBox">
             <h3>📊 Đánh giá năng lực & Hướng dẫn cải thiện:</h3>
-            <p id="analysisText">Đang phân tích kết quả...</p>
+            <p id="analysisText" style="line-height: 1.5; font-weight: 600;">Đang phân tích kết quả...</p>
         </div>
 
         <h3>📝 Bảng chi tiết đáp án & Hướng dẫn</h3>
@@ -274,23 +345,114 @@
         </div>
 
         <div style="text-align: center;">
-            <button class="btn" onclick="returnToSelect()">Chọn đề thi khác</button>
+            <button class="btn" onclick="returnToSelect()">🏠 Chọn Đề Thi Khác</button>
         </div>
     </div>
 </div>
 
 <script>
     const topics = {
-        pronoun: { name: "Đại từ nhân xưng (Subject Pronouns)", count: 0, wrong: 0, guide: "Đại từ nhân xưng dùng làm chủ ngữ trong câu (I, You, He, She, It, We, They). Hãy nhớ: He dùng cho nam, She dùng cho nữ, It dùng cho vật/động vật số ít, They dùng cho số nhiều." },
-        object: { name: "Đại từ tân ngữ (Object Pronouns)", count: 0, wrong: 0, guide: "Đại từ tân ngữ đứng sau động từ hoặc giới từ (me, you, him, her, it, us, them). Ví dụ: 'I love him' (Tôi yêu anh ấy - him là tân ngữ của He)." },
-        thereIsAre: { name: "Cấu trúc There is / There are", count: 0, wrong: 0, guide: "Dùng 'There is' trước danh từ số ít hoặc danh từ không đếm được (There is a book). Dùng 'There are' trước danh từ số nhiều (There are two books)." },
-        preposition: { name: "Giới từ chỉ thời gian (Time Prepositions)", count: 0, wrong: 0, guide: "• IN: dùng cho tháng, năm, mùa, buổi trong ngày (in 2026, in the morning).\n• ON: dùng cho thứ trong tuần, ngày tháng (on Monday, on May 5th).\n• AT: dùng cho giờ cụ thể, các dịp lễ (at 7:00 AM, at Christmas)." }
+        singularPlural: { name: "Số ít & Số nhiều (Singular & Plural)", guide: "Danh từ số ít dùng 'a/an' hoặc giữ nguyên dạng đơn (cat, book). Danh từ số nhiều thường thêm '-s' hoặc '-es' (cats, books). Các danh từ bất quy tắc cần nhớ: child -> children, man -> men, tooth -> teeth." },
+        objectPronoun: { name: "Đại từ tân ngữ (Object Pronouns)", guide: "Đại từ tân ngữ đứng sau động từ hoặc giới từ (me, you, him, her, it, us, them). Ví dụ: 'I like her' (Tôi thích cô ấy)." },
+        toBe: { name: "Động từ To be (Am / Is / Are)", guide: "• I đi với am.\n• He, She, It, Danh từ số ít đi với is.\n• We, You, They, Danh từ số nhiều đi với are." },
+        whQuestion: { name: "Từ hỏi (Wh-questions)", guide: "• What: Hỏi vật, sự việc.\n• Who: Hỏi người.\n• Where: Hỏi địa điểm, nơi chốn.\n• When: Hỏi thời gian.\n• Why: Hỏi lý do (trả lời với Because).\n• How: Hỏi cách thức, phương tiện." },
+        prepositionTime: { name: "Giới từ chỉ thời gian (In / On / At)", guide: "• IN: Dùng cho tháng, năm, mùa, buổi trong ngày (in June, in 2026, in the morning).\n• ON: Dùng cho thứ trong tuần, ngày tháng (on Monday, on May 5th).\n• AT: Dùng cho giờ cụ thể, các dịp lễ (at 7:00 AM, at Christmas)." },
+        someAny: { name: "Some & Any", guide: "• Some: Dùng trong câu khẳng định và câu mời/đề nghị (I have some apples).\n• Any: Dùng trong câu phủ định và câu hỏi (Do you have any questions? / I don't have any pens)." },
+        howMuchMany: { name: "How much & How many", guide: "• How many: Dùng với danh từ đếm được số nhiều (How many books do you have?).\n• How much: Dùng với danh từ không đếm được hoặc hỏi giá tiền (How much water is left? / How much is this shirt?)." }
+    };
+
+    const questionBank = {
+        singularPlural: [
+            { q: "I have two ___ in my pencil case.", options: ["pen", "pens", "a pen", "penes"], correct: 1, explain: "Số từ 'two' chỉ số lượng nhiều, danh từ 'pen' phải thêm '-s' thành 'pens'." },
+            { q: "There is ___ cat under the table.", options: ["a", "an", "two", "some"], correct: 0, explain: "Danh từ đếm được số ít bắt đầu bằng phụ âm 'cat' dùng mạo từ 'a'." },
+            { q: "She has an beautiful ___ on her desk.", options: ["apple", "apples", "boxs", "box"], correct: 3, explain: "'an' đi với danh từ số ít bắt đầu bằng nguyên âm hoặc phụ âm tùy mạo từ, ở đây 'apple' là số ít đúng." },
+            { q: "How many ___ are there in the classroom?", options: ["child", "childs", "children", "baby"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'child' là 'children'." },
+            { q: "My mother bought three ___ at the market.", options: ["fish", "fishes", "fishs", "fihesh"], correct: 0, explain: "Từ 'fish' giữ nguyên hình thức ở cả số ít và số nhiều." },
+            { q: "Look at those ___ running in the park!", options: ["dog", "dogs", "doges", "doggies"], correct: 1, explain: "Đại từ chỉ định 'those' đi với danh từ số nhiều thêm '-s' (dogs)." },
+            { q: "He brushes his ___ every morning.", options: ["tooth", "teeths", "teeth", "tooths"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'tooth' là 'teeth'." },
+            { q: "There are many ___ on the farm.", options: ["sheep", "sheeps", "sheepes", "ship"], correct: 0, explain: "Từ 'sheep' không thay đổi dạng số nhiều." },
+            { q: "Do you have ___ eraser?", options: ["a", "an", "two", "some"], correct: 1, explain: "'eraser' bắt đầu bằng nguyên âm 'e' nên dùng mạo từ 'an'." },
+            { q: "The farmer has four ___ and two cows.", options: ["horse", "horses", "horsis", "horsees"], correct: 1, explain: "Số lượng 'four' đi với danh từ số nhiều 'horses'." }
+        ],
+        objectPronoun: [
+            { q: "Mary is talking to Tom. She likes ___ very much.", options: ["he", "him", "his", "himself"], correct: 1, explain: "Đứng sau động từ 'likes' cần đại từ tân ngữ của 'he' là 'him'." },
+            { q: "This gift is for you. Do you like ___?", options: ["it", "its", "they", "them"], correct: 0, explain: "Thay thế cho vật số ít 'gift' ở vị trí tân ngữ dùng 'it'." },
+            { q: "We are waiting for ___ at the bus stop.", options: ["they", "them", "their", "theirs"], correct: 1, explain: "Đứng sau giới từ 'for' cần dùng tân ngữ 'them'." },
+            { q: "Can you help ___ with this heavy bag?", options: ["I", "my", "me", "mine"], correct: 2, explain: "Đứng sau động từ 'help' làm tân ngữ là 'me'." },
+            { q: "The teacher is explaining the lesson to ___.", options: ["we", "our", "us", "ours"], correct: 2, explain: "Đứng sau giới từ 'to' cần dùng tân ngữ 'us'." },
+            { q: "Peter is my best friend. I always trust ___.", options: ["he", "him", "his", "it"], correct: 1, explain: "Peter là nam giới, đứng sau động từ 'trust' dùng tân ngữ 'him'." },
+            { q: "These shoes are nice. I want to buy ___.", options: ["it", "they", "them", "their"], correct: 2, explain: "'These shoes' là danh từ số nhiều, tân ngữ tương ứng là 'them'." },
+            { q: "Where is Anna? I need to speak to ___.", options: ["she", "her", "hers", "it"], correct: 1, explain: "Anna là nữ, đứng sau giới từ 'to' dùng tân ngữ 'her'." },
+            { q: "My dog is hungry. Give ___ some food, please.", options: ["it", "its", "he", "him"], correct: 0, explain: "Động vật số ít ở vị trí tân ngữ dùng 'it'." },
+            { q: "Do you know John and Mary? Yes, I know ___.", options: ["they", "them", "their", "us"], correct: 1, explain: "John and Mary là số nhiều, tân ngữ là 'them'." }
+        ],
+        toBe: [
+            { q: "I ___ a student in class 4A.", options: ["am", "is", "are", "be"], correct: 0, explain: "Chủ ngữ 'I' đi với động từ 'To be' là 'am'." },
+            { q: "My mother ___ a teacher in a primary school.", options: ["am", "is", "are", "be"], correct: 1, explain: "'My mother' là ngôi thứ ba số ít nên đi với 'is'." },
+            { q: "They ___ playing football in the school yard.", options: ["am", "is", "are", "be"], correct: 2, explain: "Chủ ngữ số nhiều 'They' đi với động từ 'are'." },
+            { q: "___ you happy today?", options: ["Am", "Is", "Are", "Do"], correct: 2, explain: "Chủ ngữ 'you' đi với động từ 'To be' ở thể nghi vấn là 'Are'." },
+            { q: "The weather ___ nice and warm this morning.", options: ["am", "is", "are", "be"], correct: 1, explain: "'The weather' là danh từ không đếm được số ít, dùng 'is'." },
+            { q: "Mary and John ___ good friends.", options: ["am", "is", "are", "be"], correct: 2, explain: "Hai người 'Mary and John' là số nhiều, dùng 'are'." },
+            { q: "Where ___ your books?", options: ["am", "is", "are", "be"], correct: 2, explain: "'your books' là danh từ số nhiều nên dùng 'are'." },
+            { q: "This ___ my new bicycle.", options: ["am", "is", "are", "be"], correct: 1, explain: "'This' chỉ một vật duy nhất, dùng 'is'." },
+            { q: "Cats ___ animals that like catching mice.", options: ["am", "is", "are", "be"], correct: 2, explain: "'Cats' là danh từ số nhiều, dùng 'are'." },
+            { q: "___ there a pen on the desk?", options: ["Am", "Is", "Are", "Do"], correct: 1, explain: "Cấu trúc 'There is' dạng câu hỏi đảo 'Is' lên trước danh từ số ít." }
+        ],
+        whQuestion: [
+            { q: "___ is your name? - My name is Linh.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi tên hoặc sự vật dùng từ để hỏi 'What'." },
+            { q: "___ old are you? - I am ten years old.", options: ["What", "How", "Where", "Who"], correct: 1, explain: "Hỏi tuổi dùng cấu trúc 'How old'." },
+            { q: "___ do you live? - I live in Hanoi.", options: ["What", "Who", "Where", "When"], correct: 2, explain: "Hỏi nơi chốn, địa điểm dùng 'Where'." },
+            { q: "___ is that man over there? - He is my uncle.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người dùng từ 'Who'." },
+            { q: "___ do you go to school? - I go at 7 o'clock.", options: ["What", "When", "Where", "Who"], correct: 1, explain: "Hỏi về thời gian dùng 'When'." },
+            { q: "___ do you like English? - Because it is fun.", options: ["What", "Where", "Why", "Who"], correct: 2, explain: "Hỏi lý do (trả lời bằng 'Because') dùng 'Why'." },
+            { q: "___ do you go to school? - By bicycle.", options: ["What", "How", "Where", "When"], correct: 1, explain: "Hỏi phương tiện hoặc cách thức di chuyển dùng 'How'." },
+            { q: "___ color is your new bag? - It's blue.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi màu sắc dùng 'What color'." },
+            { q: "___ is your birthday? - It's on May 5th.", options: ["What", "Who", "Where", "When"], correct: 3, explain: "Hỏi ngày tháng/thời gian sinh nhật dùng 'When'." },
+            { q: "___ is your best friend? - It's Nam.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người bạn thân dùng 'Who'." }
+        ],
+        prepositionTime: [
+            { q: "My birthday is ___ June.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các tháng trong năm dùng giới từ 'in'." },
+            { q: "We don't go to school ___ Sundays.", options: ["in", "on", "at", "to"], correct: 1, explain: "Đi trước các thứ trong tuần dùng giới từ 'on'." },
+            { q: "The film starts ___ 8:00 PM tonight.", options: ["in", "on", "at", "during"], correct: 2, explain: "Đi trước các mốc giờ cụ thể dùng giới từ 'at'." },
+            { q: "Birds often fly to the south ___ winter.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các mùa trong năm dùng giới từ 'in'." },
+            { q: "We celebrate Christmas ___ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Đi trước ngày tháng cụ thể dùng giới từ 'on'." },
+            { q: "What do you usually do ___ the weekend?", options: ["in", "on", "at", "to"], correct: 2, explain: "Cụm từ cố định chỉ cuối tuần dùng 'at the weekend'." },
+            { q: "My father was born ___ 1985.", options: ["at", "on", "in", "during"], correct: 2, explain: "Đi trước năm dùng giới từ 'in'." },
+            { q: "Do you wake up early ___ the morning?", options: ["at", "on", "in", "by"], correct: 2, explain: "Cụm từ cố định: 'in the morning', 'in the afternoon', 'in the evening'." },
+            { q: "The party is scheduled ___ Friday evening.", options: ["at", "in", "on", "by"], correct: 2, explain: "Khi có thứ đi kèm (Friday), ta dùng giới từ 'on'." },
+            { q: "The shops close ___ midnight in this town.", options: ["in", "on", "at", "during"], correct: 2, explain: "Cụm từ chỉ thời điểm đêm muộn dùng 'at midnight'." }
+        ],
+        someAny: [
+            { q: "I have ___ apples in my bag.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định với danh từ số nhiều dùng 'some'." },
+            { q: "Do you have ___ questions for me?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi nghi vấn thường dùng 'any'." },
+            { q: "There isn't ___ milk left in the fridge.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('isn't') đi với 'any'." },
+            { q: "Would you like ___ tea?", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời hoặc đề nghị lịch sự dùng 'some'." },
+            { q: "She doesn't want ___ help with her homework.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('doesn't want') dùng 'any'." },
+            { q: "Can I have ___ water, please?", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu xin phép hoặc nhờ vả dùng 'some'." },
+            { q: "We don't have ___ bananas in the kitchen.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
+            { q: "He bought ___ new books yesterday.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
+            { q: "Are there ___ students in the library?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
+            { q: "I need ___ paper to write a letter.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định danh từ không đếm được dùng 'some'." }
+        ],
+        howMuchMany: [
+            { q: "___ books do you have in your bag?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'books' là danh từ đếm được số nhiều nên dùng 'How many'." },
+            { q: "___ is this lovely dress?", options: ["How much", "How many", "How old", "What"], correct: 0, explain: "Hỏi giá tiền dùng cấu trúc 'How much'." },
+            { q: "___ water do you drink every day?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'water' là danh từ không đếm được nên dùng 'How much'." },
+            { q: "___ apples do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' là danh từ đếm được số nhiều dùng 'How many'." },
+            { q: "___ money do you have in your pocket?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'money' (tiền) không đếm được trong tiếng Anh, dùng 'How much'." },
+            { q: "___ students are there in your class?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'students' đếm được số nhiều dùng 'How many'." },
+            { q: "___ rice is left in the cooker?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'rice' (gạo) không đếm được dùng 'How much'." },
+            { q: "___ pens do you need?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pens' đếm được số nhiều dùng 'How many'." },
+            { q: "___ is a bowl of noodles?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "Hỏi giá tiền một bát phở dùng 'How much'." },
+            { q: "___ milk do you drink for breakfast?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'milk' không đếm được dùng 'How much'." }
+        ]
     };
 
     let allExams = [];
     let currentExamIndex = 0;
     let currentQuestionIndex = 0;
     let userAnswers = [];
+    let currentMode = 'mixed';
 
     function shuffleArray(array) {
         let arr = [...array];
@@ -301,125 +463,109 @@
         return arr;
     }
 
-    function buildQuestionBank() {
-        return [
-            // --- ĐẠI TỪ NHÂN XUNG ---
-            { q: "___ am a primary school student.", options: ["I", "He", "She", "It"], correct: 0, topic: "pronoun", explain: "Chủ ngữ đi với động từ 'am' luôn là 'I'." },
-            { q: "My mother is cooking in the kitchen. ___ is very kind.", options: ["He", "She", "They", "It"], correct: 1, topic: "pronoun", explain: "'My mother' là giới tính nữ, số ít nên dùng 'She'." },
-            { q: "Look at David! ___ is playing soccer with his friends.", options: ["He", "She", "It", "They"], correct: 0, topic: "pronoun", explain: "David là tên con trai nên dùng đại từ 'He'." },
-            { q: "The cat is sleeping on the sofa. ___ looks very lazy.", options: ["He", "She", "It", "We"], correct: 2, topic: "pronoun", explain: "Động vật (con mèo) số ít dùng đại từ 'It'." },
-            { q: "My friends and I are in the classroom. ___ are studying English.", options: ["They", "We", "You", "He"], correct: 1, topic: "pronoun", explain: "Có 'My friends and I' (tôi và các bạn) nghĩa là 'chúng tôi', dùng 'We'." },
-            { q: "Children, are ___ ready for the picnic tomorrow?", options: ["we", "they", "you", "he"], correct: 2, topic: "pronoun", explain: "Đang nói trực tiếp với các em nhỏ (số nhiều), dùng 'you'." },
-            { q: "Peter and Linda are late. ___ missed the school bus.", options: ["They", "We", "He", "She"], correct: 0, topic: "pronoun", explain: "Peter và Linda là hai người (số nhiều), dùng 'They'." },
-            { q: "This is a new book. ___ has many colorful pictures.", options: ["He", "She", "It", "They"], correct: 2, topic: "pronoun", explain: "Vật vô tri (cuốn sách) số ít dùng 'It'." },
-            { q: "Where is your father? - ___ is watering the flowers in the garden.", options: ["She", "He", "It", "They"], correct: 1, topic: "pronoun", explain: "Bố (father) là nam giới nên dùng 'He'." },
-            { q: "Mary and you are good singers. ___ sing very well.", options: ["We", "They", "You", "She"], correct: 2, topic: "pronoun", explain: "Khi có 'you' kết hợp trong nhóm, đại từ chủ ngữ tương ứng là 'You' (các bạn)." },
-            { q: "My brother has a bicycle. ___ rides it to school every day.", options: ["He", "She", "It", "They"], correct: 0, topic: "pronoun", explain: "Anh trai (my brother) là nam nên dùng 'He'." },
-            { q: "The weather is nice today. ___ is warm and sunny.", options: ["He", "She", "It", "We"], correct: 2, topic: "pronoun", explain: "Nói về thời tiết dùng đại từ 'It'." },
-            { q: "Anna and her sister love reading books. ___ go to the library on weekends.", options: ["We", "They", "He", "She"], correct: 1, topic: "pronoun", explain: "Anna và em gái cô ấy là hai người, dùng 'They'." },
-            { q: "Are ___ a new student in this school?", options: ["I", "he", "you", "she"], correct: 2, topic: "pronoun", explain: "Hỏi trực tiếp người đối diện (bạn) dùng 'you'." },
-            { q: "Uncle Bob is a doctor. ___ works in a big hospital.", options: ["He", "She", "It", "They"], correct: 0, topic: "pronoun", explain: "Bác sĩ Bob là nam giới nên dùng 'He'." },
-
-            // --- TÂN NGỮ ---
-            { q: "The teacher is calling. Please listen to ___.", options: ["she", "her", "hers", "he"], correct: 1, topic: "object", explain: "Đứng sau giới từ 'to' cần dùng tân ngữ 'her' (cô ấy)." },
-            { q: "I have a new puppy. I love ___ very much.", options: ["it", "he", "she", "they"], correct: 0, topic: "object", explain: "Con cún nhỏ là vật/động vật số ít, tân ngữ là 'it'." },
-            { q: "John invited ___ to his birthday party last night.", options: ["we", "us", "our", "ours"], correct: 1, topic: "object", explain: "Đứng sau động từ 'invited' là tân ngữ, tân ngữ của 'we' là 'us'." },
-            { q: "These shoes are dirty. You should clean ___.", options: ["they", "them", "their", "it"], correct: 1, topic: "object", explain: "'These shoes' là danh từ số nhiều, tân ngữ là 'them'." },
-            { q: "Can you help ___ with this difficult math homework?", options: ["I", "my", "me", "mine"], correct: 2, topic: "object", explain: "Đứng sau động từ 'help' làm tân ngữ là 'me'." },
-            { q: "Where is Tom? I need to talk to ___.", options: ["him", "he", "his", "it"], correct: 0, topic: "object", explain: "Tom là nam, đứng sau giới từ 'to' dùng tân ngữ 'him'." },
-            { q: "Mary lost her pen. I am giving ___ my pen.", options: ["she", "her", "hers", "it"], correct: 1, topic: "object", explain: "Mary là nữ, vị trí sau động từ 'giving' cần tân ngữ 'her'." },
-            { q: "We are hungry. Can mom make some sandwiches for ___?", options: ["we", "us", "our", "they"], correct: 1, topic: "object", explain: "Tân ngữ tương ứng của 'we' là 'us'." },
-            { q: "Do you know Mr. Brown? Yes, I know ___.", options: ["he", "him", "his", "she"], correct: 1, topic: "object", explain: "Mr. Brown là nam, đứng sau động từ 'know' dùng tân ngữ 'him'." },
-            { q: "The kids are making too much noise. Tell ___ to be quiet.", options: ["they", "them", "their", "it"], correct: 1, topic: "object", explain: "'The kids' là số nhiều, tân ngữ là 'them'." },
-            { q: "This present is for you and me. Open ___ together!", options: ["it", "them", "they", "its"], correct: 0, topic: "object", explain: "'This present' là số ít, dùng tân ngữ 'it'." },
-            { q: "My little brother is crying. Can you calm ___ down?", options: ["he", "him", "his", "it"], correct: 1, topic: "object", explain: "Em trai là nam, dùng tân ngữ 'him'." },
-            { q: "I bought a nice hat, but I don't like ___ color.", options: ["it", "its", "them", "they"], correct: 0, topic: "object", explain: "Cần tân ngữ 'it' đại diện cho chiếc mũ." },
-            { q: "Linda is looking for her keys. Did you see ___?", options: ["they", "them", "it", "their"], correct: 1, topic: "object", explain: "'her keys' là danh từ số nhiều, tân ngữ là 'them'." },
-            { q: "Listen to ___! I have something important to tell you.", options: ["I", "my", "me", "mine"], correct: 2, topic: "object", explain: "Đứng sau giới từ 'to' là tân ngữ 'me'." },
-
-            // --- THERE IS / THERE ARE ---
-            { q: "___ an apple on the kitchen table.", options: ["There is", "There are", "Is there", "Are there"], correct: 0, topic: "thereIsAre", explain: "'an apple' là danh từ đếm được số ít nên dùng 'There is'." },
-            { q: "___ five books in my school bag.", options: ["There is", "There are", "Is there", "Are there"], correct: 1, topic: "thereIsAre", explain: "'five books' là danh từ số nhiều nên dùng 'There are'." },
-            { q: "___ any water left in the bottle?", options: ["There is", "There are", "Is there", "Are there"], correct: 2, topic: "thereIsAre", explain: "'water' không đếm được và đây là câu hỏi, dùng 'Is there'." },
-            { q: "___ a big playground behind our school.", options: ["There is", "There are", "Are there", "There has"], correct: 0, topic: "thereIsAre", explain: "'a big playground' là danh từ số ít, dùng 'There is'." },
-            { q: "___ many tall trees in this park.", options: ["There is", "There are", "Is there", "There have"], correct: 1, topic: "thereIsAre", explain: "'many tall trees' là số nhiều, dùng 'There are'." },
-            { q: "___ a cat and two dogs in the yard?", options: ["Is there", "Are there", "There is", "There are"], correct: 0, topic: "thereIsAre", explain: "Xét danh từ đầu tiên 'a cat' (số ít) đi sau cấu trúc, dùng 'Is there'." },
-            { q: "___ no milk in the fridge for breakfast.", options: ["There is", "There are", "Is there", "Are there"], correct: 0, topic: "thereIsAre", explain: "'milk' là danh từ không đếm được, dùng 'There is'." },
-            { q: "___ twenty classrooms in our new school.", options: ["There is", "There are", "Is there", "Are there"], correct: 1, topic: "thereIsAre", explain: "'twenty classrooms' là danh từ số nhiều, dùng 'There are'." },
-            { q: "Excuse me, ___ a post office near here?", options: ["there is", "there are", "is there", "are there"], correct: 2, topic: "thereIsAre", explain: "Câu hỏi với danh từ số ít 'a post office' dùng 'Is there'." },
-            { q: "Look! ___ a rainbow in the sky.", options: ["There is", "There are", "Is there", "Are there"], correct: 0, topic: "thereIsAre", explain: "'a rainbow' là số ít, dùng 'There is'." },
-            { q: "___ some children playing football outside.", options: ["There is", "There are", "Is there", "Are there"], correct: 1, topic: "thereIsAre", explain: "'some children' là số nhiều, dùng 'There are'." },
-            { q: "___ a computer and two books on the desk.", options: ["There is", "There are", "Is there", "Are there"], correct: 0, topic: "thereIsAre", explain: "Danh từ đứng gần nhất là 'a computer' (số ít), dùng 'There is'." },
-            { q: "___ any orange juice in the glass?", options: ["Is there", "Are there", "There is", "There are"], correct: 0, topic: "thereIsAre", explain: "Danh từ không đếm được 'orange juice' trong câu hỏi dùng 'Is there'." },
-            { q: "___ many cars on the street during rush hour.", options: ["There is", "There are", "Is there", "Are there"], correct: 1, topic: "thereIsAre", explain: "'many cars' là số nhiều, dùng 'There are'." },
-            { q: "___ a nurse in the school medical room?", options: ["Is there", "Are there", "There is", "There are"], correct: 0, topic: "thereIsAre", explain: "Câu hỏi với danh từ số ít 'a nurse' dùng 'Is there'." },
-
-            // --- GIỚI TỪ THỜI GIAN ---
-            { q: "My birthday is ___ June.", options: ["at", "on", "in", "by"], correct: 2, topic: "preposition", explain: "Đi trước các tháng trong năm dùng giới từ 'in'." },
-            { q: "We don't go to school ___ Sundays.", options: ["in", "on", "at", "to"], correct: 1, topic: "preposition", explain: "Đi trước các thứ trong tuần dùng giới từ 'on'." },
-            { q: "The film starts ___ 8:00 PM tonight.", options: ["in", "on", "at", "during"], correct: 2, topic: "preposition", explain: "Đi trước các mốc giờ cụ thể dùng giới từ 'at'." },
-            { q: "Birds often fly to the south ___ winter.", options: ["at", "on", "in", "by"], correct: 2, topic: "preposition", explain: "Đi trước các mùa trong năm dùng giới từ 'in'." },
-            { q: "We celebrate Christmas ___ December 25th.", options: ["in", "on", "at", "by"], correct: 1, topic: "preposition", explain: "Đi trước ngày tháng cụ thể dùng giới từ 'on'." },
-            { q: "What do you usually do ___ the weekend?", options: ["in", "on", "at", "to"], correct: 2, topic: "preposition", explain: "Cụm từ cố định: 'at the weekend' (vào cuối tuần)." },
-            { q: "My father was born ___ 1985.", options: ["at", "on", "in", "during"], correct: 2, topic: "preposition", explain: "Đi trước năm dùng giới từ 'in'." },
-            { q: "Do you wake up early ___ the morning?", options: ["at", "on", "in", "by"], correct: 2, topic: "preposition", explain: "Cụm từ cố định: 'in the morning', 'in the afternoon', 'in the evening'." },
-            { q: "The party is scheduled ___ Friday evening.", options: ["at", "in", "on", "by"], correct: 2, topic: "preposition", explain: "Khi có thứ đi kèm (Friday), ta dùng giới từ 'on'." },
-            { q: "The shops close ___ midnight in this town.", options: ["in", "on", "at", "during"], correct: 2, topic: "preposition", explain: "Cụm từ chỉ thời điểm đêm muộn dùng 'at midnight'." },
-            { q: "Her birthday is ___ autumn.", options: ["at", "on", "in", "to"], correct: 2, topic: "preposition", explain: "Đi trước các mùa (autumn) dùng 'in'." },
-            { q: "We have a long vacation ___ July.", options: ["at", "on", "in", "by"], correct: 2, topic: "preposition", explain: "Đi trước tháng dùng 'in'." },
-            { q: "Are you free ___ Monday afternoon?", options: ["at", "on", "in", "to"], correct: 2, topic: "preposition", explain: "Đi kèm với thứ (Monday) dùng giới từ 'on'." },
-            { q: "The train leaves ___ noon.", options: ["in", "on", "at", "during"], correct: 2, topic: "preposition", explain: "Cụm từ chỉ trưa dùng 'at noon'." },
-            { q: "Leaves turn yellow ___ autumn.", options: ["at", "on", "in", "by"], correct: 2, topic: "preposition", explain: "Mùa trong năm dùng 'in'." }
-        ];
-    }
-
-    function generateExams() {
-        let basePool = buildQuestionBank();
-        
-        let pronounPool = basePool.filter(item => item.topic === 'pronoun');
-        let objectPool = basePool.filter(item => item.topic === 'object');
-        let therePool = basePool.filter(item => item.topic === 'thereIsAre');
-        let prepPool = basePool.filter(item => item.topic === 'preposition');
-
+    function generateMixedExams() {
+        let keys = Object.keys(questionBank);
         allExams = [];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             let examQuestions = [];
-            // Mỗi đề gồm đúng 25 câu, phân bổ đều cho 4 chủ đề (khoảng 6-7 câu mỗi chủ đề)
-            let pSelected = shuffleArray(pronounPool).slice(0, 7);
-            let oSelected = shuffleArray(objectPool).slice(0, 6);
-            let tSelected = shuffleArray(therePool).slice(0, 6);
-            let prSelected = shuffleArray(prepPool).slice(0, 6);
+            let topicCounts = { singularPlural: 4, objectPronoun: 4, toBe: 4, whQuestion: 4, prepositionTime: 3, someAny: 3, howMuchMany: 3 };
 
-            let combined = [...pSelected, ...oSelected, ...tSelected, ...prSelected];
-            combined = shuffleArray(combined);
-
-            combined.forEach((item, idx) => {
-                examQuestions.push({
-                    id: idx + 1,
-                    q: `(${idx + 1}) ${item.q.replace(/^\(\d+\)\s*/, '')}`,
-                    options: [...item.options],
-                    correct: item.correct,
-                    topic: item.topic,
-                    explain: item.explain
+            for (let key of keys) {
+                let needed = topicCounts[key];
+                let shuffledPool = shuffleArray(questionBank[key]);
+                let selected = shuffledPool.slice(0, needed);
+                selected.forEach(item => {
+                    examQuestions.push({ ...item, topicKey: key });
                 });
-            });
+            }
 
+            examQuestions = shuffleArray(examQuestions);
+
+            let finalizedExam = examQuestions.map((item, idx) => ({
+                id: idx + 1,
+                q: `(${idx + 1}) ${item.q.replace(/^\(\d+\)\s*/, '')}`,
+                options: [...item.options],
+                correct: item.correct,
+                topic: item.topicKey,
+                explain: item.explain
+            }));
+
+            allExams.push(finalizedExam);
+        }
+    }
+
+    function generateTopicExams() {
+        allExams = [];
+        let keys = Object.keys(questionBank);
+        keys.forEach(k => {
+            let pool = questionBank[k];
+            let examQuestions = [];
+            for (let i = 0; i < 25; i++) {
+                let sourceItem = pool[i % pool.length];
+                examQuestions.push({
+                    id: i + 1,
+                    q: `(${i + 1}) ${sourceItem.q.replace(/^\(\d+\)\s*/, '')}`,
+                    options: [...sourceItem.options],
+                    correct: sourceItem.correct,
+                    topic: k,
+                    explain: sourceItem.explain
+                });
+            }
             allExams.push(examQuestions);
+        });
+    }
+
+    function switchTab(mode) {
+        currentMode = mode;
+        document.getElementById('tabMixed').classList.toggle('active', mode === 'mixed');
+        document.getElementById('tabTopic').classList.toggle('active', mode === 'topic');
+        
+        if (mode === 'mixed') {
+            document.getElementById('selectDesc').innerText = "Chọn đề tổng hợp bên dưới để bắt đầu thử thách (20 đề, 25 câu phân bổ đều)";
+            generateMixedExams();
+        } else {
+            document.getElementById('selectDesc').innerText = "Chọn chuyên đề bên dưới để tập trung ôn luyện sâu từng phần (7 chuyên đề, 25 câu/đề)";
+            generateTopicExams();
+        }
+        renderExamGrid();
+    }
+
+    function renderExamGrid() {
+        const grid = document.getElementById('examGrid');
+        grid.innerHTML = '';
+        
+        if (currentMode === 'mixed') {
+            for (let i = 0; i < 20; i++) {
+                let btn = document.createElement('button');
+                btn.className = 'exam-btn';
+                btn.innerText = `Đề Số ${i + 1} 🌟`;
+                btn.onclick = () => startExam(i);
+                grid.appendChild(btn);
+            }
+        } else {
+            let topicNames = [
+                "1. Số ít & Số nhiều",
+                "2. Đại từ tân ngữ",
+                "3. Động từ To be",
+                "4. Từ hỏi (Wh-q)",
+                "5. Giới từ thời gian",
+                "6. Some & Any",
+                "7. How much / many"
+            ];
+            for (let i = 0; i < 7; i++) {
+                let btn = document.createElement('button');
+                btn.className = 'exam-btn';
+                btn.innerText = topicNames[i];
+                btn.onclick = () => startExam(i);
+                grid.appendChild(btn);
+            }
         }
     }
 
     function initScreenSelect() {
-        generateExams();
-        const grid = document.getElementById('examGrid');
-        grid.innerHTML = '';
-        for (let i = 0; i < 10; i++) {
-            let btn = document.createElement('button');
-            btn.className = 'exam-btn';
-            btn.innerText = `Đề Số ${i + 1}`;
-            btn.onclick = () => startExam(i);
-            grid.appendChild(btn);
-        }
+        generateMixedExams();
+        renderExamGrid();
     }
 
     function startExam(index) {
@@ -427,7 +573,8 @@
         currentQuestionIndex = 0;
         userAnswers = new Array(25).fill(null);
         
-        document.getElementById('examTitle').innerText = `Đang làm: Đề Số ${index + 1}`;
+        let titleText = currentMode === 'mixed' ? `🚀 Thử Thách: Đề Tổng Hợp Số ${index + 1}` : `🎯 Ôn Tập: ${Object.keys(topics)[index] ? topics[Object.keys(topics)[index]].name : 'Chuyên đề'}`;
+        document.getElementById('examTitle').innerText = titleText;
         switchScreen('screen-quiz');
         renderQuestion();
     }
@@ -457,7 +604,7 @@
         });
 
         document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
-        document.getElementById('nextBtn').innerText = currentQuestionIndex === 24 ? 'Nộp bài' : 'Câu tiếp theo';
+        document.getElementById('nextBtn').innerText = currentQuestionIndex === 24 ? 'Nộp Bài 🎯' : 'Câu tiếp theo ➡';
     }
 
     function selectOption(optionIndex) {
@@ -483,9 +630,9 @@
 
     function finishExam() {
         let score = 0;
+        let topicStats = {};
         for (let key in topics) {
-            topics[key].count = 0;
-            topics[key].wrong = 0;
+            topicStats[key] = { count: 0, wrong: 0, name: topics[key].name, guide: topics[key].guide };
         }
 
         const questions = allExams[currentExamIndex];
@@ -497,8 +644,10 @@
             let isCorrect = (userAns === q.correct);
             if (isCorrect) score++;
 
-            topics[q.topic].count++;
-            if (!isCorrect) topics[q.topic].wrong++;
+            if (topicStats[q.topic]) {
+                topicStats[q.topic].count++;
+                if (!isCorrect) topicStats[q.topic].wrong++;
+            }
 
             let userAnsText = userAns !== null ? `${String.fromCharCode(65 + userAns)}. ${q.options[userAns]}` : "Chưa chọn";
             let correctAnsText = `${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}`;
@@ -520,27 +669,27 @@
         });
 
         document.getElementById('scoreBadge').innerText = `${score} / 25`;
-        generateAnalysis();
+        generateAnalysis(topicStats);
         switchScreen('screen-result');
     }
 
-    function generateAnalysis() {
+    function generateAnalysis(topicStats) {
         let worstTopic = null;
         let maxWrong = -1;
 
-        for (let key in topics) {
-            if (topics[key].wrong > maxWrong) {
-                maxWrong = topics[key].wrong;
-                worstTopic = topics[key];
+        for (let key in topicStats) {
+            if (topicStats[key].wrong > maxWrong) {
+                maxWrong = topicStats[key].wrong;
+                worstTopic = topicStats[key];
             }
         }
 
         let analysisTextElem = document.getElementById('analysisText');
         if (maxWrong === 0) {
-            analysisTextElem.innerHTML = "🌟 <b>Xuất sắc!</b> Bạn đã trả lời đúng toàn bộ các câu hỏi. Kiến thức của bạn về Đại từ nhân xưng, Tân ngữ, There is/There are và Giới từ thời gian rất vững chắc!";
+            analysisTextElem.innerHTML = "🌟 <b>Quá đỉnh!</b> Bạn đã trả lời đúng tuyệt đối 25/25 câu hỏi. Thật là một thành tích xuất sắc!";
         } else {
-            analysisTextElem.innerHTML = `📌 Dựa trên kết quả bài làm, phần kiến thức bạn đang gặp nhiều khó khăn nhất là: <b>${worstTopic.name}</b> (sai ${maxWrong} câu).<br><br>` +
-                `💡 <b>Hướng dẫn giảng giải nhanh cho phần yếu:</b><br>` +
+            analysisTextElem.innerHTML = `📌 Phần kiến thức cần chú ý ôn tập thêm: <b>${worstTopic.name}</b> (sai ${maxWrong} câu).<br><br>` +
+                `💡 <b>Mẹo ghi nhớ nhanh:</b><br>` +
                 `<pre style="white-space: pre-wrap; font-family: inherit; margin: 5px 0 0 0; background: transparent;">${worstTopic.guide}</pre>`;
         }
     }
