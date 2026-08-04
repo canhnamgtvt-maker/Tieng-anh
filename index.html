@@ -53,16 +53,10 @@
 
         .screen {
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
         }
 
         .screen.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .tab-container {
@@ -314,10 +308,10 @@
         <h1>🚀 Chinh Phục Tiếng Anh Vui Nhộn 🌟</h1>
         <div class="tab-container">
             <button class="tab-btn active" id="tabMixed" onclick="switchTab('mixed')">🔥 20 Đề Tổng Hợp</button>
-            <button class="tab-btn" id="tabPractice" onclick="switchTab('practice')">📚 7 Đề Ôn Tập (Mới)</button>
+            <button class="tab-btn" id="tabPractice" onclick="switchTab('practice')">📚 7 Đề Ôn Tập</button>
             <button class="tab-btn" id="tabTopic" onclick="switchTab('topic')">🎯 8 Đề Chuyên Đề</button>
         </div>
-        <p style="text-align: center; color: #64748b; font-weight: 600;" id="selectDesc">Chọn đề tổng hợp bên dưới để bắt đầu thử thách (25 câu phân bổ đều)</p>
+        <p style="text-align: center; color: #64748b; font-weight: 600;" id="selectDesc">Chọn đề tổng hợp bên dưới để bắt đầu thử thách</p>
         <div class="exam-grid" id="examGrid"></div>
     </div>
 
@@ -373,116 +367,115 @@
     const topics = {
         prepositionTime: { 
             name: "Giới từ chỉ thời gian (In / On / At)", 
-            theory: "<b>Quy tắc vàng:</b><br>• <b>IN:</b> Đi trước *tháng, năm, mùa, buổi trong ngày* (ví dụ: <i>in June, in 2026, in the morning, in winter</i>).<br>• <b>ON:</b> Đi trước *thứ trong tuần, ngày tháng cụ thể* (ví dụ: <i>on Monday, on May 5th, on Sunday morning</i>).<br>• <b>AT:</b> Đi trước *giờ cụ thể* hoặc mốc thời điểm (ví dụ: <i>at 7:00 p.m., at midnight, at noon, at night</i>)." 
+            theory: "<b>Quy tắc vàng:</b><br>• <b>IN:</b> Đi trước tháng, năm, mùa, buổi trong ngày (ví dụ: <i>in June, in 2026, in the morning</i>).<br>• <b>ON:</b> Đi trước thứ trong tuần, ngày tháng cụ thể (ví dụ: <i>on Monday, on May 5th</i>).<br>• <b>AT:</b> Đi trước giờ cụ thể hoặc mốc thời điểm (ví dụ: <i>at 7:00 p.m., at midnight, at night</i>)." 
         },
         howMuchMany: { 
             name: "How much & How many", 
-            theory: "<b>Quy tắc phân biệt số lượng:</b><br>• <b>HOW MANY:</b> Đi với danh từ đếm được *số nhiều* (ví dụ: <i>How many books/racquets/students do you have?</i>).<br>• <b>HOW MUCH:</b> Đi với danh từ *không đếm được* (water, sugar, milk, money, time...) hoặc dùng để *hỏi giá tiền* (ví dụ: <i>How much sugar do you want? / How much is this dress?</i>)." 
+            theory: "<b>Quy tắc phân biệt số lượng:</b><br>• <b>HOW MANY:</b> Đi với danh từ đếm được số nhiều (ví dụ: <i>How many books/racquets do you have?</i>).<br>• <b>HOW MUCH:</b> Đi với danh từ không đếm được (water, sugar, milk, money...) hoặc dùng để hỏi giá tiền." 
         },
         someAny: { 
             name: "Some & Any", 
-            theory: "<b>Quy tắc sử dụng:</b><br>• <b>SOME:</b> Dùng trong câu *khẳng định* và câu *mời/đề nghị* lịch sự (ví dụ: <i>I have some yogurt / Would you like some tea?</i>).<br>• <b>ANY:</b> Dùng trong câu *phủ định* (có not/doesn't/isn't/haven't) và câu *hỏi nghi vấn* (ví dụ: <i>I don't have any books / Do you have any free time?</i>)." 
+            theory: "<b>Quy tắc sử dụng:</b><br>• <b>SOME:</b> Dùng trong câu khẳng định và câu mời/đề nghị lịch sự.<br>• <b>ANY:</b> Dùng trong câu phủ định (có not/don't) và câu hỏi nghi vấn." 
         },
         singularPlural: { 
             name: "Chuyển đổi Số ít sang Số nhiều", 
-            theory: "<b>Quy tắc biến đổi:</b><br>• Động từ To be: <i>is/am -> are</i>.<br>• Mạo từ: <i>a/an -> bỏ đi hoặc chuyển thành danh từ số nhiều</i>.<br>• Danh từ: Thêm '-s' hoặc '-es' (ví dụ: <i>boy -> boys, tomato -> tomatoes</i>).<br>• Bất quy tắc: <i>child -> children, foot -> feet, tooth -> teeth, mouse -> mice, woman -> women</i>." 
+            theory: "<b>Quy tắc biến đổi:</b><br>• Động từ To be: is/am -> are.<br>• Danh từ: Thêm '-s' hoặc '-es'. Bất quy tắc: <i>child -> children, foot -> feet, tooth -> teeth, woman -> women</i>." 
         },
         objectPronoun: { 
             name: "Đại từ tân ngữ (Object Pronouns)", 
-            theory: "<b>Quy tắc:</b> Đại từ tân ngữ đứng sau động từ hoặc giới từ. Bảng đổi: I -> me, you -> you, he -> him, she -> her, it -> it, we -> us, they -> them.<br><b>Ví dụ:</b> 'She likes <i>him</i>' (Cô ấy thích anh ấy)." 
+            theory: "<b>Quy tắc:</b> Đại từ tân ngữ đứng sau động từ hoặc giới từ (I->me, you->you, he->him, she->her, it->it, we->us, they->them)." 
         },
         toBe: { 
             name: "Động từ To be (Am / Is / Are)", 
-            theory: "<b>Quy tắc:</b> I đi với <i>am</i>; He, She, It, danh từ số ít đi với <i>is</i>; We, You, They, danh từ số nhiều đi với <i>are</i>." 
+            theory: "<b>Quy tắc:</b> I đi với am; He, She, It, số ít đi với is; We, You, They, số nhiều đi với are." 
         },
         whQuestion: { 
             name: "Từ hỏi (Wh-questions)", 
-            theory: "<b>Quy tắc:</b> What (vật/sự việc), Who (người), Where (nơi chốn), When (thời gian), Why (lý do - trả lời because), How (cách thức/phương tiện/tuổi)." 
+            theory: "<b>Quy tắc:</b> What (vật/sự việc), Who (người), Where (nơi chốn), When (thời gian), Why (lý do), How (cách thức/tuổi)." 
         }
     };
 
-    // 7 Đề thực chiến ôn tập do bạn biên soạn trực tiếp
     const practiceExamsData = [
         // ĐỀ SỐ 1
         [
-            { q: "I play pickleball _______ Sunday morning.", options: ["in", "on", "at", "by"], correct: 1, topic: "prepositionTime", explain: "Đi trước thứ kết hợp buổi (Sunday morning) ta dùng giới từ 'on'." },
-            { q: "The osmanthus tree was planted _______ 2023.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước năm (2023) ta dùng giới từ 'in'." },
-            { q: "We usually have breakfast _______ 7 o'clock.", options: ["in", "on", "at", "by"], correct: 2, explain: "Đi trước mốc giờ cụ thể (7 o'clock) dùng giới từ 'at'." },
-            { q: "My birthday is _______ October.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước các tháng trong năm dùng giới từ 'in'." },
-            { q: "He goes to the park _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định chỉ cuối tuần dùng 'at the weekend'." },
-            { q: "The meeting starts _______ Monday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Đi trước thứ trong tuần (Monday) dùng giới từ 'on'." },
-            { q: "She drinks brown rice tea _______ the morning.", options: ["in", "on", "at", "by"], correct: 0, explain: "Cụm từ cố định 'in the morning'." },
-            { q: "The children sleep _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định chỉ ban đêm dùng 'at night'." },
-            { q: "They are building a road _______ the moment.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ 'at the moment' (ngay lúc này)." },
-            { q: "My family travels _______ summer.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước các mùa trong năm dùng 'in'." },
-            { q: "_______ racquets do you have?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'racquets' là danh từ đếm được số nhiều dùng 'How many'." },
-            { q: "_______ milk is in the bottle?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'milk' là danh từ không đếm được dùng 'How much'." },
-            { q: "_______ time do you spend in the garden?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'time' ở đây không đếm được dùng 'How much'." },
-            { q: "_______ students are there in the classroom?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'students' đếm được số nhiều dùng 'How many'." },
+            { q: "I play pickleball _______ Sunday morning.", options: ["in", "on", "at", "by"], correct: 1, topic: "prepositionTime", explain: "Thứ kết hợp buổi (Sunday morning) dùng giới từ 'on'." },
+            { q: "The osmanthus tree was planted _______ 2023.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước năm dùng giới từ 'in'." },
+            { q: "We usually have breakfast _______ 7 o'clock.", options: ["in", "on", "at", "by"], correct: 2, explain: "Mốc giờ cụ thể dùng giới từ 'at'." },
+            { q: "My birthday is _______ October.", options: ["in", "on", "at", "by"], correct: 0, explain: "Tháng trong năm dùng giới từ 'in'." },
+            { q: "He goes to the park _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định 'at the weekend'." },
+            { q: "The meeting starts _______ Monday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ trong tuần dùng 'on'." },
+            { q: "She drinks brown rice tea _______ the morning.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the morning'." },
+            { q: "The children sleep _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at night'." },
+            { q: "They are building a road _______ the moment.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at the moment'." },
+            { q: "My family travels _______ summer.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa trong năm dùng 'in'." },
+            { q: "_______ racquets do you have?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'racquets' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ milk is in the bottle?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'milk' không đếm được dùng 'How much'." },
+            { q: "_______ time do you spend in the garden?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'time' không đếm được dùng 'How much'." },
+            { q: "_______ students are there in the classroom?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'students' đếm được dùng 'How many'." },
             { q: "_______ rice do you want?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'rice' không đếm được dùng 'How much'." },
-            { q: "_______ birds are flying in the sky?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'birds' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ birds are flying in the sky?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'birds' đếm được dùng 'How many'." },
             { q: "_______ water does the tree need?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'water' không đếm được dùng 'How much'." },
-            { q: "_______ apples are on the table?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ apples are on the table?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' đếm được dùng 'How many'." },
             { q: "_______ money is in the wallet?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'money' không đếm được dùng 'How much'." },
-            { q: "_______ toys does she have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'toys' đếm được số nhiều dùng 'How many'." },
-            { q: "There is _______ yogurt in the fridge.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định với danh từ không đếm được dùng 'some'." },
-            { q: "I don't have _______ red dates for the tea.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('don't have') dùng 'any'." },
-            { q: "Are there _______ flowers in the garden?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi nghi vấn dùng 'any'." },
+            { q: "_______ toys does she have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'toys' đếm được dùng 'How many'." },
+            { q: "There is _______ yogurt in the fridge.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
+            { q: "I don't have _______ red dates for the tea.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
+            { q: "Are there _______ flowers in the garden?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
             { q: "He has _______ new books on the desk.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "Is there _______ cheese on the plate?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi nghi vấn dùng 'any'." },
-            { q: "He is a boy. (Chuyển sang số nhiều)", options: ["They are boys.", "We are boys.", "He are boys.", "It is boys."], correct: 0, explain: "He -> They; is -> are; a boy -> boys." },
-            { q: "It is a tall tree. (Chuyển sang số nhiều)", options: ["They are tall trees.", "It is tall trees.", "We are tall tree.", "Them are tall trees."], correct: 0, explain: "It -> They; is -> are; a tall tree -> tall trees." },
-            { q: "She is a teacher. (Chuyển sang số nhiều)", options: ["They are teachers.", "She are teachers.", "We is teachers.", "Thems are teacher."], correct: 0, explain: "She -> They; is -> are; a teacher -> teachers." },
-            { q: "I am a student. (Chuyển sang số nhiều)", options: ["We are students.", "They are student.", "We is student.", "I are students."], correct: 0, explain: "I -> We; am -> are; a student -> students." },
-            { q: "It is a sweet apple. (Chuyển sang số nhiều)", options: ["They are sweet apples.", "It are sweet apples.", "We are sweet apple.", "They is sweet apples."], correct: 0, explain: "It -> They; is -> are; a sweet apple -> sweet apples." }
+            { q: "Is there _______ cheese on the plate?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
+            { q: "He is a boy. (Chuyển sang số nhiều)", options: ["They are boys.", "We are boys.", "He are boys.", "It is boys."], correct: 0, explain: "He->They, is->are, boy->boys." },
+            { q: "It is a tall tree. (Chuyển sang số nhiều)", options: ["They are tall trees.", "It is tall trees.", "We are tall tree.", "Them are tall trees."], correct: 0, explain: "It->They, is->are, tree->trees." },
+            { q: "She is a teacher. (Chuyển sang số nhiều)", options: ["They are teachers.", "She are teachers.", "We is teachers.", "Thems are teacher."], correct: 0, explain: "She->They, is->are, teacher->teachers." },
+            { q: "I am a student. (Chuyển sang số nhiều)", options: ["We are students.", "They are student.", "We is student.", "I are students."], correct: 0, explain: "I->We, am->are, student->students." },
+            { q: "It is a sweet apple. (Chuyển sang số nhiều)", options: ["They are sweet apples.", "It are sweet apples.", "We are sweet apple.", "They is sweet apples."], correct: 0, explain: "It->They, is->are, apple->apples." }
         ],
         // ĐỀ SỐ 2
         [
-            { q: "We go to bed _______ midnight.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định 'at midnight'." },
-            { q: "The party is _______ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Đi trước ngày tháng cụ thể (December 25th) dùng 'on'." },
-            { q: "I saw him _______ the afternoon.", options: ["in", "on", "at", "by"], correct: 0, explain: "Cụm từ cố định 'in the afternoon'." },
-            { q: "The train arrives _______ 5:30 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Đi trước giờ cụ thể dùng 'at'." },
+            { q: "We go to bed _______ midnight.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at midnight'." },
+            { q: "The party is _______ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
+            { q: "I saw him _______ the afternoon.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the afternoon'." },
+            { q: "The train arrives _______ 5:30 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ cụ thể dùng 'at'." },
             { q: "My dad reads books _______ Tuesday morning.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "We went to the beach _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ 'at the weekend'." },
-            { q: "The weather is very cold _______ winter.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước các mùa dùng 'in'." },
-            { q: "She will call you _______ a few minutes.", options: ["in", "on", "at", "by"], correct: 0, explain: "Cụm từ 'in a few minutes' (trong vòng vài phút tới)." },
-            { q: "The grocery store closes _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ 'at night'." },
-            { q: "He was born _______ 2015.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước năm dùng 'in'." },
+            { q: "We went to the beach _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at the weekend'." },
+            { q: "The weather is very cold _______ winter.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
+            { q: "She will call you _______ a few minutes.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in a few minutes'." },
+            { q: "The grocery store closes _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at night'." },
+            { q: "He was born _______ 2015.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
             { q: "_______ sugar do you put in your tea?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'sugar' không đếm được dùng 'How much'." },
-            { q: "_______ brothers do you have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'brothers' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ brothers do you have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'brothers' đếm được dùng 'How many'." },
             { q: "_______ homework did the teacher give?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'homework' không đếm được dùng 'How much'." },
-            { q: "_______ chairs are in the living room?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'chairs' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ chairs are in the living room?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'chairs' đếm được dùng 'How many'." },
             { q: "_______ juice is left in the glass?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'juice' không đếm được dùng 'How much'." },
-            { q: "_______ cars are driving on the highway?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'cars' đếm được số nhiều dùng 'How many'." },
-            { q: "_______ advice did your father give you?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'advice' (lời khuyên) không đếm được dùng 'How much'." },
-            { q: "_______ days are there in August?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'days' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ cars are driving on the highway?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'cars' đếm được dùng 'How many'." },
+            { q: "_______ advice did your father give you?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'advice' không đếm được dùng 'How much'." },
+            { q: "_______ days are there in August?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'days' đếm được dùng 'How many'." },
             { q: "_______ bread is on the table?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'bread' không đếm được dùng 'How much'." },
-            { q: "_______ friends are playing outside?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'friends' đếm được số nhiều dùng 'How many'." },
-            { q: "We need _______ avocados for breakfast.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "She doesn't read _______ books in the evening.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
+            { q: "_______ friends are playing outside?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'friends' đếm được dùng 'How many'." },
+            { q: "We need _______ avocados for breakfast.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
+            { q: "She doesn't read _______ books in the evening.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
             { q: "Do you have _______ free time today?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "There are _______ ducks swimming in the lake.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "There isn't _______ meat in the soup.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
-            { q: "The dictionary is heavy. (Chuyển sang số nhiều)", options: ["The dictionaries are heavy.", "The dictionarys are heavy.", "The dictionaries is heavy.", "The dictionary are heavy."], correct: 0, explain: "Dictionary tận cùng phụ âm + y đổi y thành ies (dictionaries); is -> are." },
-            { q: "He has a new car. (Chuyển sang số nhiều)", options: ["They have new cars.", "They has new cars.", "He have new cars.", "They are new cars."], correct: 0, explain: "He -> They; has -> have; a new car -> new cars." },
-            { q: "It is a sharp knife. (Chuyển sang số nhiều)", options: ["They are sharp knives.", "They are sharp knifes.", "It are sharp knives.", "They is sharp knives."], correct: 0, explain: "It -> They; is -> are; knife tận cùng fe đổi thành ves (knives)." },
-            { q: "She is a happy woman. (Chuyển sang số nhiều)", options: ["They are happy women.", "They are happy womans.", "She are happy women.", "They is happy women."], correct: 0, explain: "She -> They; is -> are; woman bất quy tắc thành women." },
-            { q: "It is a beautiful flower. (Chuyển sang số nhiều)", options: ["They are beautiful flowers.", "It are beautiful flowers.", "They is beautiful flowers.", "We are beautiful flower."], correct: 0, explain: "It -> They; is -> are; a beautiful flower -> beautiful flowers." }
+            { q: "There are _______ ducks swimming in the lake.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
+            { q: "There isn't _______ meat in the soup.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
+            { q: "The dictionary is heavy. (Chuyển sang số nhiều)", options: ["The dictionaries are heavy.", "The dictionarys are heavy.", "The dictionaries is heavy.", "The dictionary are heavy."], correct: 0, explain: "Dictionary -> dictionaries, is -> are." },
+            { q: "He has a new car. (Chuyển sang số nhiều)", options: ["They have new cars.", "They has new cars.", "He have new cars.", "They are new cars."], correct: 0, explain: "He->They, has->have, car->cars." },
+            { q: "It is a sharp knife. (Chuyển sang số nhiều)", options: ["They are sharp knives.", "They are sharp knifes.", "It are sharp knives.", "They is sharp knives."], correct: 0, explain: "It->They, knife->knives." },
+            { q: "She is a happy woman. (Chuyển sang số nhiều)", options: ["They are happy women.", "They are happy womans.", "She are happy women.", "They is happy women."], correct: 0, explain: "She->They, woman->women." },
+            { q: "It is a beautiful flower. (Chuyển sang số nhiều)", options: ["They are beautiful flowers.", "It are beautiful flowers.", "They is beautiful flowers.", "We are beautiful flower."], correct: 0, explain: "It->They, flower->flowers." }
         ],
         // ĐỀ SỐ 3
         [
             { q: "My uncle visited us _______ April 30th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
-            { q: "We always have a big dinner _______ New Year's Eve.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày lễ có chữ 'Eve' hoặc ngày cụ thể dùng 'on'." },
-            { q: "The cat is sleeping _______ the sofa.", options: ["in", "on", "at", "by"], correct: 1, explain: "Nằm trên bề mặt dùng 'on'." },
+            { q: "We always have a big dinner _______ New Year's Eve.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày lễ cụ thể dùng 'on'." },
+            { q: "The cat is sleeping _______ the sofa.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên bề mặt dùng 'on'." },
             { q: "School finishes _______ 4:30 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Mốc giờ dùng 'at'." },
             { q: "I like to read books _______ the evening.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the evening'." },
             { q: "He was in Hanoi _______ 2021.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "They are waiting _______ the bus stop.", options: ["in", "on", "at", "by"], correct: 2, explain: "Địa điểm cụ thể, trạm xe buýt dùng 'at'." },
+            { q: "They are waiting _______ the bus stop.", options: ["in", "on", "at", "by"], correct: 2, explain: "Trạm xe buýt dùng 'at'." },
             { q: "The picture hangs _______ the wall.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên tường dùng 'on'." },
-            { q: "It rains a lot _______ summer.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa trong năm dùng 'in'." },
+            { q: "It rains a lot _______ summer.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
             { q: "We have English class _______ Tuesday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ trong tuần dùng 'on'." },
-            { q: "_______ coffee do you drink every day?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'coffee' không đếm được dùng 'How much'." },
-            { q: "_______ pencils are there in your pencil case?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pencils' đếm được số nhiều dùng 'How many'." },
+            { q: "_______ coffee do you drink every day?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'coffee' không đếm được dùng 'How much'." },
+            { q: "_______ pencils are there in your pencil case?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pencils' đếm được dùng 'How many'." },
             { q: "_______ information did you find on the internet?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'information' không đếm được dùng 'How much'." },
             { q: "_______ computers are there in the IT room?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'computers' đếm được dùng 'How many'." },
             { q: "_______ honey do we need for the cake?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'honey' không đếm được dùng 'How much'." },
@@ -490,28 +483,28 @@
             { q: "_______ sand is on the beach?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'sand' không đếm được dùng 'How much'." },
             { q: "_______ windows does your house have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'windows' đếm được dùng 'How many'." },
             { q: "_______ oil is left in the bottle?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'oil' không đếm được dùng 'How much'." },
-            { q: "_______ pairs of socks do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pairs' (đôi tất) đếm được dùng 'How many'." },
-            { q: "I would like _______ tea, please.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời/đề nghị lịch sự dùng 'some'." },
-            { q: "There aren't _______ oranges in the basket.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
+            { q: "_______ pairs of socks do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pairs' đếm được dùng 'How many'." },
+            { q: "I would like _______ tea, please.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời lịch sự dùng 'some'." },
+            { q: "There aren't _______ oranges in the basket.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
             { q: "Do you have _______ water?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "She doesn't have _______ pens in her bag.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
-            { q: "We need _______ butter for this recipe.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "The baby is crying. (Chuyển sang số nhiều)", options: ["The babies are crying.", "The babys are crying.", "The babies is crying.", "The baby are crying."], correct: 0, explain: "Baby -> babies; is -> are." },
-            { q: "She is a kind person. (Chuyển sang số nhiều)", options: ["They are kind persons.", "They are kind people.", "She are kind people.", "Both A and B are correct."], correct: 3, explain: "'person' có thể đổi thành 'persons' hoặc bất quy tắc là 'people'." },
-            { q: "It is a sharp tooth. (Chuyển sang số nhiều)", options: ["They are sharp teeth.", "They are sharp tooths.", "It are sharp teeth.", "They is sharp teeth."], correct: 0, explain: "It -> They; tooth -> teeth." },
-            { q: "He is a tall man. (Chuyển sang số nhiều)", options: ["They are tall men.", "They are tall mans.", "He are tall men.", "They is tall men."], correct: 0, explain: "He -> They; man -> men." },
-            { q: "It is a wild wolf. (Chuyển sang số nhiều)", options: ["They are wild wolves.", "They are wild wolfs.", "It are wild wolves.", "They is wild wolves."], correct: 0, explain: "Wolf tận cùng f đổi thành ves (wolves)." }
+            { q: "She doesn't have _______ pens in her bag.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
+            { q: "We need _______ butter for this recipe.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
+            { q: "The baby is crying. (Chuyển sang số nhiều)", options: ["The babies are crying.", "The babys are crying.", "The babies is crying.", "The baby are crying."], correct: 0, explain: "Baby -> babies." },
+            { q: "She is a kind person. (Chuyển sang số nhiều)", options: ["They are kind people.", "They are kind persons.", "She are kind people.", "Both A and B are correct."], correct: 3, explain: "Person có thể đổi thành people hoặc persons." },
+            { q: "It is a sharp tooth. (Chuyển sang số nhiều)", options: ["They are sharp teeth.", "They are sharp tooths.", "It are sharp teeth.", "They is sharp teeth."], correct: 0, explain: "Tooth -> teeth." },
+            { q: "He is a tall man. (Chuyển sang số nhiều)", options: ["They are tall men.", "They are tall mans.", "He are tall men.", "They is tall men."], correct: 0, explain: "Man -> men." },
+            { q: "It is a wild wolf. (Chuyển sang số nhiều)", options: ["They are wild wolves.", "They are wild wolfs.", "It are wild wolves.", "They is wild wolves."], correct: 0, explain: "Wolf -> wolves." }
         ],
         // ĐỀ SỐ 4
         [
-            { q: "The flowers bloom _______ spring.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa trong năm dùng 'in'." },
-            { q: "We have lunch _______ 12 o'clock.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ cụ thể dùng 'at'." },
+            { q: "The flowers bloom _______ spring.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
+            { q: "We have lunch _______ 12 o'clock.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
             { q: "I will see you _______ Wednesday morning.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
             { q: "The project started _______ 2020.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "We get presents _______ Christmas Day.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày lễ có chữ 'Day' đi kèm dùng 'on'." },
+            { q: "We get presents _______ Christmas Day.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày lễ có chữ Day dùng 'on'." },
             { q: "There are many apples _______ the tree.", options: ["in", "on", "at", "by"], correct: 1, explain: "Quả mọc trên cây dùng 'on'." },
-            { q: "My keys are _______ my bag.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bên trong túi dùng 'in'." },
-            { q: "My mother is cooking _______ the kitchen.", options: ["in", "on", "at", "by"], correct: 0, explain: "Không gian phòng bếp dùng 'in'." },
+            { q: "My keys are _______ my bag.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bên trong dùng 'in'." },
+            { q: "My mother is cooking _______ the kitchen.", options: ["in", "on", "at", "by"], correct: 0, explain: "Phòng bếp dùng 'in'." },
             { q: "He exercises _______ the morning.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the morning'." },
             { q: "Independence Day is _______ September 2nd.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
             { q: "_______ salt is in this soup?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'salt' không đếm được dùng 'How much'." },
@@ -529,24 +522,24 @@
             { q: "We don't have _______ cats in our house.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
             { q: "There are _______ monkeys in the zoo.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
             { q: "I cannot find _______ flour in the cupboard.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "The leaf is green. (Chuyển sang số nhiều)", options: ["The leaves are green.", "The leafs are green.", "The leaves is green.", "The leaf are green."], correct: 0, explain: "Leaf tận cùng f đổi thành ves (leaves)." },
-            { q: "It is a small mouse. (Chuyển sang số nhiều)", options: ["They are small mice.", "They are small mouses.", "It are small mice.", "They is small mice."], correct: 0, explain: "Mouse bất quy tắc thành mice." },
-            { q: "She has a pretty foot. (Chuyển sang số nhiều)", options: ["They have pretty feet.", "They has pretty foots.", "She have pretty feet.", "They are pretty feet."], correct: 0, explain: "Foot bất quy tắc thành feet." },
+            { q: "The leaf is green. (Chuyển sang số nhiều)", options: ["The leaves are green.", "The leafs are green.", "The leaves is green.", "The leaf are green."], correct: 0, explain: "Leaf -> leaves." },
+            { q: "It is a small mouse. (Chuyển sang số nhiều)", options: ["They are small mice.", "They are small mouses.", "It are small mice.", "They is small mice."], correct: 0, explain: "Mouse -> mice." },
+            { q: "She has a pretty foot. (Chuyển sang số nhiều)", options: ["They have pretty feet.", "They has pretty foots.", "She have pretty feet.", "They are pretty feet."], correct: 0, explain: "Foot -> feet." },
             { q: "He is a strong child. (Chuyển sang số nhiều)", options: ["They are strong children.", "They are strong childs.", "He are strong children.", "They is strong children."], correct: 0, explain: "Child -> children." },
-            { q: "The box is heavy. (Chuyển sang số nhiều)", options: ["The boxes are heavy.", "The boxs are heavy.", "The boxes is heavy.", "The box are heavy."], correct: 0, explain: "Box tận cùng x thêm -es (boxes)." }
+            { q: "The box is heavy. (Chuyển sang số nhiều)", options: ["The boxes are heavy.", "The boxs are heavy.", "The boxes is heavy.", "The box are heavy."], correct: 0, explain: "Box -> boxes." }
         ],
         // ĐỀ SỐ 5
         [
-            { q: "We usually take a nap _______ noon.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định 'at noon'." },
+            { q: "We usually take a nap _______ noon.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at noon'." },
             { q: "The concert is _______ Thursday afternoon.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
             { q: "My brother graduated _______ 2010.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "They go camping _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ 'at the weekend'." },
-            { q: "The movie ends _______ 10:45 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ cụ thể dùng 'at'." },
+            { q: "They go camping _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at the weekend'." },
+            { q: "The movie ends _______ 10:45 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
             { q: "The dog is lying _______ the floor.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên sàn nhà dùng 'on'." },
-            { q: "The cups are _______ the cupboard.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bên trong tủ dùng 'in'." },
-            { q: "The TV is _______ the living room.", options: ["in", "on", "at", "by"], correct: 0, explain: "Không gian phòng khách dùng 'in'." },
+            { q: "The cups are _______ the cupboard.", options: ["in", "on", "at", "by"], correct: 0, explain: "Trong tủ dùng 'in'." },
+            { q: "The TV is _______ the living room.", options: ["in", "on", "at", "by"], correct: 0, explain: "Phòng khách dùng 'in'." },
             { q: "We have a long holiday _______ July.", options: ["in", "on", "at", "by"], correct: 0, explain: "Tháng dùng 'in'." },
-            { q: "Children wear costumes _______ Halloween.", options: ["in", "on", "at", "by"], correct: 2, explain: "Dịp lễ hội dùng 'at'." },
+            { q: "Children wear costumes _______ Halloween.", options: ["in", "on", "at", "by"], correct: 2, explain: "Dịp lễ dùng 'at'." },
             { q: "_______ meat do you eat every week?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'meat' không đếm được dùng 'How much'." },
             { q: "_______ dogs are barking outside?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'dogs' đếm được dùng 'How many'." },
             { q: "_______ traffic is there in the city?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'traffic' không đếm được dùng 'How much'." },
@@ -560,34 +553,34 @@
             { q: "Is there _______ milk in the fridge?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
             { q: "I saw _______ dogs in the park.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
             { q: "There isn't _______ sugar in my coffee.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "_______ children are playing football.", options: ["Some", "Any", "A", "An"], correct: 0, explain: "Khẳng định đầu câu dùng 'Some'." },
+            { q: "_______ children are playing football.", options: ["Some", "Any", "A", "An"], correct: 0, explain: "Khẳng định dùng 'Some'." },
             { q: "We don't have _______ rice left.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "It is a fast bus. (Chuyển sang số nhiều)", options: ["They are fast buses.", "They are fast bus.", "It are fast buses.", "They is fast buses."], correct: 0, explain: "Bus thêm -es thành buses." },
-            { q: "She is a good wife. (Chuyển sang số nhiều)", options: ["They are good wives.", "They are good wifes.", "She are good wives.", "They is good wives."], correct: 0, explain: "Wife tận cùng fe đổi thành ves (wives)." },
-            { q: "He is a smart student. (Chuyển sang số nhiều)", options: ["They are smart students.", "They are smart student.", "He are smart students.", "They is smart students."], correct: 0, explain: "Student thêm -s." },
-            { q: "The watch is gold. (Chuyển sang số nhiều)", options: ["The watches are gold.", "The watchs are gold.", "The watches is gold.", "The watch are gold."], correct: 0, explain: "Watch tận cùng ch thêm -es (watches)." },
-            { q: "It is a ripe tomato. (Chuyển sang số nhiều)", options: ["They are ripe tomatoes.", "They are ripe tomatos.", "It are ripe tomatoes.", "They is ripe tomatoes."], correct: 0, explain: "Tomato tận cùng o thêm -es (tomatoes)." }
+            { q: "It is a fast bus. (Chuyển sang số nhiều)", options: ["They are fast buses.", "They are fast bus.", "It are fast buses.", "They is fast buses."], correct: 0, explain: "Bus -> buses." },
+            { q: "She is a good wife. (Chuyển sang số nhiều)", options: ["They are good wives.", "They are good wifes.", "She are good wives.", "They is good wives."], correct: 0, explain: "Wife -> wives." },
+            { q: "He is a smart student. (Chuyển sang số nhiều)", options: ["They are smart students.", "They are smart student.", "He are smart students.", "They is smart students."], correct: 0, explain: "Student -> students." },
+            { q: "The watch is gold. (Chuyển sang số nhiều)", options: ["The watches are gold.", "The watchs are gold.", "The watches is gold.", "The watch are gold."], correct: 0, explain: "Watch -> watches." },
+            { q: "It is a ripe tomato. (Chuyển sang số nhiều)", options: ["They are ripe tomatoes.", "They are ripe tomatos.", "It are ripe tomatoes.", "They is ripe tomatoes."], correct: 0, explain: "Tomato -> tomatoes." }
         ],
         // ĐỀ SỐ 6
         [
-            { q: "The stars shine _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định 'at night'." },
-            { q: "We celebrate Valentine's Day _______ February 14th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
-            { q: "My flight leaves _______ 7:15 a.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ cụ thể dùng 'at'." },
+            { q: "The stars shine _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at night'." },
+            { q: "We celebrate Valentine's Day _______ February 14th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng dùng 'on'." },
+            { q: "My flight leaves _______ 7:15 a.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
             { q: "She was born _______ 1985.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
             { q: "He likes to relax _______ Sunday evening.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "Don't sit _______ the grass.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngồi trên bề mặt bãi cỏ dùng 'on'." },
-            { q: "The money is _______ the wallet.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bên trong ví dùng 'in'." },
-            { q: "I will meet you _______ the library.", options: ["in", "on", "at", "by"], correct: 2, explain: "Địa điểm tổng quát tại thư viện dùng 'at'." },
-            { q: "The leaves fall _______ autumn.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa trong năm dùng 'in'." },
-            { q: "I have a meeting _______ Friday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ trong tuần dùng 'on'." },
-            { q: "_______ luggage are you carrying?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'luggage' (hành lý) không đếm được dùng 'How much'." },
+            { q: "Don't sit _______ the grass.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên bãi cỏ dùng 'on'." },
+            { q: "The money is _______ the wallet.", options: ["in", "on", "at", "by"], correct: 0, explain: "Trong ví dùng 'in'." },
+            { q: "I will meet you _______ the library.", options: ["in", "on", "at", "by"], correct: 2, explain: "Tại thư viện dùng 'at'." },
+            { q: "The leaves fall _______ autumn.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
+            { q: "I have a meeting _______ Friday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ dùng 'on'." },
+            { q: "_______ luggage are you carrying?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'luggage' không đếm được dùng 'How much'." },
             { q: "_______ passengers are on the train?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'passengers' đếm được dùng 'How many'." },
-            { q: "_______ furniture is in the new house?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'furniture' (nội thất) không đếm được dùng 'How much'." },
+            { q: "_______ furniture is in the new house?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'furniture' không đếm được dùng 'How much'." },
             { q: "_______ tables are in the restaurant?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'tables' đếm được dùng 'How many'." },
             { q: "_______ equipment do you need for the gym?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'equipment' không đếm được dùng 'How much'." },
             { q: "_______ exercises did you do?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'exercises' đếm được dùng 'How many'." },
             { q: "_______ toothpaste is on the brush?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'toothpaste' không đếm được dùng 'How much'." },
-            { q: "_______ brushes are in the bathroom?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'brushes' đếm được dùng 'How many'." },
+            { q: "_______ brushes are in the bathroom?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'brushes' đếm được dùng 'How many'." },
             { q: "_______ dust is under the bed?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'dust' không đếm được dùng 'How much'." },
             { q: "_______ coins are in your pocket?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'coins' đếm được dùng 'How many'." },
             { q: "I bought _______ apples at the market.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
@@ -595,24 +588,24 @@
             { q: "She hasn't got _______ brothers.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
             { q: "There is _______ water on the floor.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
             { q: "Are there _______ messages for me?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "The child is happy. (Chuyển sang số nhiều)", options: ["The children are happy.", "The childs are happy.", "The children is happy.", "The child are happy."], correct: 0, explain: "Child -> children; is -> are." },
+            { q: "The child is happy. (Chuyển sang số nhiều)", options: ["The children are happy.", "The childs are happy.", "The children is happy.", "The child are happy."], correct: 0, explain: "Child -> children." },
             { q: "It is a long dictionary. (Chuyển sang số nhiều)", options: ["They are long dictionaries.", "They are long dictionarys.", "It are long dictionaries.", "They is long dictionaries."], correct: 0, explain: "Dictionary -> dictionaries." },
-            { q: "He is a brave policeman. (Chuyển sang số nhiều)", options: ["They are brave policemen.", "They are brave policemans.", "He are brave policemen.", "They is brave policemen."], correct: 0, explain: "Policeman đổi a thành e (policemen)." },
-            { q: "The glass is empty. (Chuyển sang số nhiều)", options: ["The glasses are empty.", "The glasss are empty.", "The glasses is empty.", "The glass are empty."], correct: 0, explain: "Glass tận cùng ss thêm -es (glasses)." },
-            { q: "She has a white goose. (Chuyển sang số nhiều)", options: ["They have white geese.", "They has white gooses.", "She have white geese.", "They are white geese."], correct: 0, explain: "Goose đổi oo thành ee (geese)." }
+            { q: "He is a brave policeman. (Chuyển sang số nhiều)", options: ["They are brave policemen.", "They are brave policemans.", "He are brave policemen.", "They is brave policemen."], correct: 0, explain: "Policeman -> policemen." },
+            { q: "The glass is empty. (Chuyển sang số nhiều)", options: ["The glasses are empty.", "The glasss are empty.", "The glasses is empty.", "The glass are empty."], correct: 0, explain: "Glass -> glasses." },
+            { q: "She has a white goose. (Chuyển sang số nhiều)", options: ["They have white geese.", "They has white gooses.", "She have white geese.", "They are white geese."], correct: 0, explain: "Goose -> geese." }
         ],
         // ĐỀ SỐ 7
         [
-            { q: "I usually wake up _______ sunrise.", options: ["in", "on", "at", "by"], correct: 2, explain: "Mốc thời điểm rạng sáng dùng 'at sunrise'." },
-            { q: "We have a test _______ November 20th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
-            { q: "The shop opens _______ 8:00 a.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ cụ thể dùng 'at'." },
+            { q: "I usually wake up _______ sunrise.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at sunrise'." },
+            { q: "We have a test _______ November 20th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng dùng 'on'." },
+            { q: "The shop opens _______ 8:00 a.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
             { q: "They got married _______ 2005.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
             { q: "He plays tennis _______ Saturday afternoon.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "Look at the birds _______ the sky.", options: ["in", "on", "at", "by"], correct: 0, explain: "Không gian bầu trời dùng 'in'." },
-            { q: "The toys are _______ the box.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bên trong hộp dùng 'in'." },
-            { q: "He works _______ an office.", options: ["in", "on", "at", "by"], correct: 0, explain: "Không gian phòng làm việc dùng 'in'." },
-            { q: "We go skiing _______ winter.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa trong năm dùng 'in'." },
-            { q: "The party is _______ Thursday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ trong tuần dùng 'on'." },
+            { q: "Look at the birds _______ the sky.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bầu trời dùng 'in'." },
+            { q: "The toys are _______ the box.", options: ["in", "on", "at", "by"], correct: 0, explain: "Trong hộp dùng 'in'." },
+            { q: "He works _______ an office.", options: ["in", "on", "at", "by"], correct: 0, explain: "Văn phòng dùng 'in'." },
+            { q: "We go skiing _______ winter.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
+            { q: "The party is _______ Thursday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ dùng 'on'." },
             { q: "_______ homework do you have tonight?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'homework' không đếm được dùng 'How much'." },
             { q: "_______ mistakes did you make?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'mistakes' đếm được dùng 'How many'." },
             { q: "_______ time is left?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'time' không đếm được dùng 'How much'." },
@@ -622,105 +615,69 @@
             { q: "_______ bread did you buy?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'bread' không đếm được dùng 'How much'." },
             { q: "_______ sandwiches do we need?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'sandwiches' đếm được dùng 'How many'." },
             { q: "_______ juice is in the carton?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'juice' không đếm được dùng 'How much'." },
-            { q: "_______ cups of tea did you drink?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'cups' (cốc) đếm được dùng 'How many'." },
+            { q: "_______ cups of tea did you drink?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'cups' đếm được dùng 'How many'." },
             { q: "Let's listen to _______ music.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "I can't see _______ clouds in the sky.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định ('can't') dùng 'any'." },
+            { q: "I can't see _______ clouds in the sky.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
             { q: "Do you need _______ help with your homework?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
             { q: "There are _______ beautiful flowers here.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
             { q: "We didn't take _______ photos.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "The foot is big. (Chuyển sang số nhiều)", options: ["The feet are big.", "The foots are big.", "The feet is big.", "The foot are big."], correct: 0, explain: "Foot -> feet; is -> are." },
-            { q: "It is a wild deer. (Chuyển sang số nhiều)", options: ["They are wild deer.", "They are wild deers.", "It are wild deer.", "They is wild deer."], correct: 0, explain: "Deer giữ nguyên dạng ở số nhiều." },
-            { q: "She is a famous actress. (Chuyển sang số nhiều)", options: ["They are famous actresses.", "They are famous actresss.", "She are famous actresses.", "They is famous actresses."], correct: 0, explain: "Actress tận cùng ss thêm -es (actresses)." },
-            { q: "The class is noisy. (Chuyển sang số nhiều)", options: ["The classes are noisy.", "The classs are noisy.", "The classes is noisy.", "The class are noisy."], correct: 0, explain: "Class tận cùng ss thêm -es (classes)." },
-            { q: "It is a delicious strawberry. (Chuyển sang số nhiều)", options: ["They are delicious strawberries.", "They are delicious strawberrys.", "It are delicious strawberries.", "They is delicious strawberries."], correct: 0, explain: "Strawberry tận cùng phụ âm + y đổi thành ies (strawberries)." }
+            { q: "The foot is big. (Chuyển sang số nhiều)", options: ["The feet are big.", "The foots are big.", "The feet is big.", "The foot are big."], correct: 0, explain: "Foot -> feet." },
+            { q: "It is a wild deer. (Chuyển sang số nhiều)", options: ["They are wild deer.", "They are wild deers.", "It are wild deer.", "They is wild deer."], correct: 0, explain: "Deer giữ nguyên dạng." },
+            { q: "She is a famous actress. (Chuyển sang số nhiều)", options: ["They are famous actresses.", "They are famous actresss.", "She are famous actresses.", "They is famous actresses."], correct: 0, explain: "Actress -> actresses." },
+            { q: "The class is noisy. (Chuyển sang số nhiều)", options: ["The classes are noisy.", "The classs are noisy.", "The classes is noisy.", "The class are noisy."], correct: 0, explain: "Class -> classes." },
+            { q: "It is a delicious strawberry. (Chuyển sang số nhiều)", options: ["They are delicious strawberries.", "They are delicious strawberrys.", "It are delicious strawberries.", "They is delicious strawberries."], correct: 0, explain: "Strawberry -> strawberries." }
         ]
     };
 
-    // Kho câu hỏi phụ cho đề chuyên đề và đề tổng hợp (đảm bảo ~500 câu không trùng lặp)
     const questionBank = {
         singularPlural: [
             { q: "I have two ___ in my pencil case.", options: ["pen", "pens", "a pen", "penes"], correct: 1, explain: "Số từ 'two' chỉ số lượng nhiều, danh từ 'pen' phải thêm '-s' thành 'pens'." },
             { q: "There is ___ cat under the table.", options: ["a", "an", "two", "some"], correct: 0, explain: "Danh từ đếm được số ít bắt đầu bằng phụ âm 'cat' dùng mạo từ 'a'." },
             { q: "She has a beautiful ___ on her desk.", options: ["apple", "apples", "boxs", "box"], correct: 3, explain: "Mạo từ 'a' đi với danh từ đếm được số ít 'box'." },
             { q: "How many ___ are there in the classroom?", options: ["child", "childs", "children", "baby"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'child' là 'children'." },
-            { q: "My mother bought three ___ at the market.", options: ["fish", "fishes", "fishs", "fihesh"], correct: 0, explain: "Từ 'fish' giữ nguyên hình thức ở cả số ít và số nhiều." },
-            { q: "Look at those ___ running in the park!", options: ["dog", "dogs", "doges", "doggies"], correct: 1, explain: "Đại từ chỉ định 'those' đi với danh từ số nhiều thêm '-s' (dogs)." },
-            { q: "He brushes his ___ every morning.", options: ["tooth", "teeths", "teeth", "tooths"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'tooth' là 'teeth'." },
-            { q: "There are many ___ on the farm.", options: ["sheep", "sheeps", "sheepes", "ship"], correct: 0, explain: "Từ 'sheep' không thay đổi dạng số nhiều." },
-            { q: "Do you have ___ eraser?", options: ["a", "an", "two", "some"], correct: 1, explain: "'eraser' bắt đầu bằng nguyên âm 'e' nên dùng mạo từ 'an'." },
-            { q: "The farmer has four ___ and two cows.", options: ["horse", "horses", "horsis", "horsees"], correct: 1, explain: "Số lượng 'four' đi với danh từ số nhiều 'horses'." }
+            { q: "My mother bought three ___ at the market.", options: ["fish", "fishes", "fishs", "fihesh"], correct: 0, explain: "Từ 'fish' giữ nguyên hình thức ở cả số ít và số nhiều." }
         ],
         objectPronoun: [
             { q: "Mary is talking to Tom. She likes ___ very much.", options: ["he", "him", "his", "himself"], correct: 1, explain: "Đứng sau động từ 'likes' cần đại từ tân ngữ của 'he' là 'him'." },
             { q: "This gift is for you. Do you like ___?", options: ["it", "its", "they", "them"], correct: 0, explain: "Thay thế cho vật số ít 'gift' ở vị trí tân ngữ dùng 'it'." },
             { q: "We are waiting for ___ at the bus stop.", options: ["they", "them", "their", "theirs"], correct: 1, explain: "Đứng sau giới từ 'for' cần dùng tân ngữ 'them'." },
             { q: "Can you help ___ with this heavy bag?", options: ["I", "my", "me", "mine"], correct: 2, explain: "Đứng sau động từ 'help' làm tân ngữ là 'me'." },
-            { q: "The teacher is explaining the lesson to ___.", options: ["we", "our", "us", "ours"], correct: 2, explain: "Đứng sau giới từ 'to' cần dùng tân ngữ 'us'." },
-            { q: "Peter is my best friend. I always trust ___.", options: ["he", "him", "his", "it"], correct: 1, explain: "Peter là nam giới, đứng sau động từ 'trust' dùng tân ngữ 'him'." },
-            { q: "These shoes are nice. I want to buy ___.", options: ["it", "they", "them", "their"], correct: 2, explain: "'These shoes' là danh từ số nhiều, tân ngữ tương ứng là 'them'." },
-            { q: "Where is Anna? I need to speak to ___.", options: ["she", "her", "hers", "it"], correct: 1, explain: "Anna là nữ, đứng sau giới từ 'to' dùng tân ngữ 'her'." },
-            { q: "My dog is hungry. Give ___ some food, please.", options: ["it", "its", "he", "him"], correct: 0, explain: "Động vật số ít ở vị trí tân ngữ dùng 'it'." },
-            { q: "Do you know John and Mary? Yes, I know ___.", options: ["they", "them", "their", "us"], correct: 1, explain: "John and Mary là số nhiều, tân ngữ là 'them'." }
+            { q: "The teacher is explaining the lesson to ___.", options: ["we", "our", "us", "ours"], correct: 2, explain: "Đứng sau giới từ 'to' cần dùng tân ngữ 'us'." }
         ],
         toBe: [
             { q: "I ___ a student in class 4A.", options: ["am", "is", "are", "be"], correct: 0, explain: "Chủ ngữ 'I' đi với động từ 'To be' là 'am'." },
             { q: "My mother ___ a teacher in a primary school.", options: ["am", "is", "are", "be"], correct: 1, explain: "'My mother' là ngôi thứ ba số ít nên đi với 'is'." },
             { q: "They ___ playing football in the school yard.", options: ["am", "is", "are", "be"], correct: 2, explain: "Chủ ngữ số nhiều 'They' đi với động từ 'are'." },
             { q: "___ you happy today?", options: ["Am", "Is", "Are", "Do"], correct: 2, explain: "Chủ ngữ 'you' đi với động từ 'To be' ở thể nghi vấn là 'Are'." },
-            { q: "The weather ___ nice and warm this morning.", options: ["am", "is", "are", "be"], correct: 1, explain: "'The weather' là danh từ không đếm được số ít, dùng 'is'." },
-            { q: "Mary and John ___ good friends.", options: ["am", "is", "are", "be"], correct: 2, explain: "Hai người 'Mary and John' là số nhiều, dùng 'are'." },
-            { q: "Where ___ your books?", options: ["am", "is", "are", "be"], correct: 2, explain: "'your books' là danh từ số nhiều nên dùng 'are'." },
-            { q: "This ___ my new bicycle.", options: ["am", "is", "are", "be"], correct: 1, explain: "'This' chỉ một vật duy nhất, dùng 'is'." },
-            { q: "Cats ___ animals that like catching mice.", options: ["am", "is", "are", "be"], correct: 2, explain: "'Cats' là danh từ số nhiều, dùng 'are'." },
-            { q: "___ there a pen on the desk?", options: ["Am", "Is", "Are", "Do"], correct: 1, explain: "Cấu trúc 'There is' dạng câu hỏi đảo 'Is' lên trước danh từ số ít." }
+            { q: "The weather ___ nice and warm this morning.", options: ["am", "is", "are", "be"], correct: 1, explain: "'The weather' là danh từ không đếm được số ít, dùng 'is'." }
         ],
         whQuestion: [
             { q: "___ is your name? - My name is Linh.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi tên hoặc sự vật dùng từ để hỏi 'What'." },
             { q: "___ old are you? - I am ten years old.", options: ["What", "How", "Where", "Who"], correct: 1, explain: "Hỏi tuổi dùng cấu trúc 'How old'." },
             { q: "___ do you live? - I live in Hanoi.", options: ["What", "Who", "Where", "When"], correct: 2, explain: "Hỏi nơi chốn, địa điểm dùng 'Where'." },
             { q: "___ is that man over there? - He is my uncle.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người dùng từ 'Who'." },
-            { q: "___ do you go to school? - I go at 7 o'clock.", options: ["What", "When", "Where", "Who"], correct: 1, explain: "Hỏi về thời gian dùng 'When'." },
-            { q: "___ do you like English? - Because it is fun.", options: ["What", "Where", "Why", "Who"], correct: 2, explain: "Hỏi lý do (trả lời bằng 'Because') dùng 'Why'." },
-            { q: "___ do you go to school? - By bicycle.", options: ["What", "How", "Where", "When"], correct: 1, explain: "Hỏi phương tiện hoặc cách thức di chuyển dùng 'How'." },
-            { q: "___ color is your new bag? - It's blue.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi màu sắc dùng 'What color'." },
-            { q: "___ is your birthday? - It's on May 5th.", options: ["What", "Who", "Where", "When"], correct: 3, explain: "Hỏi ngày tháng/thời gian sinh nhật dùng 'When'." },
-            { q: "___ is your best friend? - It's Nam.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người bạn thân dùng 'Who'." }
+            { q: "___ do you go to school? - I go at 7 o'clock.", options: ["What", "When", "Where", "Who"], correct: 1, explain: "Hỏi về thời gian dùng 'When'." }
         ],
         prepositionTime: [
             { q: "My birthday is ___ June.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các tháng trong năm dùng giới từ 'in'." },
             { q: "We don't go to school ___ Sundays.", options: ["in", "on", "at", "to"], correct: 1, explain: "Đi trước các thứ trong tuần dùng giới từ 'on'." },
             { q: "The film starts ___ 8:00 PM tonight.", options: ["in", "on", "at", "during"], correct: 2, explain: "Đi trước các mốc giờ cụ thể dùng giới từ 'at'." },
             { q: "Birds often fly to the south ___ winter.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các mùa trong năm dùng giới từ 'in'." },
-            { q: "We celebrate Christmas ___ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Đi trước ngày tháng cụ thể dùng giới từ 'on'." },
-            { q: "What do you usually do ___ the weekend?", options: ["in", "on", "at", "to"], correct: 2, explain: "Cụm từ cố định chỉ cuối tuần dùng 'at the weekend'." },
-            { q: "My father was born ___ 1985.", options: ["at", "on", "in", "during"], correct: 2, explain: "Đi trước năm dùng giới từ 'in'." },
-            { q: "Do you wake up early ___ the morning?", options: ["at", "on", "in", "by"], correct: 2, explain: "Cụm từ cố định: 'in the morning', 'in the afternoon', 'in the evening'." },
-            { q: "The party is scheduled ___ Friday evening.", options: ["at", "in", "on", "by"], correct: 2, explain: "Khi có thứ đi kèm (Friday), ta dùng giới từ 'on'." },
-            { q: "The shops close ___ midnight in this town.", options: ["in", "on", "at", "during"], correct: 2, explain: "Cụm từ chỉ thời điểm đêm muộn dùng 'at midnight'." }
+            { q: "We celebrate Christmas ___ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Đi trước ngày tháng cụ thể dùng giới từ 'on'." }
         ],
         someAny: [
             { q: "I have ___ apples in my bag.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định với danh từ số nhiều dùng 'some'." },
             { q: "Do you have ___ questions for me?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi nghi vấn thường dùng 'any'." },
             { q: "There isn't ___ milk left in the fridge.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('isn't') đi với 'any'." },
             { q: "Would you like ___ tea?", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời hoặc đề nghị lịch sự dùng 'some'." },
-            { q: "She doesn't want ___ help with her homework.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('doesn't want') dùng 'any'." },
-            { q: "Can I have ___ water, please?", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu xin phép hoặc nhờ vả dùng 'some'." },
-            { q: "We don't have ___ bananas in the kitchen.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
-            { q: "He bought ___ new books yesterday.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "Are there ___ students in the library?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "I need ___ paper to write a letter.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định danh từ không đếm được dùng 'some'." }
+            { q: "She doesn't want ___ help with her homework.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('doesn't want') dùng 'any'." }
         ],
         howMuchMany: [
             { q: "___ books do you have in your bag?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'books' là danh từ đếm được số nhiều nên dùng 'How many'." },
             { q: "___ is this lovely dress?", options: ["How much", "How many", "How old", "What"], correct: 0, explain: "Hỏi giá tiền dùng cấu trúc 'How much'." },
             { q: "___ water do you drink every day?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'water' là danh từ không đếm được nên dùng 'How much'." },
-            { q: "___ apples do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' là danh từ đếm được số nhiều dùng 'How many'." },
-            { q: "___ money do you have in your pocket?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'money' (tiền) không đếm được trong tiếng Anh, dùng 'How much'." },
-            { q: "___ students are there in your class?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'students' đếm được số nhiều dùng 'How many'." },
-            { q: "___ rice is left in the cooker?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'rice' (gạo) không đếm được dùng 'How much'." },
-            { q: "___ pens do you need?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pens' đếm được số nhiều dùng 'How many'." },
-            { q: "___ is a bowl of noodles?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "Hỏi giá tiền một bát phở dùng 'How much'." },
-            { q: "___ milk do you drink for breakfast?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'milk' không đếm được dùng 'How much'." }
+            { q: "___ apples do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' đếm được số nhiều dùng 'How many'." },
+            { q: "___ money do you have in your pocket?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'money' không đếm được dùng 'How much'." }
         ]
     };
 
@@ -728,7 +685,7 @@
     let currentExamIndex = 0;
     let currentQuestionIndex = 0;
     let userAnswers = [];
-    let currentMode = 'mixed'; // 'mixed', 'practice', 'topic'
+    let currentMode = 'mixed';
 
     function shuffleArray(array) {
         let arr = [...array];
@@ -739,15 +696,11 @@
         return arr;
     }
 
-    // Tạo 20 đề tổng hợp phân bổ đều, không trùng lặp câu hỏi
     function generateMixedExams() {
         let keys = Object.keys(questionBank);
         allExams = [];
-
         let pools = {};
-        keys.forEach(k => {
-            pools[k] = shuffleArray(questionBank[k]);
-        });
+        keys.forEach(k => { pools[k] = shuffleArray(questionBank[k]); });
 
         let pointers = { singularPlural: 0, objectPronoun: 0, toBe: 0, whQuestion: 0, prepositionTime: 0, someAny: 0, howMuchMany: 0 };
         let counts = { singularPlural: 4, objectPronoun: 4, toBe: 4, whQuestion: 4, prepositionTime: 3, someAny: 3, howMuchMany: 3 };
@@ -767,7 +720,6 @@
                     examQuestions.push({ ...item, topicKey: key });
                 }
             }
-
             examQuestions = shuffleArray(examQuestions);
             let finalizedExam = examQuestions.map((item, idx) => ({
                 id: idx + 1,
@@ -777,12 +729,10 @@
                 topic: item.topicKey,
                 explain: item.explain
             }));
-
             allExams.push(finalizedExam);
         }
     }
 
-    // Tạo 8 đề chuyên đề riêng biệt cho mỗi chủ đề
     function generateTopicExams() {
         allExams = [];
         let keys = Object.keys(questionBank);
@@ -807,7 +757,6 @@
         });
     }
 
-    // Tạo đề ôn tập thực chiến (7 đề)
     function generatePracticeExams() {
         allExams = [];
         for (let i = 0; i < practiceExamsData.length; i++) {
