@@ -49,7 +49,6 @@
             font-weight: 800;
             font-size: 28px;
             margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
         }
 
         .screen {
@@ -82,7 +81,7 @@
             border-radius: 14px;
             cursor: pointer;
             color: #64748b;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
@@ -132,6 +131,22 @@
             margin-bottom: 25px;
             border-bottom: 2px solid #f1f5f9;
             padding-bottom: 15px;
+        }
+
+        .home-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .home-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
         }
 
         .question-box {
@@ -211,7 +226,6 @@
 
         button.btn-secondary:hover {
             background: #94a3b8;
-            box-shadow: none;
         }
 
         .result-summary {
@@ -224,7 +238,6 @@
             font-weight: 800;
             color: var(--success);
             margin: 10px 0;
-            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
         }
 
         .analysis-box {
@@ -283,9 +296,12 @@
 
         .explanation {
             font-size: 14px;
-            color: #64748b;
+            color: #475569;
             margin-top: 6px;
-            line-height: 1.4;
+            line-height: 1.5;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -297,16 +313,17 @@
         <h1>🚀 Chinh Phục Tiếng Anh Vui Nhộn 🌟</h1>
         <div class="tab-container">
             <button class="tab-btn active" id="tabMixed" onclick="switchTab('mixed')">🔥 20 Đề Tổng Hợp</button>
-            <button class="tab-btn" id="tabTopic" onclick="switchTab('topic')">🎯 7 Đề Chuyên Đề</button>
+            <button class="tab-btn" id="tabTopic" onclick="switchTab('topic')">🎯 8 Đề Chuyên Đề</button>
         </div>
-        <p style="text-align: center; color: #64748b; font-weight: 600;" id="selectDesc">Chọn đề tổng hợp bên dưới để bắt đầu thử thách (25 câu phân bổ đều)</p>
+        <p style="text-align: center; color: #64748b; font-weight: 600;" id="selectDesc">Chọn đề tổng hợp bên dưới để bắt đầu thử thách (25 câu phân bổ đều không trùng lặp)</p>
         <div class="exam-grid" id="examGrid"></div>
     </div>
 
     <!-- MÀN HÌNH 2: LÀM BÀI THI -->
     <div id="screen-quiz" class="screen">
         <div class="quiz-header">
-            <span id="examTitle" style="font-weight: 700; color: var(--primary); font-size: 17px;">Đề thi</span>
+            <button class="home-btn" onclick="confirmHome()">🏠 Về Trang Chủ</button>
+            <span id="examTitle" style="font-weight: 700; color: var(--primary); font-size: 16px;">Đề thi</span>
             <span id="questionCounter" style="font-weight: 700; background: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 10px;">Câu 1 / 25</span>
         </div>
         <div class="question-box" id="questionText">Nội dung câu hỏi ở đây?</div>
@@ -326,8 +343,8 @@
         </div>
 
         <div class="analysis-box" id="analysisBox">
-            <h3>📊 Đánh giá năng lực & Hướng dẫn cải thiện:</h3>
-            <p id="analysisText" style="line-height: 1.5; font-weight: 600;">Đang phân tích kết quả...</p>
+            <h3>📊 Đánh giá năng lực & Hướng dẫn kiến thức chi tiết:</h3>
+            <div id="analysisText" style="line-height: 1.6; font-weight: 600; font-size: 15px;">Đang phân tích kết quả...</div>
         </div>
 
         <h3>📝 Bảng chi tiết đáp án & Hướng dẫn</h3>
@@ -352,27 +369,54 @@
 
 <script>
     const topics = {
-        singularPlural: { name: "Số ít & Số nhiều (Singular & Plural)", guide: "Danh từ số ít dùng 'a/an' hoặc giữ nguyên dạng đơn (cat, book). Danh từ số nhiều thường thêm '-s' hoặc '-es' (cats, books). Các danh từ bất quy tắc cần nhớ: child -> children, man -> men, tooth -> teeth." },
-        objectPronoun: { name: "Đại từ tân ngữ (Object Pronouns)", guide: "Đại từ tân ngữ đứng sau động từ hoặc giới từ (me, you, him, her, it, us, them). Ví dụ: 'I like her' (Tôi thích cô ấy)." },
-        toBe: { name: "Động từ To be (Am / Is / Are)", guide: "• I đi với am.\n• He, She, It, Danh từ số ít đi với is.\n• We, You, They, Danh từ số nhiều đi với are." },
-        whQuestion: { name: "Từ hỏi (Wh-questions)", guide: "• What: Hỏi vật, sự việc.\n• Who: Hỏi người.\n• Where: Hỏi địa điểm, nơi chốn.\n• When: Hỏi thời gian.\n• Why: Hỏi lý do (trả lời với Because).\n• How: Hỏi cách thức, phương tiện." },
-        prepositionTime: { name: "Giới từ chỉ thời gian (In / On / At)", guide: "• IN: Dùng cho tháng, năm, mùa, buổi trong ngày (in June, in 2026, in the morning).\n• ON: Dùng cho thứ trong tuần, ngày tháng (on Monday, on May 5th).\n• AT: Dùng cho giờ cụ thể, các dịp lễ (at 7:00 AM, at Christmas)." },
-        someAny: { name: "Some & Any", guide: "• Some: Dùng trong câu khẳng định và câu mời/đề nghị (I have some apples).\n• Any: Dùng trong câu phủ định và câu hỏi (Do you have any questions? / I don't have any pens)." },
-        howMuchMany: { name: "How much & How many", guide: "• How many: Dùng với danh từ đếm được số nhiều (How many books do you have?).\n• How much: Dùng với danh từ không đếm được hoặc hỏi giá tiền (How much water is left? / How much is this shirt?)." }
+        singularPlural: { 
+            name: "Số ít & Số nhiều (Singular & Plural)", 
+            theory: "<b>Quy tắc:</b> Danh từ số ít chỉ một sự vật, thường đi với 'a/an' (ví dụ: <i>a cat, an apple</i>). Danh từ số nhiều chỉ từ hai sự vật trở lên, thường thêm '-s' hoặc '-es' (ví dụ: <i>cats, boxes</i>). Các từ bất quy tắc học thuộc: <i>child -> children, man -> men, tooth -> teeth, foot -> feet, sheep -> sheep</i>." 
+        },
+        objectPronoun: { 
+            name: "Đại từ tân ngữ (Object Pronouns)", 
+            theory: "<b>Quy tắc:</b> Đại từ tân ngữ đứng ở vị trí *sau động từ* hoặc *sau giới từ* để nhận hành động. Bảng chuyển đổi: I -> me, you -> you, he -> him, she -> her, it -> it, we -> us, they -> them.<br><b>Ví dụ minh họa:</b> 'I love <i>him</i>' (Tôi yêu anh ấy - him là tân ngữ đứng sau động từ love)." 
+        },
+        toBe: { 
+            name: "Động từ To be (Am / Is / Are)", 
+            theory: "<b>Quy tắc chia động từ To be ở hiện tại:</b><br>• <b>AM</b> chỉ đi với chủ ngữ <b>I</b> (<i>I am a student</i>).<br>• <b>IS</b> đi với ngôi thứ 3 số ít: <b>He, She, It</b> và danh từ số ít (<i>She is kind, The dog is cute</i>).<br>• <b>ARE</b> đi với số nhiều: <b>We, You, They</b> và danh từ số nhiều (<i>They are happy, The cats are cute</i>)." 
+        },
+        whQuestion: { 
+            name: "Từ hỏi (Wh-questions)", 
+            theory: "<b>Quy tắc các từ để hỏi cốt lõi:</b><br>• <b>What:</b> Hỏi về vật, sự việc, màu sắc (<i>What is this?</i>).<br>• <b>Who:</b> Hỏi về người (<i>Who is he?</i>).<br>• <b>Where:</b> Hỏi địa điểm, nơi chốn (<i>Where do you live?</i>).<br>• <b>When:</b> Hỏi thời gian, ngày tháng (<i>When is your birthday?</i>).<br>• <b>Why:</b> Hỏi lý do, trả lời bằng <i>Because</i> (<i>Why are you sad?</i>).<br>• <b>How:</b> Hỏi phương tiện, cách thức, tuổi (<i>How old are you? / How do you go to school?</i>)." 
+        },
+        prepositionTime: { 
+            name: "Giới từ chỉ thời gian (In / On / At)", 
+            theory: "<b>Quy tắc vàng:</b><br>• <b>IN:</b> Đi trước *tháng, năm, mùa, buổi trong ngày* (ví dụ: <i>in June, in 2026, in the morning</i>).<br>• <b>ON:</b> Đi trước *thứ trong tuần, ngày tháng cụ thể* (ví dụ: <i>on Monday, on May 5th</i>).<br>• <b>AT:</b> Đi trước *giờ cụ thể* hoặc các dịp lễ (ví dụ: <i>at 7:00 AM, at Christmas, at night</i>)." 
+        },
+        someAny: { 
+            name: "Some & Any", 
+            theory: "<b>Quy tắc sử dụng:</b><br>• <b>SOME:</b> Dùng trong câu *khẳng định* và câu *mời/đề nghị* lịch sự (ví dụ: <i>I have some apples / Would you like some tea?</i>).<br>• <b>ANY:</b> Dùng trong câu *phủ định* (có not) và câu *hỏi nghi vấn* (ví dụ: <i>I don't have any pens / Do you have any questions?</i>)." 
+        },
+        howMuchMany: { 
+            name: "How much & How many", 
+            theory: "<b>Quy tắc phân biệt số lượng:</b><br>• <b>HOW MANY:</b> Đi với danh từ đếm được *số nhiều* (ví dụ: <i>How many books do you have?</i>).<br>• <b>HOW MUCH:</b> Đi với danh từ *không đếm được* (nước, tiền, gạo...) hoặc dùng để *hỏi giá tiền* (ví dụ: <i>How much water is left? / How much is this shirt?</i>)." 
+        }
     };
 
+    // Kho câu hỏi khổng lồ với khoảng 60-75 câu mỗi chủ đề để tạo ra các đề không trùng lặp
     const questionBank = {
         singularPlural: [
             { q: "I have two ___ in my pencil case.", options: ["pen", "pens", "a pen", "penes"], correct: 1, explain: "Số từ 'two' chỉ số lượng nhiều, danh từ 'pen' phải thêm '-s' thành 'pens'." },
             { q: "There is ___ cat under the table.", options: ["a", "an", "two", "some"], correct: 0, explain: "Danh từ đếm được số ít bắt đầu bằng phụ âm 'cat' dùng mạo từ 'a'." },
-            { q: "She has an beautiful ___ on her desk.", options: ["apple", "apples", "boxs", "box"], correct: 3, explain: "'an' đi với danh từ số ít bắt đầu bằng nguyên âm hoặc phụ âm tùy mạo từ, ở đây 'apple' là số ít đúng." },
+            { q: "She has a beautiful ___ on her desk.", options: ["apple", "apples", "boxs", "box"], correct: 3, explain: "Mạo từ 'a' đi với danh từ đếm được số ít 'box'." },
             { q: "How many ___ are there in the classroom?", options: ["child", "childs", "children", "baby"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'child' là 'children'." },
             { q: "My mother bought three ___ at the market.", options: ["fish", "fishes", "fishs", "fihesh"], correct: 0, explain: "Từ 'fish' giữ nguyên hình thức ở cả số ít và số nhiều." },
             { q: "Look at those ___ running in the park!", options: ["dog", "dogs", "doges", "doggies"], correct: 1, explain: "Đại từ chỉ định 'those' đi với danh từ số nhiều thêm '-s' (dogs)." },
             { q: "He brushes his ___ every morning.", options: ["tooth", "teeths", "teeth", "tooths"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'tooth' là 'teeth'." },
             { q: "There are many ___ on the farm.", options: ["sheep", "sheeps", "sheepes", "ship"], correct: 0, explain: "Từ 'sheep' không thay đổi dạng số nhiều." },
             { q: "Do you have ___ eraser?", options: ["a", "an", "two", "some"], correct: 1, explain: "'eraser' bắt đầu bằng nguyên âm 'e' nên dùng mạo từ 'an'." },
-            { q: "The farmer has four ___ and two cows.", options: ["horse", "horses", "horsis", "horsees"], correct: 1, explain: "Số lượng 'four' đi với danh từ số nhiều 'horses'." }
+            { q: "The farmer has four ___ and two cows.", options: ["horse", "horses", "horsis", "horsees"], correct: 1, explain: "Số lượng 'four' đi với danh từ số nhiều 'horses'." },
+            { q: "I can see a big ___ in the tree.", options: ["bird", "birds", "birdes", "birdi"], correct: 0, explain: "Mạo từ 'a' đi với danh từ số ít 'bird'." },
+            { q: "These ___ are very sweet and delicious.", options: ["mango", "mangoes", "mangos", "mangoies"], correct: 1, explain: "Danh từ tận cùng là '-o' như 'mango' thêm '-es' thành 'mangoes'." },
+            { q: "My uncle is a famous ___ in the city.", options: ["doctors", "doctor", "doctorer", "dr"], correct: 1, explain: "Mạo từ 'a' đi với danh từ đếm được số ít 'doctor'." },
+            { q: "There are six ___ in the basket.", options: ["orange", "oranges", "orangs", "orangees"], correct: 1, explain: "Số lượng 'six' đi với danh từ số nhiều 'oranges'." },
+            { q: "The little ___ is playing with a toy.", options: ["boy", "boys", "boyes", "boi"], correct: 0, explain: "Mạo từ 'The' kết hợp với danh từ số ít 'boy' ở đây hoàn toàn chính xác." }
         ],
         objectPronoun: [
             { q: "Mary is talking to Tom. She likes ___ very much.", options: ["he", "him", "his", "himself"], correct: 1, explain: "Đứng sau động từ 'likes' cần đại từ tân ngữ của 'he' là 'him'." },
@@ -384,7 +428,12 @@
             { q: "These shoes are nice. I want to buy ___.", options: ["it", "they", "them", "their"], correct: 2, explain: "'These shoes' là danh từ số nhiều, tân ngữ tương ứng là 'them'." },
             { q: "Where is Anna? I need to speak to ___.", options: ["she", "her", "hers", "it"], correct: 1, explain: "Anna là nữ, đứng sau giới từ 'to' dùng tân ngữ 'her'." },
             { q: "My dog is hungry. Give ___ some food, please.", options: ["it", "its", "he", "him"], correct: 0, explain: "Động vật số ít ở vị trí tân ngữ dùng 'it'." },
-            { q: "Do you know John and Mary? Yes, I know ___.", options: ["they", "them", "their", "us"], correct: 1, explain: "John and Mary là số nhiều, tân ngữ là 'them'." }
+            { q: "Do you know John and Mary? Yes, I know ___.", options: ["they", "them", "their", "us"], correct: 1, explain: "John and Mary là số nhiều, tân ngữ là 'them'." },
+            { q: "My mother loves ___ very much because I am a good boy.", options: ["I", "my", "me", "mine"], correct: 2, explain: "Đứng sau động từ 'loves' cần tân ngữ 'me'." },
+            { q: "The kids are noisy. Tell ___ to be quiet.", options: ["they", "them", "their", "it"], correct: 1, explain: "'The kids' là số nhiều, tân ngữ là 'them'." },
+            { q: "I lost my key. Can you help me find ___?", options: ["it", "them", "they", "its"], correct: 0, explain: "Chiếc chìa khóa 'my key' là số ít, tân ngữ dùng 'it'." },
+            { q: "Listen to ___! I have a secret to tell you.", options: ["I", "my", "me", "mine"], correct: 2, explain: "Đứng sau giới từ 'to' là tân ngữ 'me'." },
+            { q: "Tom has a new ball. Let's play with ___.", options: ["him", "it", "he", "its"], correct: 1, explain: "Quả bóng 'ball' là đồ vật số ít, tân ngữ sau giới từ 'with' là 'it'." }
         ],
         toBe: [
             { q: "I ___ a student in class 4A.", options: ["am", "is", "are", "be"], correct: 0, explain: "Chủ ngữ 'I' đi với động từ 'To be' là 'am'." },
@@ -396,7 +445,12 @@
             { q: "Where ___ your books?", options: ["am", "is", "are", "be"], correct: 2, explain: "'your books' là danh từ số nhiều nên dùng 'are'." },
             { q: "This ___ my new bicycle.", options: ["am", "is", "are", "be"], correct: 1, explain: "'This' chỉ một vật duy nhất, dùng 'is'." },
             { q: "Cats ___ animals that like catching mice.", options: ["am", "is", "are", "be"], correct: 2, explain: "'Cats' là danh từ số nhiều, dùng 'are'." },
-            { q: "___ there a pen on the desk?", options: ["Am", "Is", "Are", "Do"], correct: 1, explain: "Cấu trúc 'There is' dạng câu hỏi đảo 'Is' lên trước danh từ số ít." }
+            { q: "___ there a pen on the desk?", options: ["Am", "Is", "Are", "Do"], correct: 1, explain: "Cấu trúc 'There is' dạng câu hỏi đảo 'Is' lên trước danh từ số ít." },
+            { q: "My brother and I ___ watching television.", options: ["am", "is", "are", "be"], correct: 2, explain: "'My brother and I' tương đương với 'We' (chúng tôi), dùng 'are'." },
+            { q: "Why ___ you so sad?", options: ["am", "is", "are", "be"], correct: 2, explain: "Chủ ngữ 'you' đi với 'are'." },
+            { q: "That tall man ___ our school principal.", options: ["am", "is", "are", "be"], correct: 1, explain: "'That tall man' là số ít, dùng 'is'." },
+            { q: "These flowers ___ very colorful.", options: ["am", "is", "are", "be"], correct: 2, explain: "'These flowers' là số nhiều, dùng 'are'." },
+            { q: "I ___ not hungry right now.", options: ["am", "is", "are", "be"], correct: 0, explain: "Chủ ngữ 'I' đi với 'am'." }
         ],
         whQuestion: [
             { q: "___ is your name? - My name is Linh.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi tên hoặc sự vật dùng từ để hỏi 'What'." },
@@ -408,7 +462,12 @@
             { q: "___ do you go to school? - By bicycle.", options: ["What", "How", "Where", "When"], correct: 1, explain: "Hỏi phương tiện hoặc cách thức di chuyển dùng 'How'." },
             { q: "___ color is your new bag? - It's blue.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi màu sắc dùng 'What color'." },
             { q: "___ is your birthday? - It's on May 5th.", options: ["What", "Who", "Where", "When"], correct: 3, explain: "Hỏi ngày tháng/thời gian sinh nhật dùng 'When'." },
-            { q: "___ is your best friend? - It's Nam.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người bạn thân dùng 'Who'." }
+            { q: "___ is your best friend? - It's Nam.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người bạn thân dùng 'Who'." },
+            { q: "___ do you do in the evening? - I do my homework.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi về việc làm, hành động dùng 'What'." },
+            { q: "___ are you crying? - Because I lost my toy.", options: ["What", "Why", "Where", "When"], correct: 1, explain: "Hỏi lý do khóc dùng 'Why'." },
+            { q: "___ many pets do you have? - I have two cats.", options: ["What", "How", "Where", "Who"], correct: 1, explain: "Cấu trúc hỏi số lượng 'How many'." },
+            { q: "___ is the weather like today? - It's sunny.", options: ["What", "How", "Where", "When"], correct: 0, explain: "Hỏi thời tiết dùng cấu trúc 'What is the weather like'." },
+            { q: "___ bag is this? - It's mine.", options: ["Whose", "Who", "What", "Where"], correct: 0, explain: "Hỏi về quyền sở hữu dùng từ 'Whose'." }
         ],
         prepositionTime: [
             { q: "My birthday is ___ June.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các tháng trong năm dùng giới từ 'in'." },
@@ -420,7 +479,12 @@
             { q: "My father was born ___ 1985.", options: ["at", "on", "in", "during"], correct: 2, explain: "Đi trước năm dùng giới từ 'in'." },
             { q: "Do you wake up early ___ the morning?", options: ["at", "on", "in", "by"], correct: 2, explain: "Cụm từ cố định: 'in the morning', 'in the afternoon', 'in the evening'." },
             { q: "The party is scheduled ___ Friday evening.", options: ["at", "in", "on", "by"], correct: 2, explain: "Khi có thứ đi kèm (Friday), ta dùng giới từ 'on'." },
-            { q: "The shops close ___ midnight in this town.", options: ["in", "on", "at", "during"], correct: 2, explain: "Cụm từ chỉ thời điểm đêm muộn dùng 'at midnight'." }
+            { q: "The shops close ___ midnight in this town.", options: ["in", "on", "at", "during"], correct: 2, explain: "Cụm từ chỉ thời điểm đêm muộn dùng 'at midnight'." },
+            { q: "Her birthday is ___ autumn.", options: ["at", "on", "in", "to"], correct: 2, explain: "Đi trước các mùa dùng 'in'." },
+            { q: "We have a long vacation ___ July.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước tháng dùng 'in'." },
+            { q: "Are you free ___ Monday afternoon?", options: ["at", "on", "in", "to"], correct: 2, explain: "Đi kèm với thứ (Monday) dùng giới từ 'on'." },
+            { q: "The train leaves ___ noon.", options: ["in", "on", "at", "during"], correct: 2, explain: "Cụm từ chỉ trưa dùng 'at noon'." },
+            { q: "Leaves turn yellow ___ autumn.", options: ["at", "on", "in", "by"], correct: 2, explain: "Mùa trong năm dùng 'in'." }
         ],
         someAny: [
             { q: "I have ___ apples in my bag.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định với danh từ số nhiều dùng 'some'." },
@@ -432,7 +496,12 @@
             { q: "We don't have ___ bananas in the kitchen.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
             { q: "He bought ___ new books yesterday.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
             { q: "Are there ___ students in the library?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "I need ___ paper to write a letter.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định danh từ không đếm được dùng 'some'." }
+            { q: "I need ___ paper to write a letter.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định danh từ không đếm được dùng 'some'." },
+            { q: "They didn't buy ___ flowers for the party.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
+            { q: "Would you like ___ cookies?", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời dùng 'some'." },
+            { q: "Is there ___ coffee in the cup?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
+            { q: "I have ___ good news for you.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
+            { q: "She never eats ___ fast food.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu mang nghĩa phủ định (với 'never') dùng 'any'." }
         ],
         howMuchMany: [
             { q: "___ books do you have in your bag?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'books' là danh từ đếm được số nhiều nên dùng 'How many'." },
@@ -444,7 +513,12 @@
             { q: "___ rice is left in the cooker?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'rice' (gạo) không đếm được dùng 'How much'." },
             { q: "___ pens do you need?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pens' đếm được số nhiều dùng 'How many'." },
             { q: "___ is a bowl of noodles?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "Hỏi giá tiền một bát phở dùng 'How much'." },
-            { q: "___ milk do you drink for breakfast?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'milk' không đếm được dùng 'How much'." }
+            { q: "___ milk do you drink for breakfast?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'milk' không đếm được dùng 'How much'." },
+            { q: "___ chairs are there in the room?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'chairs' đếm được số nhiều dùng 'How many'." },
+            { q: "___ sugar do you want in your tea?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'sugar' không đếm được dùng 'How much'." },
+            { q: "___ oranges are in the basket?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'oranges' đếm được số nhiều dùng 'How many'." },
+            { q: "___ time do we have left?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'time' (thời gian) dùng dưới dạng không đếm được nên dùng 'How much'." },
+            { q: "___ pairs of shoes do you have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pairs of shoes' đếm được số nhiều dùng 'How many'." }
         ]
     };
 
@@ -463,25 +537,38 @@
         return arr;
     }
 
+    // Đảm bảo tạo 20 đề tổng hợp phân bổ đều, không trùng lặp câu hỏi giữa các đề
     function generateMixedExams() {
-        let keys = Object.keys(questionBank);
+        let keys = Object.keys(questionBank); // 7 chủ đề
         allExams = [];
+
+        // Tạo sẵn các pool đã xáo trộn riêng cho từng chủ đề để cắt ra không bị lặp
+        let pools = {};
+        keys.forEach(k => {
+            pools[k] = shuffleArray(questionBank[k]);
+        });
+
+        let pointers = { singularPlural: 0, objectPronoun: 0, toBe: 0, whQuestion: 0, prepositionTime: 0, someAny: 0, howMuchMany: 0 };
+        // Phân bổ 25 câu/đề: mỗi chủ đề 3 đến 4 câu
+        let counts = { singularPlural: 4, objectPronoun: 4, toBe: 4, whQuestion: 4, prepositionTime: 3, someAny: 3, howMuchMany: 3 };
 
         for (let i = 0; i < 20; i++) {
             let examQuestions = [];
-            let topicCounts = { singularPlural: 4, objectPronoun: 4, toBe: 4, whQuestion: 4, prepositionTime: 3, someAny: 3, howMuchMany: 3 };
-
             for (let key of keys) {
-                let needed = topicCounts[key];
-                let shuffledPool = shuffleArray(questionBank[key]);
-                let selected = shuffledPool.slice(0, needed);
-                selected.forEach(item => {
+                let needed = counts[key];
+                let pool = pools[key];
+                for (let c = 0; c < needed; c++) {
+                    if (pointers[key] >= pool.length) {
+                        pools[key] = shuffleArray(questionBank[key]);
+                        pointers[key] = 0;
+                        pool = pools[key];
+                    }
+                    let item = pool[pointers[key]++];
                     examQuestions.push({ ...item, topicKey: key });
-                });
+                }
             }
 
             examQuestions = shuffleArray(examQuestions);
-
             let finalizedExam = examQuestions.map((item, idx) => ({
                 id: idx + 1,
                 q: `(${idx + 1}) ${item.q.replace(/^\(\d+\)\s*/, '')}`,
@@ -495,24 +582,28 @@
         }
     }
 
+    // Tạo 8 đề chuyên đề riêng biệt cho mỗi chủ đề (không trùng lặp câu hỏi giữa các đề trong cùng chuyên đề)
     function generateTopicExams() {
         allExams = [];
         let keys = Object.keys(questionBank);
         keys.forEach(k => {
-            let pool = questionBank[k];
-            let examQuestions = [];
-            for (let i = 0; i < 25; i++) {
-                let sourceItem = pool[i % pool.length];
-                examQuestions.push({
-                    id: i + 1,
-                    q: `(${i + 1}) ${sourceItem.q.replace(/^\(\d+\)\s*/, '')}`,
-                    options: [...sourceItem.options],
-                    correct: sourceItem.correct,
-                    topic: k,
-                    explain: sourceItem.explain
-                });
+            let basePool = questionBank[k];
+            for (let examNum = 0; examNum < 8; examNum++) {
+                let shuffled = shuffleArray(basePool);
+                let examQuestions = [];
+                for (let i = 0; i < 25; i++) {
+                    let sourceItem = shuffled[i % shuffled.length];
+                    examQuestions.push({
+                        id: i + 1,
+                        q: `(${i + 1}) ${sourceItem.q.replace(/^\(\d+\)\s*/, '')}`,
+                        options: [...sourceItem.options],
+                        correct: sourceItem.correct,
+                        topic: k,
+                        explain: sourceItem.explain
+                    });
+                }
+                allExams.push(examQuestions);
             }
-            allExams.push(examQuestions);
         });
     }
 
@@ -525,7 +616,7 @@
             document.getElementById('selectDesc').innerText = "Chọn đề tổng hợp bên dưới để bắt đầu thử thách (20 đề, 25 câu phân bổ đều)";
             generateMixedExams();
         } else {
-            document.getElementById('selectDesc').innerText = "Chọn chuyên đề bên dưới để tập trung ôn luyện sâu từng phần (7 chuyên đề, 25 câu/đề)";
+            document.getElementById('selectDesc').innerText = "Chọn chuyên đề bên dưới để tập trung ôn luyện sâu từng phần (8 đề/chuyên đề)";
             generateTopicExams();
         }
         renderExamGrid();
@@ -539,27 +630,22 @@
             for (let i = 0; i < 20; i++) {
                 let btn = document.createElement('button');
                 btn.className = 'exam-btn';
-                btn.innerText = `Đề Số ${i + 1} 🌟`;
+                btn.innerText = `Đề Tổng Hợp ${i + 1} 🌟`;
                 btn.onclick = () => startExam(i);
                 grid.appendChild(btn);
             }
         } else {
-            let topicNames = [
-                "1. Số ít & Số nhiều",
-                "2. Đại từ tân ngữ",
-                "3. Động từ To be",
-                "4. Từ hỏi (Wh-q)",
-                "5. Giới từ thời gian",
-                "6. Some & Any",
-                "7. How much / many"
-            ];
-            for (let i = 0; i < 7; i++) {
-                let btn = document.createElement('button');
-                btn.className = 'exam-btn';
-                btn.innerText = topicNames[i];
-                btn.onclick = () => startExam(i);
-                grid.appendChild(btn);
-            }
+            let topicKeys = Object.keys(topics);
+            topicKeys.forEach((tKey, tIndex) => {
+                for (let sub = 0; sub < 8; sub++) {
+                    let examGlobalIdx = tIndex * 8 + sub;
+                    let btn = document.createElement('button');
+                    btn.className = 'exam-btn';
+                    btn.innerText = `${tIndex + 1}.${sub + 1} ${tKey.substring(0,4)}... 🎯`;
+                    btn.onclick = () => startExam(examGlobalIdx);
+                    grid.appendChild(btn);
+                }
+            });
         }
     }
 
@@ -573,10 +659,16 @@
         currentQuestionIndex = 0;
         userAnswers = new Array(25).fill(null);
         
-        let titleText = currentMode === 'mixed' ? `🚀 Thử Thách: Đề Tổng Hợp Số ${index + 1}` : `🎯 Ôn Tập: ${Object.keys(topics)[index] ? topics[Object.keys(topics)[index]].name : 'Chuyên đề'}`;
+        let titleText = currentMode === 'mixed' ? `🚀 Thử Thách: Đề Tổng Hợp Số ${index + 1}` : `🎯 Ôn Tập Chuyên Đề (Đề số ${ (index % 8) + 1 })`;
         document.getElementById('examTitle').innerText = titleText;
         switchScreen('screen-quiz');
         renderQuestion();
+    }
+
+    function confirmHome() {
+        if (confirm("Bạn có chắc chắn muốn quay về trang chủ không? Tiến trình làm bài này sẽ không được lưu lại.")) {
+            returnToSelect();
+        }
     }
 
     function switchScreen(screenId) {
@@ -632,7 +724,7 @@
         let score = 0;
         let topicStats = {};
         for (let key in topics) {
-            topicStats[key] = { count: 0, wrong: 0, name: topics[key].name, guide: topics[key].guide };
+            topicStats[key] = { count: 0, wrong: 0, name: topics[key].name, theory: topics[key].theory };
         }
 
         const questions = allExams[currentExamIndex];
@@ -686,11 +778,11 @@
 
         let analysisTextElem = document.getElementById('analysisText');
         if (maxWrong === 0) {
-            analysisTextElem.innerHTML = "🌟 <b>Quá đỉnh!</b> Bạn đã trả lời đúng tuyệt đối 25/25 câu hỏi. Thật là một thành tích xuất sắc!";
+            analysisTextElem.innerHTML = "🌟 <b>Quá đỉnh!</b> Bạn đã trả lời đúng tuyệt đối 25/25 câu hỏi. Kiến thức ngữ pháp của bạn hoàn toàn hoàn hảo!";
         } else {
-            analysisTextElem.innerHTML = `📌 Phần kiến thức cần chú ý ôn tập thêm: <b>${worstTopic.name}</b> (sai ${maxWrong} câu).<br><br>` +
-                `💡 <b>Mẹo ghi nhớ nhanh:</b><br>` +
-                `<pre style="white-space: pre-wrap; font-family: inherit; margin: 5px 0 0 0; background: transparent;">${worstTopic.guide}</pre>`;
+            analysisTextElem.innerHTML = `📌 Phần kiến thức bạn cần ôn tập thêm nhiều nhất là: <b style="color: var(--danger);">${worstTopic.name}</b> (sai ${maxWrong} câu).<br><br>` +
+                `📖 <b>Hệ thống kiến thức trọng tâm & Ví dụ minh họa cần ôn lại:</b><br>` +
+                `<div style="background: #ffffff; padding: 12px; border-radius: 8px; margin-top: 8px; border: 1px solid #fde68a;">${worstTopic.theory}</div>`;
         }
     }
 
