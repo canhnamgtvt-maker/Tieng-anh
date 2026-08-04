@@ -7,303 +7,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --accent: #ec4899;
-            --success: #10b981;
-            --danger: #f43f5e;
-            --warning: #f59e0b;
+            --primary: #6366f1; --primary-hover: #4f46e5;
+            --success: #10b981; --danger: #f43f5e; --warning: #f59e0b;
             --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fae8ff 100%);
-            --card-bg: #ffffff;
-            --text-color: #1e293b;
+            --card-bg: #ffffff; --text-color: #1e293b;
         }
-
         body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Nunito', sans-serif; background: var(--bg-gradient); color: var(--text-color);
+            margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh;
         }
-
         .container {
-            width: 100%;
-            max-width: 850px;
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
-            border: 4px solid #ffffff;
+            width: 100%; max-width: 850px; background: var(--card-bg); padding: 35px;
+            border-radius: 24px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15); border: 4px solid #ffffff;
         }
-
-        h1, h2, h3 {
-            color: var(--primary);
-            text-align: center;
-        }
-
-        h1 {
-            font-weight: 800;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
+        h1, h2, h3 { color: var(--primary); text-align: center; }
+        h1 { font-weight: 800; font-size: 28px; margin-bottom: 10px; }
+        .screen { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
         .tab-btn {
-            background: #f1f5f9;
-            border: none;
-            padding: 10px 18px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 14px;
-            cursor: pointer;
-            color: #64748b;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            background: #f1f5f9; border: none; padding: 10px 18px; font-size: 15px; font-weight: 700;
+            border-radius: 14px; cursor: pointer; color: #64748b; transition: all 0.3s;
         }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .exam-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 8px;
-        }
-
+        .tab-btn.active { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(99,102,241,0.3); }
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; max-height: 400px; overflow-y: auto; padding: 8px; }
         .exam-btn {
-            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
-            color: var(--primary);
-            border: 2px solid #c7d2fe;
-            padding: 16px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); color: var(--primary); border: 2px solid #c7d2fe;
+            padding: 14px; font-size: 14px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: all 0.2s; text-align: center;
         }
-
-        .exam-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 15px;
-        }
-
-        .home-btn {
-            background: #f1f5f9;
-            color: #475569;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .home-btn:hover {
-            background: #e2e8f0;
-            color: #1e293b;
-        }
-
-        .question-box {
-            font-size: 19px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            color: #0f172a;
-            line-height: 1.5;
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 16px;
-            border-left: 6px solid var(--primary);
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .option-item {
-            background: #ffffff;
-            border: 2px solid #e2e8f0;
-            padding: 14px 18px;
-            border-radius: 14px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-
-        .option-item:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-            transform: translateX(4px);
-        }
-
-        .option-item.selected {
-            background: #eef2ff;
-            border-color: var(--primary);
-            color: var(--primary);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
-        }
-
-        .quiz-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        button.btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        button.btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        button.btn-secondary {
-            background: #cbd5e1;
-            color: #475569;
-            box-shadow: none;
-        }
-
-        button.btn-secondary:hover {
-            background: #94a3b8;
-        }
-
-        .result-summary {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .score-badge {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--success);
-            margin: 10px 0;
-        }
-
-        .analysis-box {
-            background: #fffbeb;
-            border-left: 6px solid var(--warning);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.05);
-        }
-
-        .analysis-box h3 {
-            color: #d97706;
-            margin-top: 0;
-            text-align: left;
-            font-size: 18px;
-        }
-
-        .detail-table-container {
-            max-height: 350px;
-            overflow-y: auto;
-            border: 2px solid #f1f5f9;
-            border-radius: 16px;
-            margin-bottom: 25px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 14px;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 15px;
-        }
-
-        th {
-            background: #f8fafc;
-            position: sticky;
-            top: 0;
-            font-weight: 700;
-            color: #475569;
-        }
-
-        .text-correct {
-            color: var(--success);
-            font-weight: 700;
-        }
-
-        .text-incorrect {
-            color: var(--danger);
-            font-weight: 700;
-        }
-
-        .explanation {
-            font-size: 14px;
-            color: #475569;
-            margin-top: 6px;
-            line-height: 1.5;
-            background: #f8fafc;
-            padding: 10px;
-            border-radius: 8px;
-        }
+        .exam-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(99,102,241,0.3); }
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
+        .home-btn { background: #f1f5f9; color: #475569; border: none; padding: 8px 14px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+        .home-btn:hover { background: #e2e8f0; color: #1e293b; }
+        .question-box { font-size: 19px; font-weight: 700; margin-bottom: 25px; background: #f8fafc; padding: 20px; border-radius: 16px; border-left: 6px solid var(--primary); }
+        .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+        .option-item { background: #ffffff; border: 2px solid #e2e8f0; padding: 14px 18px; border-radius: 14px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.2s; }
+        .option-item:hover { background: #f8fafc; transform: translateX(4px); }
+        .option-item.selected { background: #eef2ff; border-color: var(--primary); color: var(--primary); }
+        .quiz-footer { display: flex; justify-content: space-between; align-items: center; }
+        button.btn { background: var(--primary); color: white; border: none; padding: 12px 28px; font-size: 16px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: all 0.2s; }
+        button.btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        button.btn-secondary { background: #cbd5e1; color: #475569; }
+        button.btn-secondary:hover { background: #94a3b8; }
+        .score-badge { font-size: 42px; font-weight: 800; color: var(--success); margin: 10px 0; text-align: center;}
+        .analysis-box { background: #fffbeb; border-left: 6px solid var(--warning); padding: 20px; margin-bottom: 25px; border-radius: 12px; }
+        .detail-table-container { max-height: 350px; overflow-y: auto; border: 2px solid #f1f5f9; border-radius: 16px; margin-bottom: 25px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 14px; border-bottom: 1px solid #f1f5f9; font-size: 15px; }
+        th { background: #f8fafc; position: sticky; top: 0; font-weight: 700; }
+        .text-correct { color: var(--success); font-weight: 700; }
+        .text-incorrect { color: var(--danger); font-weight: 700; }
+        .explanation { font-size: 14px; color: #475569; margin-top: 6px; background: #f8fafc; padding: 10px; border-radius: 8px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- MÀN HÌNH 1: CHỌN ĐỀ THI -->
     <div id="screen-select" class="screen active">
         <h1>🚀 Chinh Phục Tiếng Anh Vui Nhộn 🌟</h1>
         <div class="tab-container">
@@ -315,14 +75,13 @@
         <div class="exam-grid" id="examGrid"></div>
     </div>
 
-    <!-- MÀN HÌNH 2: LÀM BÀI THI -->
     <div id="screen-quiz" class="screen">
         <div class="quiz-header">
             <button class="home-btn" onclick="confirmHome()">🏠 Về Trang Chủ</button>
             <span id="examTitle" style="font-weight: 700; color: var(--primary); font-size: 16px;">Đề thi</span>
-            <span id="questionCounter" style="font-weight: 700; background: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 10px;">Câu 1 / 30</span>
+            <span id="questionCounter" style="font-weight: 700; background: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 10px;">Câu 1</span>
         </div>
-        <div class="question-box" id="questionText">Nội dung câu hỏi ở đây?</div>
+        <div class="question-box" id="questionText"></div>
         <div class="options-list" id="optionsList"></div>
         <div class="quiz-footer">
             <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">⬅ Quay lại</button>
@@ -330,656 +89,408 @@
         </div>
     </div>
 
-    <!-- MÀN HÌNH 3: KẾT QUẢ & PHÂN TÍCH -->
     <div id="screen-result" class="screen">
         <h2>🎉 Hoàn Thành Xuất Sắc Thử Thách! 🎉</h2>
-        <div class="result-summary">
-            <p style="font-weight: 600; color: #64748b;">Số câu trả lời đúng của bạn:</p>
-            <div class="score-badge" id="scoreBadge">25 / 30</div>
-        </div>
-
+        <div class="score-badge" id="scoreBadge"></div>
         <div class="analysis-box" id="analysisBox">
-            <h3>📊 Đánh giá năng lực & Hướng dẫn kiến thức chi tiết:</h3>
-            <div id="analysisText" style="line-height: 1.6; font-weight: 600; font-size: 15px;">Đang phân tích kết quả...</div>
+            <h3>📊 Đánh giá năng lực & Hướng dẫn:</h3>
+            <div id="analysisText" style="line-height: 1.6; font-weight: 600;"></div>
         </div>
-
-        <h3>📝 Bảng chi tiết đáp án & Hướng dẫn</h3>
+        <h3>📝 Bảng chi tiết đáp án</h3>
         <div class="detail-table-container">
             <table>
-                <thead>
-                    <tr>
-                        <th style="width: 8%;">Câu</th>
-                        <th style="width: 42%;">Câu hỏi & Đáp án của bạn</th>
-                        <th style="width: 50%;">Kết quả & Hướng dẫn giải chi tiết</th>
-                    </tr>
-                </thead>
+                <thead><tr><th style="width:8%;">Câu</th><th style="width:42%;">Câu hỏi & Đáp án</th><th style="width:50%;">Kết quả & Giải thích</th></tr></thead>
                 <tbody id="resultTableBody"></tbody>
             </table>
         </div>
-
-        <div style="text-align: center;">
-            <button class="btn" onclick="returnToSelect()">🏠 Chọn Đề Thi Khác</button>
-        </div>
+        <div style="text-align: center;"><button class="btn" onclick="returnToSelect()">🏠 Chọn Đề Khác</button></div>
     </div>
 </div>
 
 <script>
+    const tPrep = "prepositionTime", tHow = "howMuchMany", tSome = "someAny", tSingular = "singularPlural";
+    const tObj = "objectPronoun", tBe = "toBe", tWh = "whQuestion";
+
     const topics = {
-        prepositionTime: { 
-            name: "Giới từ chỉ thời gian (In / On / At)", 
-            theory: "<b>Quy tắc vàng:</b><br>• <b>IN:</b> Đi trước tháng, năm, mùa, buổi trong ngày (ví dụ: <i>in June, in 2026, in the morning</i>).<br>• <b>ON:</b> Đi trước thứ trong tuần, ngày tháng cụ thể (ví dụ: <i>on Monday, on May 5th</i>).<br>• <b>AT:</b> Đi trước giờ cụ thể hoặc mốc thời điểm (ví dụ: <i>at 7:00 p.m., at midnight, at night</i>)." 
-        },
-        howMuchMany: { 
-            name: "How much & How many", 
-            theory: "<b>Quy tắc phân biệt số lượng:</b><br>• <b>HOW MANY:</b> Đi với danh từ đếm được số nhiều (ví dụ: <i>How many books/racquets do you have?</i>).<br>• <b>HOW MUCH:</b> Đi với danh từ không đếm được (water, sugar, milk, money...) hoặc dùng để hỏi giá tiền." 
-        },
-        someAny: { 
-            name: "Some & Any", 
-            theory: "<b>Quy tắc sử dụng:</b><br>• <b>SOME:</b> Dùng trong câu khẳng định và câu mời/đề nghị lịch sự.<br>• <b>ANY:</b> Dùng trong câu phủ định (có not/don't) và câu hỏi nghi vấn." 
-        },
-        singularPlural: { 
-            name: "Chuyển đổi Số ít sang Số nhiều", 
-            theory: "<b>Quy tắc biến đổi:</b><br>• Động từ To be: is/am -> are.<br>• Danh từ: Thêm '-s' hoặc '-es'. Bất quy tắc: <i>child -> children, foot -> feet, tooth -> teeth, woman -> women</i>." 
-        },
-        objectPronoun: { 
-            name: "Đại từ tân ngữ (Object Pronouns)", 
-            theory: "<b>Quy tắc:</b> Đại từ tân ngữ đứng sau động từ hoặc giới từ (I->me, you->you, he->him, she->her, it->it, we->us, they->them)." 
-        },
-        toBe: { 
-            name: "Động từ To be (Am / Is / Are)", 
-            theory: "<b>Quy tắc:</b> I đi với am; He, She, It, số ít đi với is; We, You, They, số nhiều đi với are." 
-        },
-        whQuestion: { 
-            name: "Từ hỏi (Wh-questions)", 
-            theory: "<b>Quy tắc:</b> What (vật/sự việc), Who (người), Where (nơi chốn), When (thời gian), Why (lý do), How (cách thức/tuổi)." 
-        }
+        [tPrep]: { name: "Giới từ chỉ thời gian", theory: "IN: tháng, năm, mùa, buổi. ON: thứ, ngày tháng. AT: giờ, mốc thời điểm (at night)." },
+        [tHow]: { name: "How much & How many", theory: "HOW MANY + số nhiều đếm được. HOW MUCH + không đếm được/giá tiền." },
+        [tSome]: { name: "Some & Any", theory: "SOME: khẳng định, mời/đề nghị. ANY: phủ định (not), nghi vấn." },
+        [tSingular]: { name: "Số ít sang Số nhiều", theory: "is->are, a/an->bỏ. Thêm s/es. Bất quy tắc: child->children, foot->feet, tooth->teeth, man->men." },
+        [tObj]: { name: "Đại từ tân ngữ", theory: "Đứng sau động từ/giới từ: I->me, he->him, she->her, we->us, they->them." },
+        [tBe]: { name: "Động từ To be", theory: "I->am; He/She/It->is; We/You/They->are." },
+        [tWh]: { name: "Từ hỏi", theory: "What(vật), Who(người), Where(nơi chốn), When(thời gian), Why(lý do), How(cách thức)." }
     };
 
-    const practiceExamsData = [
-        // ĐỀ SỐ 1
-        [
-            { q: "I play pickleball _______ Sunday morning.", options: ["in", "on", "at", "by"], correct: 1, topic: "prepositionTime", explain: "Thứ kết hợp buổi (Sunday morning) dùng giới từ 'on'." },
-            { q: "The osmanthus tree was planted _______ 2023.", options: ["in", "on", "at", "by"], correct: 0, explain: "Đi trước năm dùng giới từ 'in'." },
-            { q: "We usually have breakfast _______ 7 o'clock.", options: ["in", "on", "at", "by"], correct: 2, explain: "Mốc giờ cụ thể dùng giới từ 'at'." },
-            { q: "My birthday is _______ October.", options: ["in", "on", "at", "by"], correct: 0, explain: "Tháng trong năm dùng giới từ 'in'." },
-            { q: "He goes to the park _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "Cụm từ cố định 'at the weekend'." },
-            { q: "The meeting starts _______ Monday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ trong tuần dùng 'on'." },
-            { q: "She drinks brown rice tea _______ the morning.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the morning'." },
-            { q: "The children sleep _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at night'." },
-            { q: "They are building a road _______ the moment.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at the moment'." },
-            { q: "My family travels _______ summer.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa trong năm dùng 'in'." },
-            { q: "_______ racquets do you have?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'racquets' đếm được số nhiều dùng 'How many'." },
-            { q: "_______ milk is in the bottle?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'milk' không đếm được dùng 'How much'." },
-            { q: "_______ time do you spend in the garden?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'time' không đếm được dùng 'How much'." },
-            { q: "_______ students are there in the classroom?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'students' đếm được dùng 'How many'." },
-            { q: "_______ rice do you want?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'rice' không đếm được dùng 'How much'." },
-            { q: "_______ birds are flying in the sky?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'birds' đếm được dùng 'How many'." },
-            { q: "_______ water does the tree need?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'water' không đếm được dùng 'How much'." },
-            { q: "_______ apples are on the table?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' đếm được dùng 'How many'." },
-            { q: "_______ money is in the wallet?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'money' không đếm được dùng 'How much'." },
-            { q: "_______ toys does she have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'toys' đếm được dùng 'How many'." },
-            { q: "There is _______ yogurt in the fridge.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "I don't have _______ red dates for the tea.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định dùng 'any'." },
-            { q: "Are there _______ flowers in the garden?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "He has _______ new books on the desk.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định dùng 'some'." },
-            { q: "Is there _______ cheese on the plate?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "He is a boy. (Chuyển sang số nhiều)", options: ["They are boys.", "We are boys.", "He are boys.", "It is boys."], correct: 0, explain: "He->They, is->are, boy->boys." },
-            { q: "It is a tall tree. (Chuyển sang số nhiều)", options: ["They are tall trees.", "It is tall trees.", "We are tall tree.", "Them are tall trees."], correct: 0, explain: "It->They, is->are, tree->trees." },
-            { q: "She is a teacher. (Chuyển sang số nhiều)", options: ["They are teachers.", "She are teachers.", "We is teachers.", "Thems are teacher."], correct: 0, explain: "She->They, is->are, teacher->teachers." },
-            { q: "I am a student. (Chuyển sang số nhiều)", options: ["We are students.", "They are student.", "We is student.", "I are students."], correct: 0, explain: "I->We, am->are, student->students." },
-            { q: "It is a sweet apple. (Chuyển sang số nhiều)", options: ["They are sweet apples.", "It are sweet apples.", "We are sweet apple.", "They is sweet apples."], correct: 0, explain: "It->They, is->are, apple->apples." }
+    const optPrep = ["in", "on", "at", "by"];
+    const optHow = ["How much", "How many", "What", "Which"];
+    const optSome = ["some", "any", "a", "an"];
+
+    // Kho 7 Đề thực chiến (Giảm kích thước mã nguồn để chống đơ trình duyệt)
+    const pExams = [
+        [ // Đề 1
+            {q:"I play pickleball _______ Sunday morning.", o:optPrep, c:1, t:tPrep, e:"Thứ kết hợp buổi dùng 'on'."},
+            {q:"The osmanthus tree was planted _______ 2023.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"We usually have breakfast _______ 7 o'clock.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"My birthday is _______ October.", o:optPrep, c:0, t:tPrep, e:"Tháng dùng 'in'."},
+            {q:"He goes to the park _______ the weekend.", o:optPrep, c:2, t:tPrep, e:"Cụm 'at the weekend'."},
+            {q:"The meeting starts _______ Monday.", o:optPrep, c:1, t:tPrep, e:"Thứ dùng 'on'."},
+            {q:"She drinks brown rice tea _______ the morning.", o:optPrep, c:0, t:tPrep, e:"'in the morning'."},
+            {q:"The children sleep _______ night.", o:optPrep, c:2, t:tPrep, e:"'at night'."},
+            {q:"They are building a road _______ the moment.", o:optPrep, c:2, t:tPrep, e:"'at the moment'."},
+            {q:"My family travels _______ summer.", o:optPrep, c:0, t:tPrep, e:"Mùa dùng 'in'."},
+            {q:"_______ racquets do you have?", o:optHow, c:1, t:tHow, e:"Đếm được dùng How many."},
+            {q:"_______ milk is in the bottle?", o:optHow, c:0, t:tHow, e:"Không đếm được dùng How much."},
+            {q:"_______ time do you spend in the garden?", o:optHow, c:0, t:tHow, e:"Time không đếm được -> How much."},
+            {q:"_______ students are in the classroom?", o:optHow, c:1, t:tHow, e:"Students đếm được -> How many."},
+            {q:"_______ rice do you want?", o:optHow, c:0, t:tHow, e:"Rice không đếm được -> How much."},
+            {q:"_______ birds are flying in the sky?", o:optHow, c:1, t:tHow, e:"Birds đếm được -> How many."},
+            {q:"_______ water does the tree need?", o:optHow, c:0, t:tHow, e:"Water không đếm được -> How much."},
+            {q:"_______ apples are on the table?", o:optHow, c:1, t:tHow, e:"Apples đếm được -> How many."},
+            {q:"_______ money is in the wallet?", o:optHow, c:0, t:tHow, e:"Money không đếm được -> How much."},
+            {q:"_______ toys does she have?", o:optHow, c:1, t:tHow, e:"Toys đếm được -> How many."},
+            {q:"There is _______ yogurt in the fridge.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"I don't have _______ red dates for the tea.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"Are there _______ flowers in the garden?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"He has _______ new books on the desk.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"Is there _______ cheese on the plate?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"He is a boy. (Sang số nhiều)", o:["They are boys.","We are boys.","He are boys.","It is boys."], c:0, t:tSingular, e:"He->They, is->are, boy->boys."},
+            {q:"It is a tall tree.", o:["They are tall trees.","It is tall trees.","We are tall tree.","Them are tall trees."], c:0, t:tSingular, e:"It->They, is->are, tree->trees."},
+            {q:"She is a teacher.", o:["They are teachers.","She are teachers.","We is teachers.","Thems are teacher."], c:0, t:tSingular, e:"She->They, teacher->teachers."},
+            {q:"I am a student.", o:["We are students.","They are student.","We is student.","I are students."], c:0, t:tSingular, e:"I->We, student->students."},
+            {q:"It is a sweet apple.", o:["They are sweet apples.","It are sweet apples.","We are sweet apple.","They is sweet apples."], c:0, t:tSingular, e:"It->They, apple->apples."}
         ],
-        // ĐỀ SỐ 2
-        [
-            { q: "We go to bed _______ midnight.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at midnight'." },
-            { q: "The party is _______ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
-            { q: "I saw him _______ the afternoon.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the afternoon'." },
-            { q: "The train arrives _______ 5:30 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ cụ thể dùng 'at'." },
-            { q: "My dad reads books _______ Tuesday morning.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "We went to the beach _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at the weekend'." },
-            { q: "The weather is very cold _______ winter.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
-            { q: "She will call you _______ a few minutes.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in a few minutes'." },
-            { q: "The grocery store closes _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at night'." },
-            { q: "He was born _______ 2015.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "_______ sugar do you put in your tea?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'sugar' không đếm được dùng 'How much'." },
-            { q: "_______ brothers do you have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'brothers' đếm được dùng 'How many'." },
-            { q: "_______ homework did the teacher give?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'homework' không đếm được dùng 'How much'." },
-            { q: "_______ chairs are in the living room?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'chairs' đếm được dùng 'How many'." },
-            { q: "_______ juice is left in the glass?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'juice' không đếm được dùng 'How much'." },
-            { q: "_______ cars are driving on the highway?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'cars' đếm được dùng 'How many'." },
-            { q: "_______ advice did your father give you?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'advice' không đếm được dùng 'How much'." },
-            { q: "_______ days are there in August?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'days' đếm được dùng 'How many'." },
-            { q: "_______ bread is on the table?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'bread' không đếm được dùng 'How much'." },
-            { q: "_______ friends are playing outside?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'friends' đếm được dùng 'How many'." },
-            { q: "We need _______ avocados for breakfast.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "She doesn't read _______ books in the evening.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "Do you have _______ free time today?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "There are _______ ducks swimming in the lake.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "There isn't _______ meat in the soup.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "The dictionary is heavy. (Chuyển sang số nhiều)", options: ["The dictionaries are heavy.", "The dictionarys are heavy.", "The dictionaries is heavy.", "The dictionary are heavy."], correct: 0, explain: "Dictionary -> dictionaries, is -> are." },
-            { q: "He has a new car. (Chuyển sang số nhiều)", options: ["They have new cars.", "They has new cars.", "He have new cars.", "They are new cars."], correct: 0, explain: "He->They, has->have, car->cars." },
-            { q: "It is a sharp knife. (Chuyển sang số nhiều)", options: ["They are sharp knives.", "They are sharp knifes.", "It are sharp knives.", "They is sharp knives."], correct: 0, explain: "It->They, knife->knives." },
-            { q: "She is a happy woman. (Chuyển sang số nhiều)", options: ["They are happy women.", "They are happy womans.", "She are happy women.", "They is happy women."], correct: 0, explain: "She->They, woman->women." },
-            { q: "It is a beautiful flower. (Chuyển sang số nhiều)", options: ["They are beautiful flowers.", "It are beautiful flowers.", "They is beautiful flowers.", "We are beautiful flower."], correct: 0, explain: "It->They, flower->flowers." }
+        [ // Đề 2
+            {q:"We go to bed _______ midnight.", o:optPrep, c:2, t:tPrep, e:"'at midnight'."},
+            {q:"The party is _______ December 25th.", o:optPrep, c:1, t:tPrep, e:"Ngày cụ thể dùng 'on'."},
+            {q:"I saw him _______ the afternoon.", o:optPrep, c:0, t:tPrep, e:"'in the afternoon'."},
+            {q:"The train arrives _______ 5:30 p.m.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"My dad reads books _______ Tuesday morning.", o:optPrep, c:1, t:tPrep, e:"Thứ+buổi dùng 'on'."},
+            {q:"We went to the beach _______ the weekend.", o:optPrep, c:2, t:tPrep, e:"'at the weekend'."},
+            {q:"The weather is very cold _______ winter.", o:optPrep, c:0, t:tPrep, e:"Mùa dùng 'in'."},
+            {q:"She will call you _______ a few minutes.", o:optPrep, c:0, t:tPrep, e:"'in a few minutes'."},
+            {q:"The grocery store closes _______ night.", o:optPrep, c:2, t:tPrep, e:"'at night'."},
+            {q:"He was born _______ 2015.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"_______ sugar do you put in your tea?", o:optHow, c:0, t:tHow, e:"Sugar không đếm được."},
+            {q:"_______ brothers do you have?", o:optHow, c:1, t:tHow, e:"Brothers đếm được."},
+            {q:"_______ homework did the teacher give?", o:optHow, c:0, t:tHow, e:"Homework không đếm được."},
+            {q:"_______ chairs are in the living room?", o:optHow, c:1, t:tHow, e:"Chairs đếm được."},
+            {q:"_______ juice is left in the glass?", o:optHow, c:0, t:tHow, e:"Juice không đếm được."},
+            {q:"_______ cars are driving on the highway?", o:optHow, c:1, t:tHow, e:"Cars đếm được."},
+            {q:"_______ advice did your father give you?", o:optHow, c:0, t:tHow, e:"Advice không đếm được."},
+            {q:"_______ days are there in August?", o:optHow, c:1, t:tHow, e:"Days đếm được."},
+            {q:"_______ bread is on the table?", o:optHow, c:0, t:tHow, e:"Bread không đếm được."},
+            {q:"_______ friends are playing outside?", o:optHow, c:1, t:tHow, e:"Friends đếm được."},
+            {q:"We need _______ avocados for breakfast.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"She doesn't read _______ books in the evening.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"Do you have _______ free time today?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"There are _______ ducks swimming in the lake.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"There isn't _______ meat in the soup.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"The dictionary is heavy.", o:["The dictionaries are heavy.","The dictionarys are heavy.","The dictionaries is heavy.","The dictionary are heavy."], c:0, t:tSingular, e:"y->ies (dictionaries)."},
+            {q:"He has a new car.", o:["They have new cars.","They has new cars.","He have new cars.","They are new cars."], c:0, t:tSingular, e:"has->have, car->cars."},
+            {q:"It is a sharp knife.", o:["They are sharp knives.","They are sharp knifes.","It are sharp knives.","They is sharp knives."], c:0, t:tSingular, e:"knife->knives."},
+            {q:"She is a happy woman.", o:["They are happy women.","They are happy womans.","She are happy women.","They is happy women."], c:0, t:tSingular, e:"woman->women."},
+            {q:"It is a beautiful flower.", o:["They are beautiful flowers.","It are beautiful flowers.","They is beautiful flowers.","We are beautiful flower."], c:0, t:tSingular, e:"flower->flowers."}
         ],
-        // ĐỀ SỐ 3
-        [
-            { q: "My uncle visited us _______ April 30th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
-            { q: "We always have a big dinner _______ New Year's Eve.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày lễ cụ thể dùng 'on'." },
-            { q: "The cat is sleeping _______ the sofa.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên bề mặt dùng 'on'." },
-            { q: "School finishes _______ 4:30 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Mốc giờ dùng 'at'." },
-            { q: "I like to read books _______ the evening.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the evening'." },
-            { q: "He was in Hanoi _______ 2021.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "They are waiting _______ the bus stop.", options: ["in", "on", "at", "by"], correct: 2, explain: "Trạm xe buýt dùng 'at'." },
-            { q: "The picture hangs _______ the wall.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên tường dùng 'on'." },
-            { q: "It rains a lot _______ summer.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
-            { q: "We have English class _______ Tuesday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ trong tuần dùng 'on'." },
-            { q: "_______ coffee do you drink every day?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'coffee' không đếm được dùng 'How much'." },
-            { q: "_______ pencils are there in your pencil case?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pencils' đếm được dùng 'How many'." },
-            { q: "_______ information did you find on the internet?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'information' không đếm được dùng 'How much'." },
-            { q: "_______ computers are there in the IT room?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'computers' đếm được dùng 'How many'." },
-            { q: "_______ honey do we need for the cake?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'honey' không đếm được dùng 'How much'." },
-            { q: "_______ trees are planted in the park?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'trees' đếm được dùng 'How many'." },
-            { q: "_______ sand is on the beach?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'sand' không đếm được dùng 'How much'." },
-            { q: "_______ windows does your house have?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'windows' đếm được dùng 'How many'." },
-            { q: "_______ oil is left in the bottle?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'oil' không đếm được dùng 'How much'." },
-            { q: "_______ pairs of socks do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pairs' đếm được dùng 'How many'." },
-            { q: "I would like _______ tea, please.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời lịch sự dùng 'some'." },
-            { q: "There aren't _______ oranges in the basket.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "Do you have _______ water?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "She doesn't have _______ pens in her bag.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "We need _______ butter for this recipe.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "The baby is crying. (Chuyển sang số nhiều)", options: ["The babies are crying.", "The babys are crying.", "The babies is crying.", "The baby are crying."], correct: 0, explain: "Baby -> babies." },
-            { q: "She is a kind person. (Chuyển sang số nhiều)", options: ["They are kind people.", "They are kind persons.", "She are kind people.", "Both A and B are correct."], correct: 3, explain: "Person có thể đổi thành people hoặc persons." },
-            { q: "It is a sharp tooth. (Chuyển sang số nhiều)", options: ["They are sharp teeth.", "They are sharp tooths.", "It are sharp teeth.", "They is sharp teeth."], correct: 0, explain: "Tooth -> teeth." },
-            { q: "He is a tall man. (Chuyển sang số nhiều)", options: ["They are tall men.", "They are tall mans.", "He are tall men.", "They is tall men."], correct: 0, explain: "Man -> men." },
-            { q: "It is a wild wolf. (Chuyển sang số nhiều)", options: ["They are wild wolves.", "They are wild wolfs.", "It are wild wolves.", "They is wild wolves."], correct: 0, explain: "Wolf -> wolves." }
+        [ // Đề 3
+            {q:"My uncle visited us _______ April 30th.", o:optPrep, c:1, t:tPrep, e:"Ngày cụ thể dùng 'on'."},
+            {q:"We always have a big dinner _______ New Year's Eve.", o:optPrep, c:1, t:tPrep, e:"Lễ cụ thể dùng 'on'."},
+            {q:"The cat is sleeping _______ the sofa.", o:optPrep, c:1, t:tPrep, e:"Trên mặt phẳng dùng 'on'."},
+            {q:"School finishes _______ 4:30 p.m.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"I like to read books _______ the evening.", o:optPrep, c:0, t:tPrep, e:"'in the evening'."},
+            {q:"He was in Hanoi _______ 2021.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"They are waiting _______ the bus stop.", o:optPrep, c:2, t:tPrep, e:"Trạm chờ dùng 'at'."},
+            {q:"The picture hangs _______ the wall.", o:optPrep, c:1, t:tPrep, e:"Trên tường dùng 'on'."},
+            {q:"It rains a lot _______ summer.", o:optPrep, c:0, t:tPrep, e:"Mùa dùng 'in'."},
+            {q:"We have English class _______ Tuesday.", o:optPrep, c:1, t:tPrep, e:"Thứ dùng 'on'."},
+            {q:"_______ coffee do you drink every day?", o:optHow, c:0, t:tHow, e:"Coffee không đếm được."},
+            {q:"_______ pencils are there in your pencil case?", o:optHow, c:1, t:tHow, e:"Pencils đếm được."},
+            {q:"_______ information did you find on the internet?", o:optHow, c:0, t:tHow, e:"Information không đếm được."},
+            {q:"_______ computers are there in the IT room?", o:optHow, c:1, t:tHow, e:"Computers đếm được."},
+            {q:"_______ honey do we need for the cake?", o:optHow, c:0, t:tHow, e:"Honey không đếm được."},
+            {q:"_______ trees are planted in the park?", o:optHow, c:1, t:tHow, e:"Trees đếm được."},
+            {q:"_______ sand is on the beach?", o:optHow, c:0, t:tHow, e:"Sand không đếm được."},
+            {q:"_______ windows does your house have?", o:optHow, c:1, t:tHow, e:"Windows đếm được."},
+            {q:"_______ oil is left in the bottle?", o:optHow, c:0, t:tHow, e:"Oil không đếm được."},
+            {q:"_______ pairs of socks do you want to buy?", o:optHow, c:1, t:tHow, e:"Pairs đếm được."},
+            {q:"I would like _______ tea, please.", o:optSome, c:0, t:tSome, e:"Lời mời/yêu cầu dùng some."},
+            {q:"There aren't _______ oranges in the basket.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"Do you have _______ water?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"She doesn't have _______ pens in her bag.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"We need _______ butter for this recipe.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"The baby is crying.", o:["The babies are crying.","The babys are crying.","The babies is crying.","The baby are crying."], c:0, t:tSingular, e:"baby->babies."},
+            {q:"She is a kind person.", o:["They are kind persons.","They are kind people.","Both are correct.","She are kind people."], c:2, t:tSingular, e:"Person -> people/persons đều đúng."},
+            {q:"It is a sharp tooth.", o:["They are sharp teeth.","They are sharp tooths.","It are sharp teeth.","They is sharp teeth."], c:0, t:tSingular, e:"tooth->teeth."},
+            {q:"He is a tall man.", o:["They are tall men.","They are tall mans.","He are tall men.","They is tall men."], c:0, t:tSingular, e:"man->men."},
+            {q:"It is a wild wolf.", o:["They are wild wolves.","They are wild wolfs.","It are wild wolves.","They is wild wolves."], c:0, t:tSingular, e:"wolf->wolves."}
         ],
-        // ĐỀ SỐ 4
-        [
-            { q: "The flowers bloom _______ spring.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
-            { q: "We have lunch _______ 12 o'clock.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
-            { q: "I will see you _______ Wednesday morning.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "The project started _______ 2020.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "We get presents _______ Christmas Day.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày lễ có chữ Day dùng 'on'." },
-            { q: "There are many apples _______ the tree.", options: ["in", "on", "at", "by"], correct: 1, explain: "Quả mọc trên cây dùng 'on'." },
-            { q: "My keys are _______ my bag.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bên trong dùng 'in'." },
-            { q: "My mother is cooking _______ the kitchen.", options: ["in", "on", "at", "by"], correct: 0, explain: "Phòng bếp dùng 'in'." },
-            { q: "He exercises _______ the morning.", options: ["in", "on", "at", "by"], correct: 0, explain: "'in the morning'." },
-            { q: "Independence Day is _______ September 2nd.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng cụ thể dùng 'on'." },
-            { q: "_______ salt is in this soup?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'salt' không đếm được dùng 'How much'." },
-            { q: "_______ animals live in the zoo?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'animals' đếm được dùng 'How many'." },
-            { q: "_______ pepper should I add?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'pepper' không đếm được dùng 'How much'." },
-            { q: "_______ planets are there in the solar system?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'planets' đếm được dùng 'How many'." },
-            { q: "_______ flour do you need to make bread?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'flour' không đếm được dùng 'How much'." },
-            { q: "_______ stars can you see tonight?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'stars' đếm được dùng 'How many'." },
-            { q: "_______ soup is left in the pot?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'soup' không đếm được dùng 'How much'." },
-            { q: "_______ houses are there in this village?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'houses' đếm được dùng 'How many'." },
-            { q: "_______ cheese is on the pizza?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'cheese' không đếm được dùng 'How much'." },
-            { q: "_______ shoes are outside the door?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'shoes' đếm được dùng 'How many'." },
-            { q: "There is _______ jam on the bread.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "Is there _______ honey in the jar?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "We don't have _______ cats in our house.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "There are _______ monkeys in the zoo.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "I cannot find _______ flour in the cupboard.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "The leaf is green. (Chuyển sang số nhiều)", options: ["The leaves are green.", "The leafs are green.", "The leaves is green.", "The leaf are green."], correct: 0, explain: "Leaf -> leaves." },
-            { q: "It is a small mouse. (Chuyển sang số nhiều)", options: ["They are small mice.", "They are small mouses.", "It are small mice.", "They is small mice."], correct: 0, explain: "Mouse -> mice." },
-            { q: "She has a pretty foot. (Chuyển sang số nhiều)", options: ["They have pretty feet.", "They has pretty foots.", "She have pretty feet.", "They are pretty feet."], correct: 0, explain: "Foot -> feet." },
-            { q: "He is a strong child. (Chuyển sang số nhiều)", options: ["They are strong children.", "They are strong childs.", "He are strong children.", "They is strong children."], correct: 0, explain: "Child -> children." },
-            { q: "The box is heavy. (Chuyển sang số nhiều)", options: ["The boxes are heavy.", "The boxs are heavy.", "The boxes is heavy.", "The box are heavy."], correct: 0, explain: "Box -> boxes." }
+        [ // Đề 4
+            {q:"The flowers bloom _______ spring.", o:optPrep, c:0, t:tPrep, e:"Mùa dùng 'in'."},
+            {q:"We have lunch _______ 12 o'clock.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"I will see you _______ Wednesday morning.", o:optPrep, c:1, t:tPrep, e:"Thứ+buổi dùng 'on'."},
+            {q:"The project started _______ 2020.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"We get presents _______ Christmas Day.", o:optPrep, c:1, t:tPrep, e:"Ngày lễ có Day dùng 'on'."},
+            {q:"There are many apples _______ the tree.", o:optPrep, c:1, t:tPrep, e:"Trên cây dùng 'on'."},
+            {q:"My keys are _______ my bag.", o:optPrep, c:0, t:tPrep, e:"Bên trong dùng 'in'."},
+            {q:"My mother is cooking _______ the kitchen.", o:optPrep, c:0, t:tPrep, e:"Bên trong phòng dùng 'in'."},
+            {q:"He exercises _______ the morning.", o:optPrep, c:0, t:tPrep, e:"'in the morning'."},
+            {q:"Independence Day is _______ September 2nd.", o:optPrep, c:1, t:tPrep, e:"Ngày cụ thể dùng 'on'."},
+            {q:"_______ salt is in this soup?", o:optHow, c:0, t:tHow, e:"Salt không đếm được."},
+            {q:"_______ animals live in the zoo?", o:optHow, c:1, t:tHow, e:"Animals đếm được."},
+            {q:"_______ pepper should I add?", o:optHow, c:0, t:tHow, e:"Pepper không đếm được."},
+            {q:"_______ planets are there in the solar system?", o:optHow, c:1, t:tHow, e:"Planets đếm được."},
+            {q:"_______ flour do you need to make bread?", o:optHow, c:0, t:tHow, e:"Flour không đếm được."},
+            {q:"_______ stars can you see tonight?", o:optHow, c:1, t:tHow, e:"Stars đếm được."},
+            {q:"_______ soup is left in the pot?", o:optHow, c:0, t:tHow, e:"Soup không đếm được."},
+            {q:"_______ houses are there in this village?", o:optHow, c:1, t:tHow, e:"Houses đếm được."},
+            {q:"_______ cheese is on the pizza?", o:optHow, c:0, t:tHow, e:"Cheese không đếm được."},
+            {q:"_______ shoes are outside the door?", o:optHow, c:1, t:tHow, e:"Shoes đếm được."},
+            {q:"There is _______ jam on the bread.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"Is there _______ honey in the jar?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"We don't have _______ cats in our house.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"There are _______ monkeys in the zoo.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"I cannot find _______ flour in the cupboard.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"The leaf is green.", o:["The leaves are green.","The leafs are green.","The leaves is green.","The leaf are green."], c:0, t:tSingular, e:"leaf->leaves."},
+            {q:"It is a small mouse.", o:["They are small mice.","They are small mouses.","It are small mice.","They is small mice."], c:0, t:tSingular, e:"mouse->mice."},
+            {q:"She has a pretty foot.", o:["They have pretty feet.","They has pretty foots.","She have pretty feet.","They are pretty feet."], c:0, t:tSingular, e:"foot->feet."},
+            {q:"He is a strong child.", o:["They are strong children.","They are strong childs.","He are strong children.","They is strong children."], c:0, t:tSingular, e:"child->children."},
+            {q:"The box is heavy.", o:["The boxes are heavy.","The boxs are heavy.","The boxes is heavy.","The box are heavy."], c:0, t:tSingular, e:"box->boxes."}
         ],
-        // ĐỀ SỐ 5
-        [
-            { q: "We usually take a nap _______ noon.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at noon'." },
-            { q: "The concert is _______ Thursday afternoon.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "My brother graduated _______ 2010.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "They go camping _______ the weekend.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at the weekend'." },
-            { q: "The movie ends _______ 10:45 p.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
-            { q: "The dog is lying _______ the floor.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên sàn nhà dùng 'on'." },
-            { q: "The cups are _______ the cupboard.", options: ["in", "on", "at", "by"], correct: 0, explain: "Trong tủ dùng 'in'." },
-            { q: "The TV is _______ the living room.", options: ["in", "on", "at", "by"], correct: 0, explain: "Phòng khách dùng 'in'." },
-            { q: "We have a long holiday _______ July.", options: ["in", "on", "at", "by"], correct: 0, explain: "Tháng dùng 'in'." },
-            { q: "Children wear costumes _______ Halloween.", options: ["in", "on", "at", "by"], correct: 2, explain: "Dịp lễ dùng 'at'." },
-            { q: "_______ meat do you eat every week?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'meat' không đếm được dùng 'How much'." },
-            { q: "_______ dogs are barking outside?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'dogs' đếm được dùng 'How many'." },
-            { q: "_______ traffic is there in the city?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'traffic' không đếm được dùng 'How much'." },
-            { q: "_______ buses stop at this station?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'buses' đếm được dùng 'How many'." },
-            { q: "_______ pollution is in the air?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'pollution' không đếm được dùng 'How much'." },
-            { q: "_______ rivers flow through this country?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'rivers' đếm được dùng 'How many'." },
-            { q: "_______ grass is in the garden?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'grass' không đếm được dùng 'How much'." },
-            { q: "_______ mountains did you climb?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'mountains' đếm được dùng 'How many'." },
-            { q: "_______ jam do you want on your toast?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'jam' không đếm được dùng 'How much'." },
-            { q: "_______ oceans are there in the world?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'oceans' đếm được dùng 'How many'." },
-            { q: "Is there _______ milk in the fridge?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "I saw _______ dogs in the park.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "There isn't _______ sugar in my coffee.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "_______ children are playing football.", options: ["Some", "Any", "A", "An"], correct: 0, explain: "Khẳng định dùng 'Some'." },
-            { q: "We don't have _______ rice left.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "It is a fast bus. (Chuyển sang số nhiều)", options: ["They are fast buses.", "They are fast bus.", "It are fast buses.", "They is fast buses."], correct: 0, explain: "Bus -> buses." },
-            { q: "She is a good wife. (Chuyển sang số nhiều)", options: ["They are good wives.", "They are good wifes.", "She are good wives.", "They is good wives."], correct: 0, explain: "Wife -> wives." },
-            { q: "He is a smart student. (Chuyển sang số nhiều)", options: ["They are smart students.", "They are smart student.", "He are smart students.", "They is smart students."], correct: 0, explain: "Student -> students." },
-            { q: "The watch is gold. (Chuyển sang số nhiều)", options: ["The watches are gold.", "The watchs are gold.", "The watches is gold.", "The watch are gold."], correct: 0, explain: "Watch -> watches." },
-            { q: "It is a ripe tomato. (Chuyển sang số nhiều)", options: ["They are ripe tomatoes.", "They are ripe tomatos.", "It are ripe tomatoes.", "They is ripe tomatoes."], correct: 0, explain: "Tomato -> tomatoes." }
+        [ // Đề 5
+            {q:"We usually take a nap _______ noon.", o:optPrep, c:2, t:tPrep, e:"'at noon'."},
+            {q:"The concert is _______ Thursday afternoon.", o:optPrep, c:1, t:tPrep, e:"Thứ+buổi dùng 'on'."},
+            {q:"My brother graduated _______ 2010.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"They go camping _______ the weekend.", o:optPrep, c:2, t:tPrep, e:"'at the weekend'."},
+            {q:"The movie ends _______ 10:45 p.m.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"The dog is lying _______ the floor.", o:optPrep, c:1, t:tPrep, e:"Trên sàn dùng 'on'."},
+            {q:"The cups are _______ the cupboard.", o:optPrep, c:0, t:tPrep, e:"Bên trong tủ dùng 'in'."},
+            {q:"The TV is _______ the living room.", o:optPrep, c:0, t:tPrep, e:"Trong phòng dùng 'in'."},
+            {q:"We have a long holiday _______ July.", o:optPrep, c:0, t:tPrep, e:"Tháng dùng 'in'."},
+            {q:"Children wear costumes _______ Halloween.", o:optPrep, c:2, t:tPrep, e:"Lễ hội dùng 'at'."},
+            {q:"_______ meat do you eat every week?", o:optHow, c:0, t:tHow, e:"Meat không đếm được."},
+            {q:"_______ dogs are barking outside?", o:optHow, c:1, t:tHow, e:"Dogs đếm được."},
+            {q:"_______ traffic is there in the city?", o:optHow, c:0, t:tHow, e:"Traffic không đếm được."},
+            {q:"_______ buses stop at this station?", o:optHow, c:1, t:tHow, e:"Buses đếm được."},
+            {q:"_______ pollution is in the air?", o:optHow, c:0, t:tHow, e:"Pollution không đếm được."},
+            {q:"_______ rivers flow through this country?", o:optHow, c:1, t:tHow, e:"Rivers đếm được."},
+            {q:"_______ grass is in the garden?", o:optHow, c:0, t:tHow, e:"Grass không đếm được."},
+            {q:"_______ mountains did you climb?", o:optHow, c:1, t:tHow, e:"Mountains đếm được."},
+            {q:"_______ jam do you want on your toast?", o:optHow, c:0, t:tHow, e:"Jam không đếm được."},
+            {q:"_______ oceans are there in the world?", o:optHow, c:1, t:tHow, e:"Oceans đếm được."},
+            {q:"Is there _______ milk in the fridge?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"I saw _______ dogs in the park.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"There isn't _______ sugar in my coffee.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"_______ children are playing football.", o:["Some","Any","A","An"], c:0, t:tSome, e:"Khẳng định dùng Some."},
+            {q:"We don't have _______ rice left.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"It is a fast bus.", o:["They are fast buses.","They are fast bus.","It are fast buses.","They is fast buses."], c:0, t:tSingular, e:"bus->buses."},
+            {q:"She is a good wife.", o:["They are good wives.","They are good wifes.","She are good wives.","They is good wives."], c:0, t:tSingular, e:"wife->wives."},
+            {q:"He is a smart student.", o:["They are smart students.","They are smart student.","He are smart students.","They is smart students."], c:0, t:tSingular, e:"student->students."},
+            {q:"The watch is gold.", o:["The watches are gold.","The watchs are gold.","The watches is gold.","The watch are gold."], c:0, t:tSingular, e:"watch->watches."},
+            {q:"It is a ripe tomato.", o:["They are ripe tomatoes.","They are ripe tomatos.","It are ripe tomatoes.","They is ripe tomatoes."], c:0, t:tSingular, e:"tomato->tomatoes."}
         ],
-        // ĐỀ SỐ 6
-        [
-            { q: "The stars shine _______ night.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at night'." },
-            { q: "We celebrate Valentine's Day _______ February 14th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng dùng 'on'." },
-            { q: "My flight leaves _______ 7:15 a.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
-            { q: "She was born _______ 1985.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "He likes to relax _______ Sunday evening.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "Don't sit _______ the grass.", options: ["in", "on", "at", "by"], correct: 1, explain: "Trên bãi cỏ dùng 'on'." },
-            { q: "The money is _______ the wallet.", options: ["in", "on", "at", "by"], correct: 0, explain: "Trong ví dùng 'in'." },
-            { q: "I will meet you _______ the library.", options: ["in", "on", "at", "by"], correct: 2, explain: "Tại thư viện dùng 'at'." },
-            { q: "The leaves fall _______ autumn.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
-            { q: "I have a meeting _______ Friday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ dùng 'on'." },
-            { q: "_______ luggage are you carrying?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'luggage' không đếm được dùng 'How much'." },
-            { q: "_______ passengers are on the train?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'passengers' đếm được dùng 'How many'." },
-            { q: "_______ furniture is in the new house?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'furniture' không đếm được dùng 'How much'." },
-            { q: "_______ tables are in the restaurant?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'tables' đếm được dùng 'How many'." },
-            { q: "_______ equipment do you need for the gym?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'equipment' không đếm được dùng 'How much'." },
-            { q: "_______ exercises did you do?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'exercises' đếm được dùng 'How many'." },
-            { q: "_______ toothpaste is on the brush?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'toothpaste' không đếm được dùng 'How much'." },
-            { q: "_______ brushes are in the bathroom?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'brushes' đếm được dùng 'How many'." },
-            { q: "_______ dust is under the bed?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'dust' không đếm được dùng 'How much'." },
-            { q: "_______ coins are in your pocket?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'coins' đếm được dùng 'How many'." },
-            { q: "I bought _______ apples at the market.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "Do you know _______ good restaurants here?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "She hasn't got _______ brothers.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "There is _______ water on the floor.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "Are there _______ messages for me?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "The child is happy. (Chuyển sang số nhiều)", options: ["The children are happy.", "The childs are happy.", "The children is happy.", "The child are happy."], correct: 0, explain: "Child -> children." },
-            { q: "It is a long dictionary. (Chuyển sang số nhiều)", options: ["They are long dictionaries.", "They are long dictionarys.", "It are long dictionaries.", "They is long dictionaries."], correct: 0, explain: "Dictionary -> dictionaries." },
-            { q: "He is a brave policeman. (Chuyển sang số nhiều)", options: ["They are brave policemen.", "They are brave policemans.", "He are brave policemen.", "They is brave policemen."], correct: 0, explain: "Policeman -> policemen." },
-            { q: "The glass is empty. (Chuyển sang số nhiều)", options: ["The glasses are empty.", "The glasss are empty.", "The glasses is empty.", "The glass are empty."], correct: 0, explain: "Glass -> glasses." },
-            { q: "She has a white goose. (Chuyển sang số nhiều)", options: ["They have white geese.", "They has white gooses.", "She have white geese.", "They are white geese."], correct: 0, explain: "Goose -> geese." }
+        [ // Đề 6
+            {q:"The stars shine _______ night.", o:optPrep, c:2, t:tPrep, e:"'at night'."},
+            {q:"We celebrate Valentine's Day _______ February 14th.", o:optPrep, c:1, t:tPrep, e:"Ngày tháng dùng 'on'."},
+            {q:"My flight leaves _______ 7:15 a.m.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"She was born _______ 1985.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"He likes to relax _______ Sunday evening.", o:optPrep, c:1, t:tPrep, e:"Thứ+buổi dùng 'on'."},
+            {q:"Don't sit _______ the grass.", o:optPrep, c:1, t:tPrep, e:"Trên bề mặt dùng 'on'."},
+            {q:"The money is _______ the wallet.", o:optPrep, c:0, t:tPrep, e:"Bên trong dùng 'in'."},
+            {q:"I will meet you _______ the library.", o:optPrep, c:2, t:tPrep, e:"Địa điểm dùng 'at'."},
+            {q:"The leaves fall _______ autumn.", o:optPrep, c:0, t:tPrep, e:"Mùa dùng 'in'."},
+            {q:"I have a meeting _______ Friday.", o:optPrep, c:1, t:tPrep, e:"Thứ dùng 'on'."},
+            {q:"_______ luggage are you carrying?", o:optHow, c:0, t:tHow, e:"Luggage không đếm được."},
+            {q:"_______ passengers are on the train?", o:optHow, c:1, t:tHow, e:"Passengers đếm được."},
+            {q:"_______ furniture is in the new house?", o:optHow, c:0, t:tHow, e:"Furniture không đếm được."},
+            {q:"_______ tables are in the restaurant?", o:optHow, c:1, t:tHow, e:"Tables đếm được."},
+            {q:"_______ equipment do you need for the gym?", o:optHow, c:0, t:tHow, e:"Equipment không đếm được."},
+            {q:"_______ exercises did you do?", o:optHow, c:1, t:tHow, e:"Exercises đếm được."},
+            {q:"_______ toothpaste is on the brush?", o:optHow, c:0, t:tHow, e:"Toothpaste không đếm được."},
+            {q:"_______ brushes are in the bathroom?", o:optHow, c:1, t:tHow, e:"Brushes đếm được."},
+            {q:"_______ dust is under the bed?", o:optHow, c:0, t:tHow, e:"Dust không đếm được."},
+            {q:"_______ coins are in your pocket?", o:optHow, c:1, t:tHow, e:"Coins đếm được."},
+            {q:"I bought _______ apples at the market.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"Do you know _______ good restaurants here?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"She hasn't got _______ brothers.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"There is _______ water on the floor.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"Are there _______ messages for me?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"The child is happy.", o:["The children are happy.","The childs are happy.","The children is happy.","The child are happy."], c:0, t:tSingular, e:"child->children."},
+            {q:"It is a long dictionary.", o:["They are long dictionaries.","They are long dictionarys.","It are long dictionaries.","They is long dictionaries."], c:0, t:tSingular, e:"dictionary->dictionaries."},
+            {q:"He is a brave policeman.", o:["They are brave policemen.","They are brave policemans.","He are brave policemen.","They is brave policemen."], c:0, t:tSingular, e:"policeman->policemen."},
+            {q:"The glass is empty.", o:["The glasses are empty.","The glasss are empty.","The glasses is empty.","The glass are empty."], c:0, t:tSingular, e:"glass->glasses."},
+            {q:"She has a white goose.", o:["They have white geese.","They has white gooses.","She have white geese.","They are white geese."], c:0, t:tSingular, e:"goose->geese."}
         ],
-        // ĐỀ SỐ 7
-        [
-            { q: "I usually wake up _______ sunrise.", options: ["in", "on", "at", "by"], correct: 2, explain: "'at sunrise'." },
-            { q: "We have a test _______ November 20th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Ngày tháng dùng 'on'." },
-            { q: "The shop opens _______ 8:00 a.m.", options: ["in", "on", "at", "by"], correct: 2, explain: "Giờ dùng 'at'." },
-            { q: "They got married _______ 2005.", options: ["in", "on", "at", "by"], correct: 0, explain: "Năm dùng 'in'." },
-            { q: "He plays tennis _______ Saturday afternoon.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ kết hợp buổi dùng 'on'." },
-            { q: "Look at the birds _______ the sky.", options: ["in", "on", "at", "by"], correct: 0, explain: "Bầu trời dùng 'in'." },
-            { q: "The toys are _______ the box.", options: ["in", "on", "at", "by"], correct: 0, explain: "Trong hộp dùng 'in'." },
-            { q: "He works _______ an office.", options: ["in", "on", "at", "by"], correct: 0, explain: "Văn phòng dùng 'in'." },
-            { q: "We go skiing _______ winter.", options: ["in", "on", "at", "by"], correct: 0, explain: "Mùa dùng 'in'." },
-            { q: "The party is _______ Thursday.", options: ["in", "on", "at", "by"], correct: 1, explain: "Thứ dùng 'on'." },
-            { q: "_______ homework do you have tonight?", options: ["How much", "How many", "How old", "How long"], correct: 0, explain: "'homework' không đếm được dùng 'How much'." },
-            { q: "_______ mistakes did you make?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'mistakes' đếm được dùng 'How many'." },
-            { q: "_______ time is left?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'time' không đếm được dùng 'How much'." },
-            { q: "_______ pages are in this book?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'pages' đếm được dùng 'How many'." },
-            { q: "_______ music do you listen to?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'music' không đếm được dùng 'How much'." },
-            { q: "_______ songs are on your phone?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'songs' đếm được dùng 'How many'." },
-            { q: "_______ bread did you buy?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'bread' không đếm được dùng 'How much'." },
-            { q: "_______ sandwiches do we need?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'sandwiches' đếm được dùng 'How many'." },
-            { q: "_______ juice is in the carton?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'juice' không đếm được dùng 'How much'." },
-            { q: "_______ cups of tea did you drink?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'cups' đếm được dùng 'How many'." },
-            { q: "Let's listen to _______ music.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "I can't see _______ clouds in the sky.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "Do you need _______ help with your homework?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi dùng 'any'." },
-            { q: "There are _______ beautiful flowers here.", options: ["some", "any", "a", "an"], correct: 0, explain: "Khẳng định dùng 'some'." },
-            { q: "We didn't take _______ photos.", options: ["some", "any", "a", "an"], correct: 1, explain: "Phủ định dùng 'any'." },
-            { q: "The foot is big. (Chuyển sang số nhiều)", options: ["The feet are big.", "The foots are big.", "The feet is big.", "The foot are big."], correct: 0, explain: "Foot -> feet." },
-            { q: "It is a wild deer. (Chuyển sang số nhiều)", options: ["They are wild deer.", "They are wild deers.", "It are wild deer.", "They is wild deer."], correct: 0, explain: "Deer giữ nguyên dạng." },
-            { q: "She is a famous actress. (Chuyển sang số nhiều)", options: ["They are famous actresses.", "They are famous actresss.", "She are famous actresses.", "They is famous actresses."], correct: 0, explain: "Actress -> actresses." },
-            { q: "The class is noisy. (Chuyển sang số nhiều)", options: ["The classes are noisy.", "The classs are noisy.", "The classes is noisy.", "The class are noisy."], correct: 0, explain: "Class -> classes." },
-            { q: "It is a delicious strawberry. (Chuyển sang số nhiều)", options: ["They are delicious strawberries.", "They are delicious strawberrys.", "It are delicious strawberries.", "They is delicious strawberries."], correct: 0, explain: "Strawberry -> strawberries." }
+        [ // Đề 7
+            {q:"I usually wake up _______ sunrise.", o:optPrep, c:2, t:tPrep, e:"'at sunrise'."},
+            {q:"We have a test _______ November 20th.", o:optPrep, c:1, t:tPrep, e:"Ngày cụ thể dùng 'on'."},
+            {q:"The shop opens _______ 8:00 a.m.", o:optPrep, c:2, t:tPrep, e:"Giờ dùng 'at'."},
+            {q:"They got married _______ 2005.", o:optPrep, c:0, t:tPrep, e:"Năm dùng 'in'."},
+            {q:"He plays tennis _______ Saturday afternoon.", o:optPrep, c:1, t:tPrep, e:"Thứ+buổi dùng 'on'."},
+            {q:"Look at the birds _______ the sky.", o:optPrep, c:0, t:tPrep, e:"Bầu trời dùng 'in'."},
+            {q:"The toys are _______ the box.", o:optPrep, c:0, t:tPrep, e:"Trong hộp dùng 'in'."},
+            {q:"He works _______ an office.", o:optPrep, c:0, t:tPrep, e:"Trong không gian phòng dùng 'in'."},
+            {q:"We go skiing _______ winter.", o:optPrep, c:0, t:tPrep, e:"Mùa dùng 'in'."},
+            {q:"The party is _______ Thursday.", o:optPrep, c:1, t:tPrep, e:"Thứ dùng 'on'."},
+            {q:"_______ homework do you have tonight?", o:optHow, c:0, t:tHow, e:"Homework không đếm được."},
+            {q:"_______ mistakes did you make?", o:optHow, c:1, t:tHow, e:"Mistakes đếm được."},
+            {q:"_______ time is left?", o:optHow, c:0, t:tHow, e:"Time không đếm được."},
+            {q:"_______ pages are in this book?", o:optHow, c:1, t:tHow, e:"Pages đếm được."},
+            {q:"_______ music do you listen to?", o:optHow, c:0, t:tHow, e:"Music không đếm được."},
+            {q:"_______ songs are on your phone?", o:optHow, c:1, t:tHow, e:"Songs đếm được."},
+            {q:"_______ bread did you buy?", o:optHow, c:0, t:tHow, e:"Bread không đếm được."},
+            {q:"_______ sandwiches do we need?", o:optHow, c:1, t:tHow, e:"Sandwiches đếm được."},
+            {q:"_______ juice is in the carton?", o:optHow, c:0, t:tHow, e:"Juice không đếm được."},
+            {q:"_______ cups of tea did you drink?", o:optHow, c:1, t:tHow, e:"Cups đếm được."},
+            {q:"Let's listen to _______ music.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"I can't see _______ clouds in the sky.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"Do you need _______ help with your homework?", o:optSome, c:1, t:tSome, e:"Câu hỏi dùng any."},
+            {q:"There are _______ beautiful flowers here.", o:optSome, c:0, t:tSome, e:"Khẳng định dùng some."},
+            {q:"We didn't take _______ photos.", o:optSome, c:1, t:tSome, e:"Phủ định dùng any."},
+            {q:"The foot is big.", o:["The feet are big.","The foots are big.","The feet is big.","The foot are big."], c:0, t:tSingular, e:"foot->feet."},
+            {q:"It is a wild deer.", o:["They are wild deer.","They are wild deers.","It are wild deer.","They is wild deer."], c:0, t:tSingular, e:"deer giữ nguyên."},
+            {q:"She is a famous actress.", o:["They are famous actresses.","They are famous actresss.","She are famous actresses.","They is famous actresses."], c:0, t:tSingular, e:"actress->actresses."},
+            {q:"The class is noisy.", o:["The classes are noisy.","The classs are noisy.","The classes is noisy.","The class are noisy."], c:0, t:tSingular, e:"class->classes."},
+            {q:"It is a delicious strawberry.", o:["They are delicious strawberries.","They are delicious strawberrys.","It are delicious strawberries.","They is delicious strawberries."], c:0, t:tSingular, e:"strawberry->strawberries."}
         ]
+    ];
+
+    const qBank = {
+        [tSingular]: [{q:"I have two ___ in my pencil case.", o:["pen","pens","a pen","penes"], c:1, e:"Số nhiều của pen là pens."},{q:"There is ___ cat under the table.", o:["a","an","two","some"], c:0, e:"Số ít dùng a."},{q:"How many ___ are there in the classroom?", o:["child","childs","children","baby"], c:2, e:"Số nhiều bất quy tắc của child là children."},{q:"My mother bought three ___ at the market.", o:["fish","fishes","fishs","fihesh"], c:0, e:"Fish giữ nguyên dạng số nhiều."},{q:"Look at those ___ running!", o:["dog","dogs","doges","doggies"], c:1, e:"Those đi với số nhiều dogs."}],
+        [tObj]: [{q:"Mary is talking to Tom. She likes ___.", o:["he","him","his","himself"], c:1, e:"Tân ngữ của he là him."},{q:"This gift is for you. Do you like ___?", o:["it","its","they","them"], c:0, e:"Tân ngữ vật số ít là it."},{q:"We are waiting for ___ at the bus stop.", o:["they","them","their","theirs"], c:1, e:"Tân ngữ của they là them."},{q:"Can you help ___?", o:["I","my","me","mine"], c:2, e:"Tân ngữ của I là me."},{q:"Peter is my friend. I trust ___.", o:["he","him","his","it"], c:1, e:"Tân ngữ chỉ nam là him."}],
+        [tBe]: [{q:"I ___ a student.", o:["am","is","are","be"], c:0, e:"I am."},{q:"My mother ___ a teacher.", o:["am","is","are","be"], c:1, e:"Ngôi thứ 3 số ít dùng is."},{q:"They ___ playing football.", o:["am","is","are","be"], c:2, e:"Số nhiều dùng are."},{q:"___ you happy today?", o:["Am","Is","Are","Do"], c:2, e:"You dùng are."},{q:"The weather ___ nice.", o:["am","is","are","be"], c:1, e:"Danh từ không đếm được dùng is."}],
+        [tWh]: [{q:"___ is your name?", o:["What","Who","Where","When"], c:0, e:"Hỏi tên dùng What."},{q:"___ old are you?", o:["What","How","Where","Who"], c:1, e:"Hỏi tuổi dùng How old."},{q:"___ do you live?", o:["What","Who","Where","When"], c:2, e:"Hỏi nơi chốn dùng Where."},{q:"___ is that man?", o:["What","Who","Where","When"], c:1, e:"Hỏi người dùng Who."},{q:"___ do you like English? - Because it is fun.", o:["What","Where","Why","Who"], c:2, e:"Hỏi lý do dùng Why."}],
+        [tPrep]: [{q:"My birthday is ___ June.", o:optPrep, c:0, e:"Tháng dùng in."},{q:"We don't go to school ___ Sundays.", o:optPrep, c:1, e:"Thứ dùng on."},{q:"The film starts ___ 8:00 PM.", o:optPrep, c:2, e:"Giờ dùng at."},{q:"Birds fly to the south ___ winter.", o:optPrep, c:0, e:"Mùa dùng in."},{q:"We celebrate Christmas ___ December 25th.", o:optPrep, c:1, e:"Ngày cụ thể dùng on."}],
+        [tSome]: [{q:"I have ___ apples.", o:optSome, c:0, e:"Khẳng định dùng some."},{q:"Do you have ___ questions?", o:optSome, c:1, e:"Câu hỏi dùng any."},{q:"There isn't ___ milk.", o:optSome, c:1, e:"Phủ định dùng any."},{q:"Would you like ___ tea?", o:optSome, c:0, e:"Mời lịch sự dùng some."},{q:"She doesn't want ___ help.", o:optSome, c:1, e:"Phủ định dùng any."}],
+        [tHow]: [{q:"___ books do you have?", o:optHow, c:1, e:"Books đếm được -> How many."},{q:"___ is this dress?", o:optHow, c:0, e:"Hỏi giá tiền -> How much."},{q:"___ water do you drink?", o:optHow, c:0, e:"Water không đếm được -> How much."},{q:"___ apples do you want?", o:optHow, c:1, e:"Apples đếm được -> How many."},{q:"___ money do you have?", o:optHow, c:0, e:"Money không đếm được -> How much."}]
     };
 
-    const questionBank = {
-        singularPlural: [
-            { q: "I have two ___ in my pencil case.", options: ["pen", "pens", "a pen", "penes"], correct: 1, explain: "Số từ 'two' chỉ số lượng nhiều, danh từ 'pen' phải thêm '-s' thành 'pens'." },
-            { q: "There is ___ cat under the table.", options: ["a", "an", "two", "some"], correct: 0, explain: "Danh từ đếm được số ít bắt đầu bằng phụ âm 'cat' dùng mạo từ 'a'." },
-            { q: "She has a beautiful ___ on her desk.", options: ["apple", "apples", "boxs", "box"], correct: 3, explain: "Mạo từ 'a' đi với danh từ đếm được số ít 'box'." },
-            { q: "How many ___ are there in the classroom?", options: ["child", "childs", "children", "baby"], correct: 2, explain: "Danh từ số nhiều bất quy tắc của 'child' là 'children'." },
-            { q: "My mother bought three ___ at the market.", options: ["fish", "fishes", "fishs", "fihesh"], correct: 0, explain: "Từ 'fish' giữ nguyên hình thức ở cả số ít và số nhiều." }
-        ],
-        objectPronoun: [
-            { q: "Mary is talking to Tom. She likes ___ very much.", options: ["he", "him", "his", "himself"], correct: 1, explain: "Đứng sau động từ 'likes' cần đại từ tân ngữ của 'he' là 'him'." },
-            { q: "This gift is for you. Do you like ___?", options: ["it", "its", "they", "them"], correct: 0, explain: "Thay thế cho vật số ít 'gift' ở vị trí tân ngữ dùng 'it'." },
-            { q: "We are waiting for ___ at the bus stop.", options: ["they", "them", "their", "theirs"], correct: 1, explain: "Đứng sau giới từ 'for' cần dùng tân ngữ 'them'." },
-            { q: "Can you help ___ with this heavy bag?", options: ["I", "my", "me", "mine"], correct: 2, explain: "Đứng sau động từ 'help' làm tân ngữ là 'me'." },
-            { q: "The teacher is explaining the lesson to ___.", options: ["we", "our", "us", "ours"], correct: 2, explain: "Đứng sau giới từ 'to' cần dùng tân ngữ 'us'." }
-        ],
-        toBe: [
-            { q: "I ___ a student in class 4A.", options: ["am", "is", "are", "be"], correct: 0, explain: "Chủ ngữ 'I' đi với động từ 'To be' là 'am'." },
-            { q: "My mother ___ a teacher in a primary school.", options: ["am", "is", "are", "be"], correct: 1, explain: "'My mother' là ngôi thứ ba số ít nên đi với 'is'." },
-            { q: "They ___ playing football in the school yard.", options: ["am", "is", "are", "be"], correct: 2, explain: "Chủ ngữ số nhiều 'They' đi với động từ 'are'." },
-            { q: "___ you happy today?", options: ["Am", "Is", "Are", "Do"], correct: 2, explain: "Chủ ngữ 'you' đi với động từ 'To be' ở thể nghi vấn là 'Are'." },
-            { q: "The weather ___ nice and warm this morning.", options: ["am", "is", "are", "be"], correct: 1, explain: "'The weather' là danh từ không đếm được số ít, dùng 'is'." }
-        ],
-        whQuestion: [
-            { q: "___ is your name? - My name is Linh.", options: ["What", "Who", "Where", "When"], correct: 0, explain: "Hỏi tên hoặc sự vật dùng từ để hỏi 'What'." },
-            { q: "___ old are you? - I am ten years old.", options: ["What", "How", "Where", "Who"], correct: 1, explain: "Hỏi tuổi dùng cấu trúc 'How old'." },
-            { q: "___ do you live? - I live in Hanoi.", options: ["What", "Who", "Where", "When"], correct: 2, explain: "Hỏi nơi chốn, địa điểm dùng 'Where'." },
-            { q: "___ is that man over there? - He is my uncle.", options: ["What", "Who", "Where", "When"], correct: 1, explain: "Hỏi về người dùng từ 'Who'." },
-            { q: "___ do you go to school? - I go at 7 o'clock.", options: ["What", "When", "Where", "Who"], correct: 1, explain: "Hỏi về thời gian dùng 'When'." }
-        ],
-        prepositionTime: [
-            { q: "My birthday is ___ June.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các tháng trong năm dùng giới từ 'in'." },
-            { q: "We don't go to school ___ Sundays.", options: ["in", "on", "at", "to"], correct: 1, explain: "Đi trước các thứ trong tuần dùng giới từ 'on'." },
-            { q: "The film starts ___ 8:00 PM tonight.", options: ["in", "on", "at", "during"], correct: 2, explain: "Đi trước các mốc giờ cụ thể dùng giới từ 'at'." },
-            { q: "Birds often fly to the south ___ winter.", options: ["at", "on", "in", "by"], correct: 2, explain: "Đi trước các mùa trong năm dùng giới từ 'in'." },
-            { q: "We celebrate Christmas ___ December 25th.", options: ["in", "on", "at", "by"], correct: 1, explain: "Đi trước ngày tháng cụ thể dùng giới từ 'on'." }
-        ],
-        someAny: [
-            { q: "I have ___ apples in my bag.", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu khẳng định với danh từ số nhiều dùng 'some'." },
-            { q: "Do you have ___ questions for me?", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu hỏi nghi vấn thường dùng 'any'." },
-            { q: "There isn't ___ milk left in the fridge.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('isn't') đi với 'any'." },
-            { q: "Would you like ___ tea?", options: ["some", "any", "a", "an"], correct: 0, explain: "Câu mời hoặc đề nghị lịch sự dùng 'some'." },
-            { q: "She doesn't want ___ help with her homework.", options: ["some", "any", "a", "an"], correct: 1, explain: "Câu phủ định ('doesn't want') dùng 'any'." }
-        ],
-        howMuchMany: [
-            { q: "___ books do you have in your bag?", options: ["How much", "How many", "How old", "How long"], correct: 1, explain: "'books' là danh từ đếm được số nhiều nên dùng 'How many'." },
-            { q: "___ is this lovely dress?", options: ["How much", "How many", "How old", "What"], correct: 0, explain: "Hỏi giá tiền dùng cấu trúc 'How much'." },
-            { q: "___ water do you drink every day?", options: ["How many", "How much", "How long", "How old"], correct: 1, explain: "'water' là danh từ không đếm được nên dùng 'How much'." },
-            { q: "___ apples do you want to buy?", options: ["How much", "How many", "What", "Which"], correct: 1, explain: "'apples' đếm được số nhiều dùng 'How many'." },
-            { q: "___ money do you have in your pocket?", options: ["How many", "How much", "What", "Which"], correct: 1, explain: "'money' không đếm được dùng 'How much'." }
-        ]
-    };
+    let allExams = [], curIdx = 0, curQIdx = 0, uAns = [], curMode = 'mixed';
+    const shuffle = a => [...a].sort(()=>0.5-Math.random());
 
-    let allExams = [];
-    let currentExamIndex = 0;
-    let currentQuestionIndex = 0;
-    let userAnswers = [];
-    let currentMode = 'mixed';
-
-    function shuffleArray(array) {
-        let arr = [...array];
-        for (let i = arr.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    function generateMixedExams() {
-        let keys = Object.keys(questionBank);
-        allExams = [];
-        let pools = {};
-        keys.forEach(k => { pools[k] = shuffleArray(questionBank[k]); });
-
-        let pointers = { singularPlural: 0, objectPronoun: 0, toBe: 0, whQuestion: 0, prepositionTime: 0, someAny: 0, howMuchMany: 0 };
-        let counts = { singularPlural: 4, objectPronoun: 4, toBe: 4, whQuestion: 4, prepositionTime: 3, someAny: 3, howMuchMany: 3 };
-
-        for (let i = 0; i < 20; i++) {
-            let examQuestions = [];
-            for (let key of keys) {
-                let needed = counts[key];
-                let pool = pools[key];
-                for (let c = 0; c < needed; c++) {
-                    if (pointers[key] >= pool.length) {
-                        pools[key] = shuffleArray(questionBank[key]);
-                        pointers[key] = 0;
-                        pool = pools[key];
-                    }
-                    let item = pool[pointers[key]++];
-                    examQuestions.push({ ...item, topicKey: key });
-                }
-            }
-            examQuestions = shuffleArray(examQuestions);
-            let finalizedExam = examQuestions.map((item, idx) => ({
-                id: idx + 1,
-                q: `(${idx + 1}) ${item.q.replace(/^\(\d+\)\s*/, '')}`,
-                options: [...item.options],
-                correct: item.correct,
-                topic: item.topicKey,
-                explain: item.explain
-            }));
-            allExams.push(finalizedExam);
+    function genMixed() {
+        allExams = []; let keys = Object.keys(qBank);
+        for(let i=0; i<20; i++){
+            let ex = [];
+            keys.forEach(k => {
+                let pool = shuffle(qBank[k]);
+                pool.slice(0, 4).forEach(item => ex.push({...item, t:k}));
+            });
+            allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q}` })));
         }
     }
 
-    function generateTopicExams() {
+    function genTopic() {
         allExams = [];
-        let keys = Object.keys(questionBank);
-        keys.forEach(k => {
-            let basePool = questionBank[k];
-            for (let examNum = 0; examNum < 8; examNum++) {
-                let shuffled = shuffleArray(basePool);
-                let examQuestions = [];
-                for (let i = 0; i < 25; i++) {
-                    let sourceItem = shuffled[i % shuffled.length];
-                    examQuestions.push({
-                        id: i + 1,
-                        q: `(${i + 1}) ${sourceItem.q.replace(/^\(\d+\)\s*/, '')}`,
-                        options: [...sourceItem.options],
-                        correct: sourceItem.correct,
-                        topic: k,
-                        explain: sourceItem.explain
-                    });
+        Object.keys(qBank).forEach(k => {
+            let pool = qBank[k];
+            for(let i=0; i<8; i++){
+                let sPool = shuffle(pool);
+                let ex = [];
+                for(let j=0; j<25; j++) {
+                    let itm = sPool[j%sPool.length];
+                    ex.push({...itm, id:j+1, q:`(${j+1}) ${itm.q}`, t:k});
                 }
-                allExams.push(examQuestions);
+                allExams.push(ex);
             }
         });
     }
 
-    function generatePracticeExams() {
-        allExams = [];
-        for (let i = 0; i < practiceExamsData.length; i++) {
-            let rawExam = practiceExamsData[i];
-            let formattedExam = rawExam.map((item, idx) => ({
-                id: idx + 1,
-                q: `(${idx + 1}) ${item.q.replace(/^\(\d+\)\s*/, '')}`,
-                options: [...item.options],
-                correct: item.correct,
-                topic: item.topic,
-                explain: item.explain
-            }));
-            allExams.push(formattedExam);
-        }
+    function genPractice() {
+        allExams = pExams.map(ex => ex.map((itm, i) => ({ ...itm, id:i+1, q:`(${i+1}) ${itm.q}` })));
     }
 
     function switchTab(mode) {
-        currentMode = mode;
-        document.getElementById('tabMixed').classList.toggle('active', mode === 'mixed');
-        document.getElementById('tabPractice').classList.toggle('active', mode === 'practice');
-        document.getElementById('tabTopic').classList.toggle('active', mode === 'topic');
+        curMode = mode;
+        ['Mixed','Practice','Topic'].forEach(m => 
+            document.getElementById('tab'+m).classList.toggle('active', mode===m.toLowerCase()));
         
-        if (mode === 'mixed') {
-            document.getElementById('selectDesc').innerText = "Chọn đề tổng hợp bên dưới để bắt đầu thử thách (20 đề, 25 câu phân bổ đều)";
-            generateMixedExams();
-        } else if (mode === 'practice') {
-            document.getElementById('selectDesc').innerText = "Chọn đề ôn tập thực chiến bên dưới (7 đề tổng hợp chất lượng cao)";
-            generatePracticeExams();
-        } else {
-            document.getElementById('selectDesc').innerText = "Chọn chuyên đề bên dưới để tập trung ôn luyện sâu từng phần (8 đề/chuyên đề)";
-            generateTopicExams();
-        }
-        renderExamGrid();
-    }
-
-    function renderExamGrid() {
-        const grid = document.getElementById('examGrid');
-        grid.innerHTML = '';
+        let desc = document.getElementById('selectDesc');
+        if(mode==='mixed') { desc.innerText = "Chọn đề tổng hợp bên dưới (Phân bổ đều)"; genMixed(); }
+        else if(mode==='practice') { desc.innerText = "Chọn đề ôn tập thực chiến bên dưới (30 câu/đề)"; genPractice(); }
+        else { desc.innerText = "Chọn chuyên đề ôn luyện sâu bên dưới (25 câu/đề)"; genTopic(); }
         
-        if (currentMode === 'mixed') {
-            for (let i = 0; i < 20; i++) {
-                let btn = document.createElement('button');
-                btn.className = 'exam-btn';
-                btn.innerText = `Đề Tổng Hợp ${i + 1} 🌟`;
-                btn.onclick = () => startExam(i);
-                grid.appendChild(btn);
-            }
-        } else if (currentMode === 'practice') {
-            for (let i = 0; i < practiceExamsData.length; i++) {
-                let btn = document.createElement('button');
-                btn.className = 'exam-btn';
-                btn.innerText = `Đề Ôn Tập ${i + 1} 📚`;
-                btn.onclick = () => startExam(i);
-                grid.appendChild(btn);
+        const grid = document.getElementById('examGrid'); grid.innerHTML = '';
+        if(mode!=='topic') {
+            let len = mode==='mixed'?20:7;
+            for(let i=0; i<len; i++) {
+                let b = document.createElement('button'); b.className='exam-btn'; 
+                b.innerText = mode==='mixed'?`Đề Tổng Hợp ${i+1} 🌟`:`Đề Ôn Tập ${i+1} 📚`;
+                b.onclick = ()=>start(i); grid.appendChild(b);
             }
         } else {
-            let topicKeys = Object.keys(topics);
-            topicKeys.forEach((tKey, tIndex) => {
-                for (let sub = 0; sub < 8; sub++) {
-                    let examGlobalIdx = tIndex * 8 + sub;
-                    let btn = document.createElement('button');
-                    btn.className = 'exam-btn';
-                    btn.innerText = `${tIndex + 1}.${sub + 1} ${tKey.substring(0,4)}... 🎯`;
-                    btn.onclick = () => startExam(examGlobalIdx);
-                    grid.appendChild(btn);
+            Object.keys(topics).forEach((k, tI) => {
+                for(let s=0; s<8; s++) {
+                    let b = document.createElement('button'); b.className='exam-btn';
+                    b.innerText = `${tI+1}.${s+1} ${k.substring(0,4)}... 🎯`;
+                    b.onclick = ()=>start(tI*8+s); grid.appendChild(b);
                 }
             });
         }
     }
 
-    function initScreenSelect() {
-        generateMixedExams();
-        renderExamGrid();
-    }
+    function init() { switchTab('mixed'); }
 
-    function startExam(index) {
-        currentExamIndex = index;
-        currentQuestionIndex = 0;
-        let totalQ = allExams[currentExamIndex].length;
-        userAnswers = new Array(totalQ).fill(null);
+    function start(idx) {
+        curIdx = idx; curQIdx = 0; 
+        uAns = new Array(allExams[curIdx].length).fill(null);
+        let tt = "";
+        if(curMode==='mixed') tt = `🚀 Tổng Hợp: Đề ${idx+1}`;
+        else if(curMode==='practice') tt = `📚 Ôn Tập: Đề ${idx+1}`;
+        else tt = `🎯 Chuyên Đề ${ (idx%8)+1 }`;
         
-        let titleText = "";
-        if (currentMode === 'mixed') titleText = `🚀 Thử Thách: Đề Tổng Hợp Số ${index + 1}`;
-        else if (currentMode === 'practice') titleText = `📚 Ôn Tập Thực Chiến: Đề Số ${index + 1}`;
-        else titleText = `🎯 Ôn Tập Chuyên Đề (Đề số ${ (index % 8) + 1 })`;
-
-        document.getElementById('examTitle').innerText = titleText;
-        switchScreen('screen-quiz');
-        renderQuestion();
+        document.getElementById('examTitle').innerText = tt;
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+        document.getElementById('screen-quiz').classList.add('active');
+        renderQ();
     }
 
-    function confirmHome() {
-        if (confirm("Bạn có chắc chắn muốn quay về trang chủ không? Tiến trình làm bài này sẽ không được lưu lại.")) {
-            returnToSelect();
-        }
-    }
-
-    function switchScreen(screenId) {
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById(screenId).classList.add('active');
-    }
-
-    function renderQuestion() {
-        const currentExam = allExams[currentExamIndex];
-        const questionObj = currentExam[currentQuestionIndex];
-        let totalQ = currentExam.length;
-
-        document.getElementById('questionCounter').innerText = `Câu ${currentQuestionIndex + 1} / ${totalQ}`;
-        document.getElementById('questionText').innerText = questionObj.q;
-
-        const optionsList = document.getElementById('optionsList');
-        optionsList.innerHTML = '';
-
-        questionObj.options.forEach((opt, idx) => {
-            let item = document.createElement('div');
-            item.className = 'option-item';
-            if (userAnswers[currentQuestionIndex] === idx) {
-                item.classList.add('selected');
-            }
-            item.innerText = `${String.fromCharCode(65 + idx)}. ${opt}`;
-            item.onclick = () => selectOption(idx);
-            optionsList.appendChild(item);
+    function renderQ() {
+        let q = allExams[curIdx][curQIdx], tot = allExams[curIdx].length;
+        document.getElementById('questionCounter').innerText = `Câu ${curQIdx+1} / ${tot}`;
+        document.getElementById('questionText').innerText = q.q;
+        let opts = document.getElementById('optionsList'); opts.innerHTML = '';
+        q.o.forEach((opt, i) => {
+            let d = document.createElement('div'); d.className = 'option-item '+(uAns[curQIdx]===i?'selected':'');
+            d.innerText = `${String.fromCharCode(65+i)}. ${opt}`;
+            d.onclick = ()=>{ uAns[curQIdx]=i; renderQ(); }; opts.appendChild(d);
         });
-
-        document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'block';
-        document.getElementById('nextBtn').innerText = currentQuestionIndex === totalQ - 1 ? 'Nộp Bài 🎯' : 'Câu tiếp theo ➡';
+        document.getElementById('prevBtn').style.display = curQIdx===0?'none':'block';
+        document.getElementById('nextBtn').innerText = curQIdx===tot-1?'Nộp Bài 🎯':'Câu tiếp theo ➡';
     }
 
-    function selectOption(optionIndex) {
-        userAnswers[currentQuestionIndex] = optionIndex;
-        renderQuestion();
-    }
+    function confirmHome() { if(confirm("Bạn muốn quay về trang chủ? Tiến trình sẽ không lưu.")) {
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+        document.getElementById('screen-select').classList.add('active');
+    }}
+    function returnToSelect() { confirmHome(); }
+    function prevQuestion() { if(curQIdx>0) { curQIdx--; renderQ(); } }
+    function nextQuestion() { if(curQIdx < allExams[curIdx].length-1) { curQIdx++; renderQ(); } else finish(); }
 
-    function prevQuestion() {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            renderQuestion();
-        }
-    }
-
-    function nextQuestion() {
-        let totalQ = allExams[currentExamIndex].length;
-        if (currentQuestionIndex < totalQ - 1) {
-            currentQuestionIndex++;
-            renderQuestion();
-        } else {
-            finishExam();
-        }
-    }
-
-    function finishExam() {
-        let score = 0;
-        let topicStats = {};
-        for (let key in topics) {
-            topicStats[key] = { count: 0, wrong: 0, name: topics[key].name, theory: topics[key].theory };
-        }
-
-        const questions = allExams[currentExamIndex];
-        let totalQ = questions.length;
-        let tableBody = document.getElementById('resultTableBody');
-        tableBody.innerHTML = '';
-
-        questions.forEach((q, idx) => {
-            let userAns = userAnswers[idx];
-            let isCorrect = (userAns === q.correct);
-            if (isCorrect) score++;
-
-            if (topicStats[q.topic]) {
-                topicStats[q.topic].count++;
-                if (!isCorrect) topicStats[q.topic].wrong++;
-            }
-
-            let userAnsText = userAns !== null ? `${String.fromCharCode(65 + userAns)}. ${q.options[userAns]}` : "Chưa chọn";
-            let correctAnsText = `${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}`;
-
-            let row = document.createElement('tr');
-            row.innerHTML = `
-                <td><b>${idx + 1}</b></td>
-                <td>
-                    <div>${q.q}</div>
-                    <div style="margin-top: 4px; font-size: 13px;">Đáp án bạn chọn: <span style="color: ${isCorrect ? 'var(--success)' : 'var(--danger)'}">${userAnsText}</span></div>
-                </td>
-                <td>
-                    <div>Kết quả: <span class="${isCorrect ? 'text-correct' : 'text-incorrect'}">${isCorrect ? 'Đúng' : 'Sai'}</span></div>
-                    ${!isCorrect ? `<div style="font-size:13px; color:#374151;">Đáp án đúng: <b>${correctAnsText}</b></div>` : ''}
-                    <div class="explanation"><b>Hướng dẫn:</b> ${q.explain}</div>
-                </td>
-            `;
-            tableBody.appendChild(row);
+    function finish() {
+        let sc = 0, stats = {};
+        for(let k in topics) stats[k] = { w:0, n:topics[k].name, th:topics[k].theory };
+        let tbody = document.getElementById('resultTableBody'); tbody.innerHTML = '';
+        allExams[curIdx].forEach((q, i) => {
+            let isC = uAns[i]===q.c; if(isC) sc++; else if(stats[q.t]) stats[q.t].w++;
+            let uT = uAns[i]!==null ? `${String.fromCharCode(65+uAns[i])}. ${q.o[uAns[i]]}` : "Chưa chọn";
+            let cT = `${String.fromCharCode(65+q.c)}. ${q.o[q.c]}`;
+            tbody.innerHTML += `<tr><td><b>${i+1}</b></td>
+                <td><div>${q.q}</div><div style="font-size:13px;margin-top:4px;">Bạn chọn: <span style="color:var(--${isC?'success':'danger'})">${uT}</span></div></td>
+                <td><div><span class="${isC?'text-correct':'text-incorrect'}">${isC?'Đúng':'Sai'}</span></div>
+                ${!isC?`<div style="font-size:13px;">Đáp án đúng: <b>${cT}</b></div>`:''}
+                <div class="explanation"><b>Hướng dẫn:</b> ${q.e}</div></td></tr>`;
         });
-
-        document.getElementById('scoreBadge').innerText = `${score} / ${totalQ}`;
-        generateAnalysis(topicStats);
-        switchScreen('screen-result');
+        document.getElementById('scoreBadge').innerText = `${sc} / ${allExams[curIdx].length}`;
+        let badT = null, maxW = -1;
+        for(let k in stats) if(stats[k].w > maxW) { maxW = stats[k].w; badT = stats[k]; }
+        let txt = document.getElementById('analysisText');
+        if(maxW===0) txt.innerHTML = "🌟 <b>Hoàn hảo!</b> Bạn đã đúng 100%.";
+        else txt.innerHTML = `📌 Bạn cần ôn thêm: <b style="color:var(--danger)">${badT.n}</b> (sai ${maxW} câu).<br><div style="background:#fff;padding:10px;border-radius:8px;border:1px solid #fcd34d;margin-top:8px;">${badT.th}</div>`;
+        
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+        document.getElementById('screen-result').classList.add('active');
     }
 
-    function generateAnalysis(topicStats) {
-        let worstTopic = null;
-        let maxWrong = -1;
-
-        for (let key in topicStats) {
-            if (topicStats[key].wrong > maxWrong) {
-                maxWrong = topicStats[key].wrong;
-                worstTopic = topicStats[key];
-            }
-        }
-
-        let analysisTextElem = document.getElementById('analysisText');
-        if (maxWrong === 0) {
-            analysisTextElem.innerHTML = "🌟 <b>Quá đỉnh!</b> Bạn đã trả lời đúng tuyệt đối toàn bộ các câu hỏi. Kiến thức ngữ pháp của bạn hoàn toàn hoàn hảo!";
-        } else {
-            analysisTextElem.innerHTML = `📌 Phần kiến thức bạn cần ôn tập thêm nhiều nhất là: <b style="color: var(--danger);">${worstTopic.name}</b> (sai ${maxWrong} câu).<br><br>` +
-                `📖 <b>Hệ thống kiến thức trọng tâm & Ví dụ minh họa cần ôn lại:</b><br>` +
-                `<div style="background: #ffffff; padding: 12px; border-radius: 8px; margin-top: 8px; border: 1px solid #fde68a;">${worstTopic.theory}</div>`;
-        }
-    }
-
-    function returnToSelect() {
-        switchScreen('screen-select');
-    }
-
-    window.onload = initScreenSelect;
+    window.onload = init;
 </script>
-
 </body>
 </html>
