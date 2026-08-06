@@ -4,88 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinh Phục Tiếng Anh - Vui Học Mỗi Ngày</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1; --primary-hover: #4f46e5;
             --success: #10b981; --danger: #f43f5e; --warning: #f59e0b;
-            --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fae8ff 100%);
+            --accent: #8b5cf6; --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fae8ff 100%);
             --card-bg: #ffffff; --text-color: #1e293b;
         }
         body {
             font-family: 'Nunito', sans-serif; background: var(--bg-gradient); color: var(--text-color);
-            margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            margin: 0; padding: 15px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
         }
         .container {
-            width: 100%; max-width: 850px; background: var(--card-bg); padding: 30px;
-            border-radius: 24px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15); border: 4px solid #ffffff;
+            width: 100%; max-width: 900px; background: var(--card-bg); padding: 30px;
+            border-radius: 24px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15); border: 4px solid #ffffff; margin-top: 20px; margin-bottom: 20px;
         }
         h1, h2, h3 { color: var(--primary); text-align: center; }
-        h1 { font-weight: 800; font-size: 26px; margin-bottom: 10px; line-height: 1.3; }
+        h1 { font-weight: 900; font-size: 28px; margin-bottom: 10px; line-height: 1.3; }
+        
         .screen { display: none; animation: fadeIn 0.3s ease-in-out; }
         .screen.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .tab-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-container { display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; }
         .tab-btn {
-            background: #f1f5f9; border: none; padding: 10px 18px; font-size: 15px; font-weight: 700;
+            background: #f1f5f9; border: none; padding: 10px 16px; font-size: 15px; font-weight: 800;
             border-radius: 14px; cursor: pointer; color: #64748b; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
         .tab-btn.active { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(99,102,241,0.3); }
-        
-        .exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 20px; max-height: 400px; overflow-y: auto; padding: 8px; }
+        .tab-btn.theory-active { background: var(--accent); color: white; box-shadow: 0 8px 15px rgba(139,92,246,0.3); }
+
+        .history-btn-wrapper { text-align: center; margin-bottom: 20px; }
+        .btn-history {
+            background: #fff; color: var(--primary); border: 2px solid var(--primary); padding: 8px 20px;
+            font-size: 15px; font-weight: 800; border-radius: 12px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(99,102,241,0.1);
+        }
+        .btn-history:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+
+        /* Style Lưới Chọn Bài */
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 10px; max-height: 400px; overflow-y: auto; padding: 8px; }
         .exam-btn {
             background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); color: var(--primary); border: 2px solid #c7d2fe;
-            padding: 14px; font-size: 14px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: all 0.2s; text-align: center;
+            padding: 14px; font-size: 15px; font-weight: 800; border-radius: 16px; cursor: pointer; transition: all 0.2s ease; text-align: center;
         }
         .exam-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(99,102,241,0.3); }
         
+        /* Style Giao Diện Làm Bài */
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
-        .home-btn { background: #f1f5f9; color: #475569; border: none; padding: 8px 14px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .home-btn { background: #f1f5f9; color: #475569; border: none; padding: 8px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
         .home-btn:hover { background: #e2e8f0; color: #1e293b; }
         
-        .question-box { font-size: 19px; font-weight: 700; margin-bottom: 25px; line-height: 1.5; background: #f8fafc; padding: 20px; border-radius: 16px; border-left: 6px solid var(--primary); }
+        .question-box { font-size: 19px; font-weight: 800; margin-bottom: 25px; line-height: 1.5; background: #f8fafc; padding: 20px; border-radius: 16px; border-left: 6px solid var(--primary); }
         .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-        .option-item { background: #ffffff; border: 2px solid #e2e8f0; padding: 14px 18px; border-radius: 14px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.2s; }
-        .option-item:hover { background: #f8fafc; transform: translateX(4px); }
+        .option-item { background: #ffffff; border: 2px solid #e2e8f0; padding: 14px 18px; border-radius: 14px; cursor: pointer; font-size: 17px; font-weight: 700; transition: all 0.2s ease; }
+        .option-item:hover { background: #f8fafc; transform: translateX(4px); border-color: #cbd5e1;}
         .option-item.selected { background: #eef2ff; border-color: var(--primary); color: var(--primary); box-shadow: 0 4px 12px rgba(99,102,241,0.15); }
         
         .quiz-footer { display: flex; justify-content: space-between; align-items: center; }
-        button.btn { background: var(--primary); color: white; border: none; padding: 12px 26px; font-size: 16px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+        button.btn { background: var(--primary); color: white; border: none; padding: 12px 26px; font-size: 16px; font-weight: 800; border-radius: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
         button.btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
         button.btn-secondary { background: #cbd5e1; color: #475569; box-shadow: none; }
         button.btn-secondary:hover { background: #94a3b8; }
         
-        .score-badge { font-size: 42px; font-weight: 800; color: var(--success); margin: 10px 0; text-align: center; }
+        /* Style Giao Diện Lý Thuyết (Mới) */
+        .theory-card { background: #fff; border: 2px solid #eef2ff; border-radius: 16px; margin-bottom: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .theory-card h3 { color: var(--accent); margin-top: 0; text-align: left; font-size: 22px; border-bottom: 2px dashed #e0e7ff; padding-bottom: 10px; margin-bottom: 20px;}
+        .theory-rule { background: #f8fafc; padding: 15px; border-left: 6px solid var(--primary); border-radius: 10px; margin-bottom: 15px; line-height: 1.6; font-size: 16px;}
+        .theory-rule b { color: #1e293b; font-size: 17px;}
+        
+        /* Style Ô Thực Hành Nhúng */
+        .prac-container { background: #eef2ff; padding: 18px; border-radius: 12px; margin-top: 10px; font-weight: 700; color: #1e293b; border: 2px dashed #c7d2fe; display: flex; flex-direction: column; gap: 10px;}
+        .prac-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .prac-input { border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 10px; font-size: 16px; font-weight: 800; width: 140px; outline: none; transition: all 0.2s; text-align: center; color: #334155; }
+        .prac-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+        .prac-select { border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 10px; font-size: 16px; font-weight: 800; outline: none; transition: all 0.2s; cursor: pointer; color: #334155;}
+        .prac-select:focus { border-color: var(--primary); }
+        
+        /* Style Bảng Điểm & Lịch Sử */
+        .score-badge { font-size: 46px; font-weight: 900; color: var(--success); margin: 10px 0; text-align: center; text-shadow: 0 4px 10px rgba(16,185,129,0.2);}
         .analysis-box { background: #fffbeb; border-left: 6px solid var(--warning); padding: 20px; margin-bottom: 25px; border-radius: 12px; }
-        .detail-table-container { max-height: 350px; overflow-y: auto; border: 2px solid #f1f5f9; border-radius: 16px; margin-bottom: 25px; }
+        .detail-table-container { max-height: 400px; overflow-y: auto; border: 2px solid #f1f5f9; border-radius: 16px; margin-bottom: 25px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 14px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        th { background: #f8fafc; position: sticky; top: 0; font-weight: 700; }
-        .text-correct { color: var(--success); font-weight: 700; }
-        .text-incorrect { color: var(--danger); font-weight: 700; }
+        th, td { padding: 14px; border-bottom: 1px solid #f1f5f9; font-size: 15px; }
+        th { background: #f8fafc; position: sticky; top: 0; font-weight: 800; color: #475569;}
+        .text-correct { color: var(--success); font-weight: 800; }
+        .text-incorrect { color: var(--danger); font-weight: 800; }
         .explanation { font-size: 14px; color: #475569; margin-top: 6px; background: #f8fafc; padding: 10px; border-radius: 8px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- MÀN HÌNH 1: TRANG CHỦ -->
     <div id="screen-select" class="screen active">
         <h1>🚀 Chinh Phục Tiếng Anh Vui Nhộn 🌟</h1>
+        
         <div class="tab-container">
             <button class="tab-btn active" id="tabMixed" onclick="switchTab('mixed')">🔥 20 Đề Tổng Hợp</button>
-            <button class="tab-btn" id="tabPractice" onclick="switchTab('practice')">📚 7 Đề Ôn Tập Mới</button>
+            <button class="tab-btn" id="tabPractice" onclick="switchTab('practice')">📚 7 Đề Ôn Tập</button>
             <button class="tab-btn" id="tabTopic" onclick="switchTab('topic')">🎯 8 Đề Chuyên Đề</button>
+            <button class="tab-btn" id="tabTheory" onclick="switchTab('theory')">📖 Lý Thuyết & Thực Hành</button>
         </div>
-        <p style="text-align: center; color: #64748b; font-weight: 600;" id="selectDesc">Đang tải dữ liệu...</p>
+        
+        <div class="history-btn-wrapper" id="historyWrapper">
+            <button class="btn-history" onclick="showHistory()">📜 Xem Lịch Sử Học Tập</button>
+        </div>
+
+        <p style="text-align: center; color: #64748b; font-weight: 700; font-size: 16px;" id="selectDesc">Đang tải dữ liệu...</p>
         <div class="exam-grid" id="examGrid"></div>
     </div>
 
+    <!-- MÀN HÌNH 2: LÀM BÀI THI -->
     <div id="screen-quiz" class="screen">
         <div class="quiz-header">
             <button class="home-btn" onclick="confirmHome()">🏠 Trang Chủ</button>
-            <span id="examTitle" style="font-weight: 700; color: var(--primary); font-size: 16px;">Đề thi</span>
-            <span id="questionCounter" style="font-weight: 700; background: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 10px;">Câu 1</span>
+            <span id="examTitle" style="font-weight: 800; color: var(--primary); font-size: 18px;">Đề thi</span>
+            <span id="questionCounter" style="font-weight: 800; background: #eef2ff; color: var(--primary); padding: 8px 16px; border-radius: 12px;">Câu 1</span>
         </div>
         <div class="question-box" id="questionText"></div>
         <div class="options-list" id="optionsList"></div>
@@ -95,12 +130,25 @@
         </div>
     </div>
 
+    <!-- MÀN HÌNH 3: BÀI GIẢNG LÝ THUYẾT CHI TIẾT -->
+    <div id="screen-theory" class="screen">
+        <div class="quiz-header">
+            <button class="home-btn" onclick="returnToSelect()">🏠 Quay Lại Menu</button>
+            <span style="font-weight: 800; color: var(--accent); font-size: 20px;">📖 Hệ Thống Lý Thuyết Tương Tác</span>
+        </div>
+        
+        <div style="max-height: 650px; overflow-y: auto; padding-right: 10px;" id="theoryContentArea">
+            <!-- Nội dung bài giảng sẽ được đổ vào đây bằng Javascript -->
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 4: KẾT QUẢ -->
     <div id="screen-result" class="screen">
         <h2>🎉 Hoàn Thành Xuất Sắc! 🎉</h2>
         <div class="score-badge" id="scoreBadge"></div>
         <div class="analysis-box" id="analysisBox">
             <h3 style="color: #d97706; margin-top:0;">📊 Phân tích & Hướng dẫn:</h3>
-            <div id="analysisText" style="line-height: 1.6; font-weight: 600; font-size: 15px;"></div>
+            <div id="analysisText" style="line-height: 1.6; font-weight: 700; font-size: 15px;"></div>
         </div>
         <h3 style="text-align: left; margin-bottom: 10px;">📝 Bảng chi tiết đáp án</h3>
         <div class="detail-table-container">
@@ -109,27 +157,176 @@
                 <tbody id="resultTableBody"></tbody>
             </table>
         </div>
-        <div style="text-align: center;"><button class="btn" onclick="returnToSelect()">🏠 Chọn Đề Khác</button></div>
+        <div style="text-align: center;"><button class="btn" onclick="returnToSelect()">🏠 Trang Chủ</button></div>
+    </div>
+
+    <!-- MÀN HÌNH 5: LỊCH SỬ -->
+    <div id="screen-history" class="screen">
+        <h2>📜 Lịch Sử Học Tập Của Bạn</h2>
+        <div class="detail-table-container">
+            <table>
+                <thead><tr><th style="width:30%;">⏰ Thời Gian</th><th style="width:50%;">📝 Tên Đề Thi</th><th style="width:20%;">🎯 Điểm</th></tr></thead>
+                <tbody id="historyTableBody"></tbody>
+            </table>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 15px;">
+            <button class="btn btn-secondary" onclick="returnToSelect()">🏠 Trang Chủ</button>
+            <button class="btn" style="background: var(--danger);" onclick="clearHistory()">🗑 Xóa Lịch Sử</button>
+        </div>
     </div>
 </div>
 
 <script>
-    // 1. CẤU TRÚC CHỦ ĐỀ & LÝ THUYẾT CHI TIẾT
+    // ==========================================
+    // PHẦN 1: KHAI BÁO DỮ LIỆU & LÝ THUYẾT CHI TIẾT
+    // ==========================================
     const topics = {
-        prep: { name: "Giới từ thời gian", theory: "• <b>IN:</b> tháng, năm, mùa, buổi (in 2025, in the morning).<br>• <b>ON:</b> thứ, ngày tháng cụ thể (on Monday, on May 5th).<br>• <b>AT:</b> giờ, mốc thời điểm (at 7:00, at night, at noon)." },
-        how: { name: "How much / How many", theory: "• <b>HOW MANY:</b> + danh từ đếm được số nhiều (racquets, students).<br>• <b>HOW MUCH:</b> + danh từ không đếm được (water, sugar, time) hoặc hỏi giá tiền." },
-        some: { name: "Some & Any", theory: "• <b>SOME:</b> Dùng trong câu khẳng định, lời mời/đề nghị (Would you like some tea?).<br>• <b>ANY:</b> Dùng trong câu phủ định (don't, isn't) và câu hỏi nghi vấn." },
-        plu: { name: "Số ít sang Số nhiều", theory: "• Động từ: is -> are.<br>• Mạo từ a/an -> bị lược bỏ.<br>• Thêm 's' hoặc 'es' (box->boxes).<br>• Bất quy tắc: child->children, foot->feet, tooth->teeth, man->men, mouse->mice, wife->wives." },
-        obj: { name: "Đại từ tân ngữ", theory: "Đứng sau động từ hoặc giới từ. Bảng đổi: I->me, you->you, he->him, she->her, it->it, we->us, they->them." },
-        be: { name: "Động từ To be", theory: "• <b>AM:</b> đi với I.<br>• <b>IS:</b> đi với He, She, It, số ít.<br>• <b>ARE:</b> đi với We, You, They, số nhiều." },
-        wh: { name: "Từ để hỏi (Wh-q)", theory: "What (vật/sự việc), Who (người), Where (nơi chốn), When (thời gian), Why (lý do - trả lời because), How (cách thức/phương tiện)." }
+        prep: { name: "Giới từ thời gian", theory: "IN: tháng, năm, mùa, buổi. ON: thứ, ngày tháng. AT: giờ, đêm, lễ." },
+        how: { name: "How much / How many", theory: "HOW MANY: đếm được số nhiều. HOW MUCH: không đếm được / Giá tiền." },
+        some: { name: "Some & Any", theory: "SOME: khẳng định, mời. ANY: phủ định, câu hỏi." },
+        plu: { name: "Số ít sang Số nhiều", theory: "Thêm s/es. Tận cùng y->ies, f/fe->ves. Bất quy tắc: child->children, foot->feet." },
+        obj: { name: "Đại từ tân ngữ", theory: "Đứng sau Động từ/Giới từ: I->me, he->him, she->her, we->us, they->them." },
+        be: { name: "Động từ To be", theory: "I am; He/She/It is; We/You/They are." },
+        wh: { name: "Từ để hỏi (Wh-q)", theory: "What, Who, Where, When, Why, How." }
     };
 
+    // Chuỗi HTML chứa toàn bộ hệ thống Lý Thuyết & Thực hành Interactive
+    const fullTheoryHTML = `
+        <div class="theory-card">
+            <h3>1. Danh từ Số Ít & Số Nhiều (Singular & Plural)</h3>
+            <div class="theory-rule">
+                <b>Quy tắc 1: Thêm "-s" vào hầu hết các danh từ.</b><br>
+                Ví dụ: a book ➔ books, an apple ➔ apples.
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">✏️ a cat ➔ <input type="text" class="prac-input" data-ans="cats" onkeyup="checkPracInput(this)" placeholder="gõ vào đây..."></div>
+                <div class="prac-row">✏️ a dog ➔ <input type="text" class="prac-input" data-ans="dogs" onkeyup="checkPracInput(this)"></div>
+            </div>
+
+            <div class="theory-rule" style="margin-top:20px;">
+                <b>Quy tắc 2: Tận cùng là O, S, CH, X, SH ➔ Thêm "-es"</b><br>
+                <i>(Mẹo nhớ vui: Ông Sáu Chạy Xe SH)</i><br>
+                Ví dụ: bus ➔ buses, watch ➔ watches, box ➔ boxes, potato ➔ potatoes.
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">✏️ a tomato (cà chua) ➔ <input type="text" class="prac-input" data-ans="tomatoes" onkeyup="checkPracInput(this)"></div>
+                <div class="prac-row">✏️ a brush (cái cọ) ➔ <input type="text" class="prac-input" data-ans="brushes" onkeyup="checkPracInput(this)"></div>
+            </div>
+
+            <div class="theory-rule" style="margin-top:20px;">
+                <b>Quy tắc 3: Tận cùng là Phụ âm + "Y" ➔ Đổi "y" thành "i" và thêm "-es"</b><br>
+                Ví dụ: baby ➔ babies, city ➔ cities.<br>
+                <i>Chú ý: Nếu trước y là nguyên âm (u,e,o,a,i) thì chỉ thêm s: boy ➔ boys.</i>
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">✏️ a ladybug (con bọ rùa) ➔ <input type="text" class="prac-input" data-ans="ladybugs" onkeyup="checkPracInput(this)"></div>
+                <div class="prac-row">✏️ a story (câu chuyện) ➔ <input type="text" class="prac-input" data-ans="stories" onkeyup="checkPracInput(this)"></div>
+            </div>
+
+            <div class="theory-rule" style="margin-top:20px;">
+                <b>Quy tắc 4: Tận cùng là "F" hoặc "FE" ➔ Đổi thành "-ves"</b><br>
+                Ví dụ: leaf (chiếc lá) ➔ leaves, knife (con dao) ➔ knives, wife ➔ wives.
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">✏️ a wolf (chó sói) ➔ <input type="text" class="prac-input" data-ans="wolves" onkeyup="checkPracInput(this)"></div>
+            </div>
+
+            <div class="theory-rule" style="margin-top:20px;">
+                <b>Quy tắc 5: Bất Quy Tắc (Phải học thuộc)</b><br>
+                • man ➔ men (đàn ông)<br>• woman ➔ women (phụ nữ)<br>• child ➔ children (trẻ em)<br>
+                • foot ➔ feet (bàn chân)<br>• tooth ➔ teeth (răng)<br>• mouse ➔ mice (chuột)<br>
+                • sheep ➔ sheep (con cừu - giữ nguyên)<br>• fish ➔ fish (con cá - giữ nguyên)
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">✏️ a child ➔ <input type="text" class="prac-input" data-ans="children" onkeyup="checkPracInput(this)"></div>
+                <div class="prac-row">✏️ a foot ➔ <input type="text" class="prac-input" data-ans="feet" onkeyup="checkPracInput(this)"></div>
+            </div>
+        </div>
+
+        <div class="theory-card">
+            <h3>2. Đại Từ Nhân Xưng & Tân Ngữ (Pronouns)</h3>
+            <div class="theory-rule">
+                • <b>Chủ ngữ (Subject):</b> I, You, He, She, It, We, They. (Luôn đứng ĐẦU câu / trước động từ).<br>
+                • <b>Tân ngữ (Object):</b> me, you, him, her, it, us, them. (Luôn đứng SAU động từ hoặc giới từ).
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">
+                    I love my mother. I love 
+                    <select class="prac-select" data-ans="her" onchange="checkPracSelect(this)">
+                        <option value="">--Chọn--</option><option value="she">she</option><option value="her">her</option><option value="him">him</option>
+                    </select>
+                </div>
+                <div class="prac-row">
+                    Tom is playing. Look at 
+                    <select class="prac-select" data-ans="him" onchange="checkPracSelect(this)">
+                        <option value="">--Chọn--</option><option value="he">he</option><option value="him">him</option><option value="his">his</option>
+                    </select>!
+                </div>
+            </div>
+        </div>
+
+        <div class="theory-card">
+            <h3>3. Giới từ chỉ Thời Gian (In / On / At)</h3>
+            <div class="theory-rule">
+                • <b>IN:</b> Đi với <i>Tháng, Năm, Mùa, Buổi trong ngày</i> (in 2025, in June, in summer, in the morning).<br>
+                • <b>ON:</b> Đi với <i>Thứ trong tuần, Ngày tháng cụ thể</i> (on Monday, on May 5th, on Sunday morning).<br>
+                • <b>AT:</b> Đi với <i>Giờ cụ thể, Các dịp lễ, Đêm/Trưa</i> (at 7 o'clock, at Christmas, at night, at noon).
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">✏️ I wake up <input type="text" class="prac-input" data-ans="at" onkeyup="checkPracInput(this)"> 6 o'clock.</div>
+                <div class="prac-row">✏️ We don't go to school <input type="text" class="prac-input" data-ans="on" onkeyup="checkPracInput(this)"> Sundays.</div>
+                <div class="prac-row">✏️ It is very cold <input type="text" class="prac-input" data-ans="in" onkeyup="checkPracInput(this)"> winter.</div>
+            </div>
+        </div>
+
+        <div class="theory-card">
+            <h3>4. Some & Any (Một vài / Một ít)</h3>
+            <div class="theory-rule">
+                • <b>SOME:</b> Dùng trong câu <i>Khẳng định</i> và câu <i>Mời / Đề nghị lịch sự</i>.<br>
+                • <b>ANY:</b> Dùng trong câu <i>Phủ định</i> (có not, don't, isn't) và câu <i>Hỏi nghi vấn</i>.
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">
+                    I don't have 
+                    <select class="prac-select" data-ans="any" onchange="checkPracSelect(this)">
+                        <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
+                    </select> pens.
+                </div>
+                <div class="prac-row">
+                    Would you like 
+                    <select class="prac-select" data-ans="some" onchange="checkPracSelect(this)">
+                        <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
+                    </select> milk?
+                </div>
+            </div>
+        </div>
+
+        <div class="theory-card">
+            <h3>5. How much & How many (Hỏi số lượng)</h3>
+            <div class="theory-rule">
+                • <b>HOW MANY:</b> + Danh từ đếm được SỐ NHIỀU (thường có "s"). <i>Ví dụ: How many books do you have?</i><br>
+                • <b>HOW MUCH:</b> + Danh từ KHÔNG đếm được (nước, tiền, thời gian...) hoặc dùng để hỏi Giá Tiền. <i>Ví dụ: How much water is left?</i>
+            </div>
+            <div class="prac-container">
+                <div class="prac-row">
+                    <select class="prac-select" data-ans="How much" onchange="checkPracSelect(this)">
+                        <option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option>
+                    </select> money do you have?
+                </div>
+                <div class="prac-row">
+                    <select class="prac-select" data-ans="How many" onchange="checkPracSelect(this)">
+                        <option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option>
+                    </select> students are there?
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Khai báo dữ liệu các mảng (rút gọn)
     const optPrep = ["in", "on", "at", "by"];
     const optHow = ["How much", "How many", "What", "Which"];
     const optSome = ["some", "any", "a", "an"];
 
-    // 2. DỮ LIỆU 7 ĐỀ THỰC CHIẾN TỪ NGƯỜI DÙNG (Tuyệt đối không có lỗi cú pháp)
     const pExams = [
         [ // Đề 1
             {q:"I play pickleball _______ Sunday morning.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
@@ -222,7 +419,7 @@
             {q:"She doesn't have _______ pens in her bag.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"We need _______ butter for this recipe.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"The baby is crying. (Sang số nhiều)", o:["The babies are crying.", "The babys are crying.", "The babies is crying.", "The baby are crying."], c:0, t:"plu", e:"baby->babies; is->are."},
-            {q:"She is a kind person. (Sang số nhiều)", o:["They are kind people.", "They are kind persons.", "She are kind people.", "Cả A và B đều được"], c:0, t:"plu", e:"person chuyển thành people (phổ biến nhất)."},
+            {q:"She is a kind person. (Sang số nhiều)", o:["They are kind people.", "They are kind persons.", "She are kind people.", "Cả A và B đều được"], c:3, t:"plu", e:"person có thể thành people hoặc persons."},
             {q:"It is a sharp tooth. (Sang số nhiều)", o:["They are sharp teeth.", "They are sharp tooths.", "It are sharp teeth.", "They is sharp teeth."], c:0, t:"plu", e:"tooth->teeth."},
             {q:"He is a tall man. (Sang số nhiều)", o:["They are tall men.", "They are tall mans.", "He are tall men.", "They is tall men."], c:0, t:"plu", e:"man->men."},
             {q:"It is a wild wolf. (Sang số nhiều)", o:["They are wild wolves.", "They are wild wolfs.", "It are wild wolves.", "They is wild wolves."], c:0, t:"plu", e:"wolf->wolves."}
@@ -357,77 +554,71 @@
         ]
     ];
 
-    // 3. THUẬT TOÁN TỰ SINH 500+ CÂU HỎI KHÔNG TRÙNG LẶP (Siêu nhẹ)
     const qBank = { prep:[], how:[], some:[], plu:[], obj:[], be:[], wh:[] };
     
-    // Tạo 80 câu Prep
-    const prepWords = [{w:"Monday",c:1},{w:"2025",c:0},{w:"7:00 AM",c:2},{w:"the weekend",c:2},{w:"October",c:0},{w:"the morning",c:0},{w:"night",c:2},{w:"Sunday afternoon",c:1},{w:"spring",c:0},{w:"noon",c:2}];
-    const prepSents = ["I will go there", "She arrives", "The class starts", "We play games", "My father works", "The store opens", "They travel", "He sleeps"];
-    for(let i=0; i<80; i++) {
+    // Tự sinh dữ liệu ngẫu nhiên cho kho hỗn hợp
+    const prepWords = [{w:"Monday",c:1},{w:"2025",c:0},{w:"7:00 AM",c:2},{w:"the weekend",c:2},{w:"October",c:0},{w:"the morning",c:0},{w:"night",c:2},{w:"Sunday",c:1},{w:"spring",c:0},{w:"noon",c:2}];
+    const prepSents = ["I will go there", "She arrives", "The class starts", "We play games", "My father works"];
+    for(let i=0; i<40; i++) {
         let w = prepWords[i%prepWords.length], s = prepSents[i%prepSents.length];
         qBank.prep.push({q:`${s} _______ ${w.w}.`, o:optPrep, c:w.c, t:"prep", e:"Áp dụng quy tắc In/On/At."});
     }
 
-    // Tạo 80 câu How
-    const howWords = [{w:"apples",c:1},{w:"water",c:0},{w:"money",c:0},{w:"students",c:1},{w:"sugar",c:0},{w:"books",c:1},{w:"time",c:0},{w:"cars",c:1},{w:"milk",c:0},{w:"dogs",c:1}];
-    const howSents = ["do you have?", "do you need?", "are there?", "did you see?", "do you want?", "is left?", "did she buy?", "can you count?"];
-    for(let i=0; i<80; i++) {
+    const howWords = [{w:"apples",c:1},{w:"water",c:0},{w:"money",c:0},{w:"students",c:1},{w:"sugar",c:0}];
+    const howSents = ["do you have?", "do you need?", "are there?"];
+    for(let i=0; i<40; i++) {
         let hw = howWords[i%howWords.length], hs = howSents[i%howSents.length];
         qBank.how.push({q:`_______ ${hw.w} ${hs}`, o:optHow, c:hw.c, t:"how", e:`'${hw.w}' ${hw.c===1?'đếm được':'không đếm được'}.`});
     }
 
-    // Tạo 80 câu Some/Any
-    const someWords = ["apples", "water", "books", "money", "time", "friends", "milk", "chairs"];
-    const someSents = [{s:"I have",c:0},{s:"Do you have",c:1},{s:"There isn't",c:1},{s:"Would you like",c:0},{s:"She doesn't want",c:1},{s:"We need",c:0},{s:"Are there",c:1},{s:"He bought",c:0}];
-    for(let i=0; i<80; i++) {
+    const someWords = ["apples", "water", "books", "money"];
+    const someSents = [{s:"I have",c:0},{s:"Do you have",c:1},{s:"There isn't",c:1},{s:"Would you like",c:0}];
+    for(let i=0; i<40; i++) {
         let sw = someWords[i%someWords.length], ss = someSents[i%someSents.length];
         qBank.some.push({q:`${ss.s} _______ ${sw}.`, o:optSome, c:ss.c, t:"some", e:ss.c===0?'Khẳng định/mời dùng some.':'Phủ định/hỏi dùng any.'});
     }
 
-    // Tạo 80 câu Plural
-    const pluWords = [{s:"cat",p:"cats"},{s:"box",p:"boxes"},{s:"child",p:"children"},{s:"man",p:"men"},{s:"tooth",p:"teeth"},{s:"foot",p:"feet"},{s:"mouse",p:"mice"},{s:"leaf",p:"leaves"}];
-    for(let i=0; i<80; i++) {
+    const pluWords = [{s:"cat",p:"cats"},{s:"box",p:"boxes"},{s:"child",p:"children"},{s:"man",p:"men"},{s:"tooth",p:"teeth"}];
+    for(let i=0; i<40; i++) {
         let pw = pluWords[i%pluWords.length];
         qBank.plu.push({q:`Chuyển sang số nhiều: a ${pw.s}`, o:[`${pw.p}`, `a ${pw.p}`, `${pw.s}s`, `many ${pw.s}`], c:0, t:"plu", e:`Số nhiều của '${pw.s}' là '${pw.p}'.`});
     }
 
-    // Tạo 80 câu Obj Pronouns
-    const objPairs = [{s:"Mary",c:3,o:["he","him","his","her"]},{s:"Tom",c:1,o:["he","him","his","her"]},{s:"my friends",c:2,o:["they","their","them","us"]},{s:"me",c:0,o:["me","my","I","mine"]},{s:"the dog",c:2,o:["he","him","it","its"]}];
-    const objVerbs = ["like", "help", "call", "visit", "look at", "listen to", "wait for", "invite"];
-    for(let i=0; i<80; i++) {
-        let op = objPairs[i%objPairs.length], ov = objVerbs[i%objVerbs.length];
-        qBank.obj.push({q:`Please ${ov} _______. (${op.s})`, o:op.o, c:op.c, t:"obj", e:`Tân ngữ cho '${op.s}'.`});
+    const objPairs = [{s:"Mary",c:3,o:["he","him","his","her"]},{s:"Tom",c:1,o:["he","him","his","her"]},{s:"my friends",c:2,o:["they","their","them","us"]}];
+    for(let i=0; i<40; i++) {
+        let op = objPairs[i%objPairs.length];
+        qBank.obj.push({q:`Please help _______. (${op.s})`, o:op.o, c:op.c, t:"obj", e:`Tân ngữ cho '${op.s}'.`});
     }
 
-    // Tạo 80 câu To Be
-    const beSubj = [{s:"I",c:0},{s:"He",c:1},{s:"She",c:1},{s:"It",c:1},{s:"We",c:2},{s:"You",c:2},{s:"They",c:2},{s:"The students",c:2}];
-    const beComps = ["happy.", "at school.", "very tall.", "playing football.", "my best friends.", "in the garden.", "tired.", "excited."];
-    for(let i=0; i<80; i++) {
-        let bs = beSubj[i%beSubj.length], bc = beComps[i%beComps.length];
-        qBank.be.push({q:`${bs.s} _______ ${bc}`, o:["am","is","are","be"], c:bs.c, t:"be", e:`'${bs.s}' dùng to be tương ứng.`});
+    const beSubj = [{s:"I",c:0},{s:"He",c:1},{s:"She",c:1},{s:"We",c:2},{s:"They",c:2}];
+    for(let i=0; i<40; i++) {
+        let bs = beSubj[i%beSubj.length];
+        qBank.be.push({q:`${bs.s} _______ happy.`, o:["am","is","are","be"], c:bs.c, t:"be", e:`'${bs.s}' dùng to be tương ứng.`});
     }
 
-    // Tạo 80 câu Wh-Questions
-    const whData = [{a:"What",q:"_______ is your name?"},{a:"How",q:"_______ old are you?"},{a:"Where",q:"_______ do you live?"},{a:"When",q:"_______ is your birthday?"},{a:"Who",q:"_______ is that man?"},{a:"Why",q:"_______ are you late?"},{a:"Which",q:"_______ class are you in?"}];
-    for(let i=0; i<80; i++) {
+    const whData = [{a:"What",q:"_______ is your name?"},{a:"How",q:"_______ old are you?"},{a:"Where",q:"_______ do you live?"},{a:"When",q:"_______ is your birthday?"}];
+    for(let i=0; i<40; i++) {
         let wd = whData[i%whData.length];
-        let opts = ["What","Who","Where","When","Why","How","Whose","Which"].sort(()=>0.5-Math.random()).slice(0,3);
+        let opts = ["What","Who","Where","When","Why","How"].sort(()=>0.5-Math.random()).slice(0,3);
         if(!opts.includes(wd.a)) opts[0] = wd.a;
-        opts = opts.sort(()=>0.5-Math.random()); opts.push("Do");
+        opts.push("Do"); opts = opts.sort(()=>0.5-Math.random());
         qBank.wh.push({q:wd.q, o:opts, c:opts.indexOf(wd.a), t:"wh", e:"Chọn từ để hỏi phù hợp ngữ cảnh."});
     }
 
-    // 4. HỆ THỐNG XỬ LÝ GIAO DIỆN & LÀM BÀI
+    // ==========================================
+    // PHẦN 2: THUẬT TOÁN ĐIỀU HƯỚNG & LÀM BÀI
+    // ==========================================
     let allExams = [], curIdx = 0, curQIdx = 0, uAns = [], curMode = 'mixed';
     const shuffle = a => [...a].sort(()=>0.5-Math.random());
 
     function genMixed() {
         allExams = []; let keys = Object.keys(qBank);
+        let counts = { plu:4, obj:4, be:4, wh:4, prep:3, some:3, how:3 };
         for(let i=0; i<20; i++){
             let ex = [];
             keys.forEach(k => {
                 let pool = shuffle(qBank[k]);
-                pool.slice(0, 4).forEach(item => ex.push({...item}));
+                pool.slice(0, counts[k]).forEach(item => ex.push({...item}));
             });
             allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q}` })));
         }
@@ -455,11 +646,31 @@
 
     function switchTab(mode) {
         curMode = mode;
-        ['Mixed','Practice','Topic'].forEach(m => document.getElementById('tab'+m).classList.toggle('active', mode===m.toLowerCase()));
-        let desc = document.getElementById('selectDesc');
+        ['Mixed','Practice','Topic','Theory'].forEach(m => {
+            let btn = document.getElementById('tab'+m);
+            if(btn) btn.classList.remove('active', 'theory-active');
+        });
         
+        if(mode === 'theory') {
+            document.getElementById('tabTheory').classList.add('theory-active');
+            document.getElementById('selectDesc').style.display = 'none';
+            document.getElementById('examGrid').style.display = 'none';
+            document.getElementById('historyWrapper').style.display = 'none';
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen-theory').classList.add('active');
+            document.getElementById('theoryContentArea').innerHTML = fullTheoryHTML;
+            return;
+        }
+
+        document.getElementById('tab'+ (mode.charAt(0).toUpperCase() + mode.slice(1))).classList.add('active');
+        document.getElementById('selectDesc').style.display = 'block';
+        document.getElementById('examGrid').style.display = 'grid';
+        document.getElementById('historyWrapper').style.display = 'block';
+        
+        let desc = document.getElementById('selectDesc');
         if(mode==='mixed') { desc.innerText = "Chọn đề tổng hợp bên dưới (25 câu - Phân bổ đều không trùng lặp)"; genMixed(); }
-        else if(mode==='practice') { desc.innerText = "Chọn đề ôn tập thực chiến bên dưới (30 câu/đề - Theo cấu trúc chuẩn)"; genPractice(); }
+        else if(mode==='practice') { desc.innerText = "Chọn đề ôn tập thực chiến bên dưới (30 câu/đề)"; genPractice(); }
         else { desc.innerText = "Chọn chuyên đề ôn luyện sâu bên dưới (25 câu/đề)"; genTopic(); }
         
         const grid = document.getElementById('examGrid'); grid.innerHTML = '';
@@ -474,7 +685,7 @@
             Object.keys(topics).forEach((k, tI) => {
                 for(let s=0; s<8; s++) {
                     let b = document.createElement('button'); b.className = 'exam-btn';
-                    b.innerText = `${tI+1}.${s+1} ${topics[k].name.substring(0,8)}... 🎯`;
+                    b.innerText = `${tI+1}.${s+1} ${topics[k].name.substring(0,10)}... 🎯`;
                     b.onclick = () => start(tI*8+s); grid.appendChild(b);
                 }
             });
@@ -513,22 +724,60 @@
 
     function confirmHome() {
         if(confirm("Bạn có muốn dừng làm bài và quay về trang chủ? Tiến trình sẽ bị hủy.")) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('screen-select').classList.add('active');
+            returnToSelect();
         }
     }
     
     function returnToSelect() {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-select').classList.add('active');
+        switchTab('mixed'); // Reset tab về mặc định
     }
     
     function prevQuestion() { if(curQIdx > 0) { curQIdx--; renderQ(); } }
     function nextQuestion() { if(curQIdx < allExams[curIdx].length-1) { curQIdx++; renderQ(); } else finish(); }
 
+    // ==========================================
+    // PHẦN 3: LỊCH SỬ & CHẤM ĐIỂM
+    // ==========================================
+    function saveHistory(examName, score, total) {
+        let history = JSON.parse(localStorage.getItem('quizHistory2') || '[]');
+        let date = new Date();
+        let dateStr = date.toLocaleDateString('vi-VN') + ' ' + date.toLocaleTimeString('vi-VN');
+        history.unshift({ date: dateStr, exam: examName, score: score, total: total });
+        if(history.length > 50) history.pop();
+        localStorage.setItem('quizHistory2', JSON.stringify(history));
+    }
+
+    function showHistory() {
+        let history = JSON.parse(localStorage.getItem('quizHistory2') || '[]');
+        let tbody = document.getElementById('historyTableBody');
+        tbody.innerHTML = '';
+        if(history.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: #64748b;">Bạn chưa làm bài thi nào. Hãy thử sức ngay nhé!</td></tr>';
+        } else {
+            history.forEach(h => {
+                tbody.innerHTML += `<tr>
+                    <td style="color: #64748b;">${h.date}</td>
+                    <td style="font-weight: 800; color: var(--primary);">${h.exam}</td>
+                    <td><b><span class="text-correct">${h.score}</span> / ${h.total}</b></td>
+                </tr>`;
+            });
+        }
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-history').classList.add('active');
+    }
+
+    function clearHistory() {
+        if(confirm('Bạn có chắc chắn muốn xóa toàn bộ lịch sử học tập?')) {
+            localStorage.removeItem('quizHistory2');
+            showHistory();
+        }
+    }
+
     function finish() {
         let sc = 0, stats = {};
-        for(let k in topics) stats[k] = { w:0, n:topics[k].name, th:topics[k].theory };
+        for(let k in topics) stats[k] = { w:0, n:topics[k].name, theory:topics[k].theory };
         let tbody = document.getElementById('resultTableBody'); tbody.innerHTML = '';
         
         allExams[curIdx].forEach((q, i) => {
@@ -549,7 +798,12 @@
             </tr>`;
         });
         
-        document.getElementById('scoreBadge').innerText = `${sc} / ${allExams[curIdx].length}`;
+        let totalQ = allExams[curIdx].length;
+        document.getElementById('scoreBadge').innerText = `${sc} / ${totalQ}`;
+        
+        let examName = document.getElementById('examTitle').innerText.replace('🚀 ', '').replace('📚 ', '').replace('🎯 ', '');
+        saveHistory(examName, sc, totalQ);
+
         let badT = null, maxW = -1;
         for(let k in stats) if(stats[k].w > maxW) { maxW = stats[k].w; badT = stats[k]; }
         
@@ -558,11 +812,42 @@
             txt.innerHTML = "🌟 <b>Hoàn hảo!</b> Bạn đã trả lời đúng 100%. Nền tảng ngữ pháp của bạn vô cùng tuyệt vời!";
         } else {
             txt.innerHTML = `📌 Điểm yếu cần khắc phục: <b style="color:var(--danger)">${badT.n}</b> (sai ${maxW} câu).<br>
-            <div style="background:#ffffff; padding:12px; border-radius:8px; border:1px solid #fde68a; margin-top:10px; font-weight:normal;">${badT.th}</div>`;
+            <div style="background:#ffffff; padding:12px; border-radius:8px; border:1px solid #fde68a; margin-top:10px; font-weight:normal;">${badT.theory}</div>`;
         }
         
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-result').classList.add('active');
+    }
+
+    // ==========================================
+    // PHẦN 4: HÀM CHECK TƯƠNG TÁC LÝ THUYẾT
+    // ==========================================
+    function checkPracInput(el) {
+        let val = el.value.trim().toLowerCase();
+        let ans = el.getAttribute('data-ans').toLowerCase();
+        
+        if(val === "") {
+            el.style.borderColor = '#cbd5e1'; el.style.backgroundColor = '#fff'; el.style.color = '#334155';
+            return;
+        }
+        if(val === ans) {
+            el.style.borderColor = 'var(--success)'; el.style.backgroundColor = '#d1fae5'; el.style.color = '#065f46';
+        } else {
+            el.style.borderColor = 'var(--danger)'; el.style.backgroundColor = '#ffe4e6'; el.style.color = '#9f1239';
+        }
+    }
+
+    function checkPracSelect(el) {
+        let val = el.value;
+        let ans = el.getAttribute('data-ans');
+        
+        if(val === "") {
+            el.style.borderColor = '#cbd5e1'; el.style.backgroundColor = '#fff'; el.style.color = '#334155';
+        } else if(val === ans) {
+            el.style.borderColor = 'var(--success)'; el.style.backgroundColor = '#d1fae5'; el.style.color = '#065f46';
+        } else {
+            el.style.borderColor = 'var(--danger)'; el.style.backgroundColor = '#ffe4e6'; el.style.color = '#9f1239';
+        }
     }
 
     window.onload = () => switchTab('mixed');
