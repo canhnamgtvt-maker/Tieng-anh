@@ -42,7 +42,6 @@
         }
         .btn-history:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
 
-        /* Style Lưới Chọn Bài */
         .exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 10px; max-height: 400px; overflow-y: auto; padding: 8px; }
         .exam-btn {
             background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); color: var(--primary); border: 2px solid #c7d2fe;
@@ -50,7 +49,13 @@
         }
         .exam-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(99,102,241,0.3); }
         
-        /* Style Giao Diện Làm Bài */
+        /* Giao diện nút chuyên biệt cho Tab Lý Thuyết */
+        .theory-menu-btn {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fae8ff 100%); color: #7e22ce; border: 2px solid #e9d5ff;
+            padding: 16px; font-size: 16px; font-weight: 800; border-radius: 16px; cursor: pointer; transition: all 0.2s; text-align: center;
+        }
+        .theory-menu-btn:hover { background: #9333ea; color: white; border-color: #9333ea; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(147,51,234,0.3); }
+
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
         .home-btn { background: #f1f5f9; color: #475569; border: none; padding: 8px 14px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
         .home-btn:hover { background: #e2e8f0; color: #1e293b; }
@@ -66,23 +71,23 @@
         button.btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
         button.btn-secondary { background: #cbd5e1; color: #475569; box-shadow: none; }
         button.btn-secondary:hover { background: #94a3b8; }
+        button.btn-accent { background: var(--accent); box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
+        button.btn-accent:hover { background: #7c3aed; transform: translateY(-2px); }
         
-        /* Style Giao Diện Lý Thuyết (Mới) */
+        /* Lý Thuyết & Thực Hành Nhúng */
         .theory-card { background: #fff; border: 2px solid #eef2ff; border-radius: 16px; margin-bottom: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .theory-card h3 { color: var(--accent); margin-top: 0; text-align: left; font-size: 22px; border-bottom: 2px dashed #e0e7ff; padding-bottom: 10px; margin-bottom: 20px;}
-        .theory-rule { background: #f8fafc; padding: 15px; border-left: 6px solid var(--primary); border-radius: 10px; margin-bottom: 15px; line-height: 1.6; font-size: 16px;}
+        .theory-rule { background: #f8fafc; padding: 15px; border-left: 6px solid var(--accent); border-radius: 10px; margin-bottom: 15px; line-height: 1.6; font-size: 16px;}
         .theory-rule b { color: #1e293b; font-size: 17px;}
         
-        /* Style Ô Thực Hành Nhúng */
         .prac-container { background: #eef2ff; padding: 18px; border-radius: 12px; margin-top: 10px; font-weight: 700; color: #1e293b; border: 2px dashed #c7d2fe; display: flex; flex-direction: column; gap: 10px;}
         .prac-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
         .prac-input { border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 10px; font-size: 16px; font-weight: 800; width: 140px; outline: none; transition: all 0.2s; text-align: center; color: #334155; }
-        .prac-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+        .prac-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139,92,246,0.2); }
         .prac-select { border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 10px; font-size: 16px; font-weight: 800; outline: none; transition: all 0.2s; cursor: pointer; color: #334155;}
-        .prac-select:focus { border-color: var(--primary); }
+        .prac-select:focus { border-color: var(--accent); }
         
-        /* Style Bảng Điểm & Lịch Sử */
-        .score-badge { font-size: 46px; font-weight: 900; color: var(--success); margin: 10px 0; text-align: center; text-shadow: 0 4px 10px rgba(16,185,129,0.2);}
+        .score-badge { font-size: 46px; font-weight: 900; color: var(--success); margin: 10px 0; text-align: center; }
         .analysis-box { background: #fffbeb; border-left: 6px solid var(--warning); padding: 20px; margin-bottom: 25px; border-radius: 12px; }
         .detail-table-container { max-height: 400px; overflow-y: auto; border: 2px solid #f1f5f9; border-radius: 16px; margin-bottom: 25px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -135,10 +140,25 @@
         <div class="quiz-header">
             <button class="home-btn" onclick="returnToSelect()">🏠 Quay Lại Menu</button>
             <span style="font-weight: 800; color: var(--accent); font-size: 20px;">📖 Hệ Thống Lý Thuyết Tương Tác</span>
+            <span style="width: 100px;"></span> <!-- Spacer để cân bằng layout -->
         </div>
         
-        <div style="max-height: 650px; overflow-y: auto; padding-right: 10px;" id="theoryContentArea">
-            <!-- Nội dung bài giảng sẽ được đổ vào đây bằng Javascript -->
+        <!-- Menu chọn Chủ đề Lý Thuyết -->
+        <div id="theoryMenu">
+            <p style="text-align: center; color: #64748b; font-weight: 700; margin-bottom: 20px; font-size: 16px;">Chọn một chủ đề bên dưới để ôn lại quy tắc và thực hành gõ đáp án nhé!</p>
+            <div class="exam-grid" id="theoryGrid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+                <!-- Nút chọn chủ đề lý thuyết render bằng JS -->
+            </div>
+        </div>
+
+        <!-- Vùng hiển thị Bài giảng chi tiết -->
+        <div id="theoryLesson" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <button class="btn btn-accent" style="padding: 8px 16px; font-size: 14px;" onclick="backToTheoryMenu()">⬅ Chọn chủ đề khác</button>
+            </div>
+            <div style="max-height: 500px; overflow-y: auto; padding-right: 10px;" id="theoryContentArea">
+                <!-- Nội dung bài giảng đổ vào đây -->
+            </div>
         </div>
     </div>
 
@@ -178,447 +198,481 @@
 
 <script>
     // ==========================================
-    // PHẦN 1: KHAI BÁO DỮ LIỆU & LÝ THUYẾT CHI TIẾT
+    // PHẦN 1: DỮ LIỆU LÝ THUYẾT & THỰC HÀNH TƯƠNG TÁC
     // ==========================================
+    const theoryLessons = {
+        plu: {
+            title: "1. Danh từ Số Ít & Số Nhiều",
+            content: `
+                <div class="theory-card">
+                    <h3>Danh từ Số Ít & Số Nhiều (Singular & Plural)</h3>
+                    <div class="theory-rule">
+                        <b>Quy tắc 1: Thêm "-s" vào hầu hết các danh từ.</b><br>
+                        Ví dụ: a book ➔ books, an apple ➔ apples.
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ a cat ➔ <input type="text" class="prac-input" data-ans="cats" onkeyup="checkPracInput(this)" placeholder="gõ vào đây..."></div>
+                        <div class="prac-row">✏️ a dog ➔ <input type="text" class="prac-input" data-ans="dogs" onkeyup="checkPracInput(this)"></div>
+                    </div>
+                    <div class="theory-rule" style="margin-top:20px;">
+                        <b>Quy tắc 2: Tận cùng là O, S, CH, X, SH ➔ Thêm "-es"</b><br>
+                        <i>(Mẹo nhớ vui: Ông Sáu Chạy Xe SH)</i><br>
+                        Ví dụ: bus ➔ buses, watch ➔ watches, box ➔ boxes, potato ➔ potatoes.
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ a tomato (cà chua) ➔ <input type="text" class="prac-input" data-ans="tomatoes" onkeyup="checkPracInput(this)"></div>
+                        <div class="prac-row">✏️ a brush (cái cọ) ➔ <input type="text" class="prac-input" data-ans="brushes" onkeyup="checkPracInput(this)"></div>
+                    </div>
+                    <div class="theory-rule" style="margin-top:20px;">
+                        <b>Quy tắc 3: Tận cùng là Phụ âm + "Y" ➔ Đổi "y" thành "i" và thêm "-es"</b><br>
+                        Ví dụ: baby ➔ babies, city ➔ cities.<br>
+                        <i>Chú ý: Nếu trước y là nguyên âm (u,e,o,a,i) thì chỉ thêm s: boy ➔ boys.</i>
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ a ladybug (bọ rùa) ➔ <input type="text" class="prac-input" data-ans="ladybugs" onkeyup="checkPracInput(this)"></div>
+                        <div class="prac-row">✏️ a story (câu chuyện) ➔ <input type="text" class="prac-input" data-ans="stories" onkeyup="checkPracInput(this)"></div>
+                    </div>
+                    <div class="theory-rule" style="margin-top:20px;">
+                        <b>Quy tắc 4: Tận cùng là "F" hoặc "FE" ➔ Đổi thành "-ves"</b><br>
+                        Ví dụ: leaf (chiếc lá) ➔ leaves, knife (con dao) ➔ knives, wife ➔ wives.
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ a wolf (chó sói) ➔ <input type="text" class="prac-input" data-ans="wolves" onkeyup="checkPracInput(this)"></div>
+                    </div>
+                    <div class="theory-rule" style="margin-top:20px;">
+                        <b>Quy tắc 5: Bất Quy Tắc (Phải học thuộc)</b><br>
+                        • man ➔ men (đàn ông)<br>• woman ➔ women (phụ nữ)<br>• child ➔ children (trẻ em)<br>
+                        • foot ➔ feet (bàn chân)<br>• tooth ➔ teeth (răng)<br>• mouse ➔ mice (chuột)<br>
+                        • sheep ➔ sheep (con cừu - giữ nguyên)<br>• fish ➔ fish (con cá - giữ nguyên)
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ a child ➔ <input type="text" class="prac-input" data-ans="children" onkeyup="checkPracInput(this)"></div>
+                        <div class="prac-row">✏️ a foot ➔ <input type="text" class="prac-input" data-ans="feet" onkeyup="checkPracInput(this)"></div>
+                    </div>
+                </div>
+            `
+        },
+        obj: {
+            title: "2. Đại Từ Nhân Xưng & Tân Ngữ",
+            content: `
+                <div class="theory-card">
+                    <h3>Đại Từ Nhân Xưng & Tân Ngữ</h3>
+                    <div class="theory-rule">
+                        • <b>Chủ ngữ (Subject):</b> I, You, He, She, It, We, They. (Luôn đứng ĐẦU câu / trước động từ).<br>
+                        • <b>Tân ngữ (Object):</b> me, you, him, her, it, us, them. (Luôn đứng SAU động từ hoặc giới từ).
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">
+                            I love my mother. I love 
+                            <select class="prac-select" data-ans="her" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="she">she</option><option value="her">her</option><option value="him">him</option>
+                            </select>
+                        </div>
+                        <div class="prac-row">
+                            Tom is playing. Look at 
+                            <select class="prac-select" data-ans="him" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="he">he</option><option value="him">him</option><option value="his">his</option>
+                            </select>!
+                        </div>
+                        <div class="prac-row">
+                            We are hungry. Please give 
+                            <select class="prac-select" data-ans="us" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="we">we</option><option value="them">them</option><option value="us">us</option>
+                            </select> some food.
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        be: {
+            title: "3. Động từ To be (Am/Is/Are)",
+            content: `
+                <div class="theory-card">
+                    <h3>Động từ To be (Thì Hiện Tại)</h3>
+                    <div class="theory-rule">
+                        • <b>AM:</b> Chỉ đi với chủ ngữ <b>I</b> (I am...).<br>
+                        • <b>IS:</b> Đi với <b>He, She, It</b> và các <b>danh từ số ít</b> (Tom is, the cat is...).<br>
+                        • <b>ARE:</b> Đi với <b>We, You, They</b> và các <b>danh từ số nhiều</b> (My friends are...).
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ I <input type="text" class="prac-input" data-ans="am" onkeyup="checkPracInput(this)"> a very good student.</div>
+                        <div class="prac-row">✏️ The cat <input type="text" class="prac-input" data-ans="is" onkeyup="checkPracInput(this)"> sleeping on the sofa.</div>
+                        <div class="prac-row">✏️ They <input type="text" class="prac-input" data-ans="are" onkeyup="checkPracInput(this)"> playing football outside.</div>
+                    </div>
+                </div>
+            `
+        },
+        wh: {
+            title: "4. Từ để hỏi (Wh-questions)",
+            content: `
+                <div class="theory-card">
+                    <h3>Các Từ Để Hỏi Cơ Bản</h3>
+                    <div class="theory-rule">
+                        • <b>What:</b> Hỏi cái gì, sự việc gì (What is this?).<br>
+                        • <b>Who:</b> Hỏi ai, người nào (Who is he?).<br>
+                        • <b>Where:</b> Hỏi ở đâu, nơi chốn (Where do you live?).<br>
+                        • <b>When:</b> Hỏi khi nào, thời gian (When is your birthday?).<br>
+                        • <b>Why:</b> Hỏi tại sao (Thường trả lời bằng Because).<br>
+                        • <b>How:</b> Hỏi như thế nào, phương tiện, hoặc tuổi (How old...).
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">
+                            <select class="prac-select" data-ans="What" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="What">What</option><option value="Who">Who</option><option value="How">How</option>
+                            </select> is your name?
+                        </div>
+                        <div class="prac-row">
+                            <select class="prac-select" data-ans="How" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="What">What</option><option value="When">When</option><option value="How">How</option>
+                            </select> old are you?
+                        </div>
+                        <div class="prac-row">
+                            <select class="prac-select" data-ans="Where" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="Where">Where</option><option value="When">When</option><option value="Who">Who</option>
+                            </select> do you live? - In Hanoi.
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        prep: {
+            title: "5. Giới từ Thời Gian (In/On/At)",
+            content: `
+                <div class="theory-card">
+                    <h3>Giới từ chỉ Thời Gian</h3>
+                    <div class="theory-rule">
+                        • <b>IN:</b> Đi với <i>Tháng, Năm, Mùa, Buổi trong ngày</i> (in 2025, in June, in summer, in the morning).<br>
+                        • <b>ON:</b> Đi với <i>Thứ trong tuần, Ngày tháng cụ thể</i> (on Monday, on May 5th, on Sunday morning).<br>
+                        • <b>AT:</b> Đi với <i>Giờ cụ thể, Các dịp lễ, Đêm/Trưa</i> (at 7 o'clock, at Christmas, at night, at noon).
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">✏️ I wake up <input type="text" class="prac-input" data-ans="at" onkeyup="checkPracInput(this)"> 6 o'clock.</div>
+                        <div class="prac-row">✏️ We don't go to school <input type="text" class="prac-input" data-ans="on" onkeyup="checkPracInput(this)"> Sundays.</div>
+                        <div class="prac-row">✏️ It is very cold <input type="text" class="prac-input" data-ans="in" onkeyup="checkPracInput(this)"> winter.</div>
+                    </div>
+                </div>
+            `
+        },
+        some: {
+            title: "6. Some & Any (Một vài/ít)",
+            content: `
+                <div class="theory-card">
+                    <h3>Cách dùng Some & Any</h3>
+                    <div class="theory-rule">
+                        • <b>SOME:</b> Dùng trong câu <i>Khẳng định</i> và câu <i>Mời / Đề nghị lịch sự</i>.<br>
+                        • <b>ANY:</b> Dùng trong câu <i>Phủ định</i> (có not, don't, isn't) và câu <i>Hỏi nghi vấn</i>.
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">
+                            I don't have 
+                            <select class="prac-select" data-ans="any" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
+                            </select> pens.
+                        </div>
+                        <div class="prac-row">
+                            Would you like 
+                            <select class="prac-select" data-ans="some" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
+                            </select> milk?
+                        </div>
+                        <div class="prac-row">
+                            There are 
+                            <select class="prac-select" data-ans="some" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
+                            </select> apples on the table.
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        how: {
+            title: "7. How much & How many",
+            content: `
+                <div class="theory-card">
+                    <h3>Hỏi số lượng: How much & How many</h3>
+                    <div class="theory-rule">
+                        • <b>HOW MANY:</b> + Danh từ đếm được SỐ NHIỀU (thường có "s"). <i>Ví dụ: How many books do you have?</i><br>
+                        • <b>HOW MUCH:</b> + Danh từ KHÔNG đếm được (nước, sữa, tiền, thời gian...) hoặc dùng để hỏi Giá Tiền. <i>Ví dụ: How much water is left?</i>
+                    </div>
+                    <div class="prac-container">
+                        <div class="prac-row">
+                            <select class="prac-select" data-ans="How much" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option>
+                            </select> money do you have?
+                        </div>
+                        <div class="prac-row">
+                            <select class="prac-select" data-ans="How many" onchange="checkPracSelect(this)">
+                                <option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option>
+                            </select> students are there in your class?
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+    };
+
     const topics = {
-        prep: { name: "Giới từ thời gian", theory: "IN: tháng, năm, mùa, buổi. ON: thứ, ngày tháng. AT: giờ, đêm, lễ." },
+        prep: { name: "Giới từ thời gian", theory: "IN: tháng, năm, mùa, buổi. ON: thứ, ngày tháng. AT: giờ, mốc thời điểm (at night)." },
         how: { name: "How much / How many", theory: "HOW MANY: đếm được số nhiều. HOW MUCH: không đếm được / Giá tiền." },
         some: { name: "Some & Any", theory: "SOME: khẳng định, mời. ANY: phủ định, câu hỏi." },
-        plu: { name: "Số ít sang Số nhiều", theory: "Thêm s/es. Tận cùng y->ies, f/fe->ves. Bất quy tắc: child->children, foot->feet." },
+        plu: { name: "Số ít sang Số nhiều", theory: "Thêm s/es. Bất quy tắc: child->children, foot->feet, tooth->teeth, man->men." },
         obj: { name: "Đại từ tân ngữ", theory: "Đứng sau Động từ/Giới từ: I->me, he->him, she->her, we->us, they->them." },
         be: { name: "Động từ To be", theory: "I am; He/She/It is; We/You/They are." },
         wh: { name: "Từ để hỏi (Wh-q)", theory: "What, Who, Where, When, Why, How." }
     };
 
-    // Chuỗi HTML chứa toàn bộ hệ thống Lý Thuyết & Thực hành Interactive
-    const fullTheoryHTML = `
-        <div class="theory-card">
-            <h3>1. Danh từ Số Ít & Số Nhiều (Singular & Plural)</h3>
-            <div class="theory-rule">
-                <b>Quy tắc 1: Thêm "-s" vào hầu hết các danh từ.</b><br>
-                Ví dụ: a book ➔ books, an apple ➔ apples.
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">✏️ a cat ➔ <input type="text" class="prac-input" data-ans="cats" onkeyup="checkPracInput(this)" placeholder="gõ vào đây..."></div>
-                <div class="prac-row">✏️ a dog ➔ <input type="text" class="prac-input" data-ans="dogs" onkeyup="checkPracInput(this)"></div>
-            </div>
-
-            <div class="theory-rule" style="margin-top:20px;">
-                <b>Quy tắc 2: Tận cùng là O, S, CH, X, SH ➔ Thêm "-es"</b><br>
-                <i>(Mẹo nhớ vui: Ông Sáu Chạy Xe SH)</i><br>
-                Ví dụ: bus ➔ buses, watch ➔ watches, box ➔ boxes, potato ➔ potatoes.
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">✏️ a tomato (cà chua) ➔ <input type="text" class="prac-input" data-ans="tomatoes" onkeyup="checkPracInput(this)"></div>
-                <div class="prac-row">✏️ a brush (cái cọ) ➔ <input type="text" class="prac-input" data-ans="brushes" onkeyup="checkPracInput(this)"></div>
-            </div>
-
-            <div class="theory-rule" style="margin-top:20px;">
-                <b>Quy tắc 3: Tận cùng là Phụ âm + "Y" ➔ Đổi "y" thành "i" và thêm "-es"</b><br>
-                Ví dụ: baby ➔ babies, city ➔ cities.<br>
-                <i>Chú ý: Nếu trước y là nguyên âm (u,e,o,a,i) thì chỉ thêm s: boy ➔ boys.</i>
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">✏️ a ladybug (con bọ rùa) ➔ <input type="text" class="prac-input" data-ans="ladybugs" onkeyup="checkPracInput(this)"></div>
-                <div class="prac-row">✏️ a story (câu chuyện) ➔ <input type="text" class="prac-input" data-ans="stories" onkeyup="checkPracInput(this)"></div>
-            </div>
-
-            <div class="theory-rule" style="margin-top:20px;">
-                <b>Quy tắc 4: Tận cùng là "F" hoặc "FE" ➔ Đổi thành "-ves"</b><br>
-                Ví dụ: leaf (chiếc lá) ➔ leaves, knife (con dao) ➔ knives, wife ➔ wives.
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">✏️ a wolf (chó sói) ➔ <input type="text" class="prac-input" data-ans="wolves" onkeyup="checkPracInput(this)"></div>
-            </div>
-
-            <div class="theory-rule" style="margin-top:20px;">
-                <b>Quy tắc 5: Bất Quy Tắc (Phải học thuộc)</b><br>
-                • man ➔ men (đàn ông)<br>• woman ➔ women (phụ nữ)<br>• child ➔ children (trẻ em)<br>
-                • foot ➔ feet (bàn chân)<br>• tooth ➔ teeth (răng)<br>• mouse ➔ mice (chuột)<br>
-                • sheep ➔ sheep (con cừu - giữ nguyên)<br>• fish ➔ fish (con cá - giữ nguyên)
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">✏️ a child ➔ <input type="text" class="prac-input" data-ans="children" onkeyup="checkPracInput(this)"></div>
-                <div class="prac-row">✏️ a foot ➔ <input type="text" class="prac-input" data-ans="feet" onkeyup="checkPracInput(this)"></div>
-            </div>
-        </div>
-
-        <div class="theory-card">
-            <h3>2. Đại Từ Nhân Xưng & Tân Ngữ (Pronouns)</h3>
-            <div class="theory-rule">
-                • <b>Chủ ngữ (Subject):</b> I, You, He, She, It, We, They. (Luôn đứng ĐẦU câu / trước động từ).<br>
-                • <b>Tân ngữ (Object):</b> me, you, him, her, it, us, them. (Luôn đứng SAU động từ hoặc giới từ).
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">
-                    I love my mother. I love 
-                    <select class="prac-select" data-ans="her" onchange="checkPracSelect(this)">
-                        <option value="">--Chọn--</option><option value="she">she</option><option value="her">her</option><option value="him">him</option>
-                    </select>
-                </div>
-                <div class="prac-row">
-                    Tom is playing. Look at 
-                    <select class="prac-select" data-ans="him" onchange="checkPracSelect(this)">
-                        <option value="">--Chọn--</option><option value="he">he</option><option value="him">him</option><option value="his">his</option>
-                    </select>!
-                </div>
-            </div>
-        </div>
-
-        <div class="theory-card">
-            <h3>3. Giới từ chỉ Thời Gian (In / On / At)</h3>
-            <div class="theory-rule">
-                • <b>IN:</b> Đi với <i>Tháng, Năm, Mùa, Buổi trong ngày</i> (in 2025, in June, in summer, in the morning).<br>
-                • <b>ON:</b> Đi với <i>Thứ trong tuần, Ngày tháng cụ thể</i> (on Monday, on May 5th, on Sunday morning).<br>
-                • <b>AT:</b> Đi với <i>Giờ cụ thể, Các dịp lễ, Đêm/Trưa</i> (at 7 o'clock, at Christmas, at night, at noon).
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">✏️ I wake up <input type="text" class="prac-input" data-ans="at" onkeyup="checkPracInput(this)"> 6 o'clock.</div>
-                <div class="prac-row">✏️ We don't go to school <input type="text" class="prac-input" data-ans="on" onkeyup="checkPracInput(this)"> Sundays.</div>
-                <div class="prac-row">✏️ It is very cold <input type="text" class="prac-input" data-ans="in" onkeyup="checkPracInput(this)"> winter.</div>
-            </div>
-        </div>
-
-        <div class="theory-card">
-            <h3>4. Some & Any (Một vài / Một ít)</h3>
-            <div class="theory-rule">
-                • <b>SOME:</b> Dùng trong câu <i>Khẳng định</i> và câu <i>Mời / Đề nghị lịch sự</i>.<br>
-                • <b>ANY:</b> Dùng trong câu <i>Phủ định</i> (có not, don't, isn't) và câu <i>Hỏi nghi vấn</i>.
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">
-                    I don't have 
-                    <select class="prac-select" data-ans="any" onchange="checkPracSelect(this)">
-                        <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
-                    </select> pens.
-                </div>
-                <div class="prac-row">
-                    Would you like 
-                    <select class="prac-select" data-ans="some" onchange="checkPracSelect(this)">
-                        <option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option>
-                    </select> milk?
-                </div>
-            </div>
-        </div>
-
-        <div class="theory-card">
-            <h3>5. How much & How many (Hỏi số lượng)</h3>
-            <div class="theory-rule">
-                • <b>HOW MANY:</b> + Danh từ đếm được SỐ NHIỀU (thường có "s"). <i>Ví dụ: How many books do you have?</i><br>
-                • <b>HOW MUCH:</b> + Danh từ KHÔNG đếm được (nước, tiền, thời gian...) hoặc dùng để hỏi Giá Tiền. <i>Ví dụ: How much water is left?</i>
-            </div>
-            <div class="prac-container">
-                <div class="prac-row">
-                    <select class="prac-select" data-ans="How much" onchange="checkPracSelect(this)">
-                        <option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option>
-                    </select> money do you have?
-                </div>
-                <div class="prac-row">
-                    <select class="prac-select" data-ans="How many" onchange="checkPracSelect(this)">
-                        <option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option>
-                    </select> students are there?
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Khai báo dữ liệu các mảng (rút gọn)
     const optPrep = ["in", "on", "at", "by"];
     const optHow = ["How much", "How many", "What", "Which"];
     const optSome = ["some", "any", "a", "an"];
 
+    // 2. KHO DỮ LIỆU ĐỀ THI
     const pExams = [
         [ // Đề 1
             {q:"I play pickleball _______ Sunday morning.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
             {q:"The osmanthus tree was planted _______ 2023.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"We usually have breakfast _______ 7 o'clock.", o:optPrep, c:2, t:"prep", e:"Mốc giờ cụ thể dùng at."},
+            {q:"We usually have breakfast _______ 7 o'clock.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
             {q:"My birthday is _______ October.", o:optPrep, c:0, t:"prep", e:"Tháng dùng in."},
             {q:"He goes to the park _______ the weekend.", o:optPrep, c:2, t:"prep", e:"Cụm 'at the weekend'."},
-            {q:"The meeting starts _______ Monday.", o:optPrep, c:1, t:"prep", e:"Thứ trong tuần dùng on."},
-            {q:"She drinks brown rice tea _______ the morning.", o:optPrep, c:0, t:"prep", e:"Cụm 'in the morning'."},
-            {q:"The children sleep _______ night.", o:optPrep, c:2, t:"prep", e:"Cụm 'at night'."},
-            {q:"They are building a road _______ the moment.", o:optPrep, c:2, t:"prep", e:"Cụm 'at the moment'."},
+            {q:"The meeting starts _______ Monday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng on."},
+            {q:"She drinks brown rice tea _______ the morning.", o:optPrep, c:0, t:"prep", e:"'in the morning'."},
+            {q:"The children sleep _______ night.", o:optPrep, c:2, t:"prep", e:"'at night'."},
+            {q:"They are building a road _______ the moment.", o:optPrep, c:2, t:"prep", e:"'at the moment'."},
             {q:"My family travels _______ summer.", o:optPrep, c:0, t:"prep", e:"Mùa dùng in."},
-            {q:"_______ racquets do you have?", o:optHow, c:1, t:"how", e:"'racquets' đếm được -> How many."},
-            {q:"_______ milk is in the bottle?", o:optHow, c:0, t:"how", e:"'milk' không đếm được -> How much."},
-            {q:"_______ time do you spend in the garden?", o:optHow, c:0, t:"how", e:"'time' không đếm được -> How much."},
-            {q:"_______ students are in the classroom?", o:optHow, c:1, t:"how", e:"'students' đếm được -> How many."},
-            {q:"_______ rice do you want?", o:optHow, c:0, t:"how", e:"'rice' không đếm được -> How much."},
-            {q:"_______ birds are flying in the sky?", o:optHow, c:1, t:"how", e:"'birds' đếm được -> How many."},
-            {q:"_______ water does the tree need?", o:optHow, c:0, t:"how", e:"'water' không đếm được -> How much."},
-            {q:"_______ apples are on the table?", o:optHow, c:1, t:"how", e:"'apples' đếm được -> How many."},
-            {q:"_______ money is in the wallet?", o:optHow, c:0, t:"how", e:"'money' không đếm được -> How much."},
-            {q:"_______ toys does she have?", o:optHow, c:1, t:"how", e:"'toys' đếm được -> How many."},
-            {q:"There is _______ yogurt in the fridge.", o:optSome, c:0, t:"some", e:"Câu khẳng định dùng some."},
-            {q:"I don't have _______ red dates for the tea.", o:optSome, c:1, t:"some", e:"Câu phủ định dùng any."},
+            {q:"_______ racquets do you have?", o:optHow, c:1, t:"how", e:"Đếm được dùng How many."},
+            {q:"_______ milk is in the bottle?", o:optHow, c:0, t:"how", e:"Không đếm được dùng How much."},
+            {q:"_______ time do you spend in the garden?", o:optHow, c:0, t:"how", e:"Time không đếm được -> How much."},
+            {q:"_______ students are in the classroom?", o:optHow, c:1, t:"how", e:"Students đếm được -> How many."},
+            {q:"_______ rice do you want?", o:optHow, c:0, t:"how", e:"Rice không đếm được -> How much."},
+            {q:"_______ birds are flying in the sky?", o:optHow, c:1, t:"how", e:"Birds đếm được -> How many."},
+            {q:"_______ water does the tree need?", o:optHow, c:0, t:"how", e:"Water không đếm được -> How much."},
+            {q:"_______ apples are on the table?", o:optHow, c:1, t:"how", e:"Apples đếm được -> How many."},
+            {q:"_______ money is in the wallet?", o:optHow, c:0, t:"how", e:"Money không đếm được -> How much."},
+            {q:"_______ toys does she have?", o:optHow, c:1, t:"how", e:"Toys đếm được -> How many."},
+            {q:"There is _______ yogurt in the fridge.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
+            {q:"I don't have _______ red dates for the tea.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"Are there _______ flowers in the garden?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
-            {q:"He has _______ new books on the desk.", o:optSome, c:0, t:"some", e:"Câu khẳng định dùng some."},
+            {q:"He has _______ new books on the desk.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"Is there _______ cheese on the plate?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
-            {q:"He is a boy. (Sang số nhiều)", o:["They are boys.", "We are boys.", "He are boys.", "It is boys."], c:0, t:"plu", e:"He->They, is->are, a boy->boys."},
-            {q:"It is a tall tree. (Sang số nhiều)", o:["They are tall trees.", "It is tall trees.", "We are tall tree.", "Them are tall trees."], c:0, t:"plu", e:"It->They, is->are, a tall tree->tall trees."},
-            {q:"She is a teacher. (Sang số nhiều)", o:["They are teachers.", "She are teachers.", "We is teachers.", "Thems are teacher."], c:0, t:"plu", e:"She->They, a teacher->teachers."},
-            {q:"I am a student. (Sang số nhiều)", o:["We are students.", "They are student.", "We is student.", "I are students."], c:0, t:"plu", e:"I->We, am->are, a student->students."},
-            {q:"It is a sweet apple. (Sang số nhiều)", o:["They are sweet apples.", "It are sweet apples.", "We are sweet apple.", "They is sweet apples."], c:0, t:"plu", e:"It->They, an apple->apples."}
+            {q:"He is a boy. (Sang số nhiều)", o:["They are boys.","We are boys.","He are boys.","It is boys."], c:0, t:"plu", e:"He->They, is->are, boy->boys."},
+            {q:"It is a tall tree.", o:["They are tall trees.","It is tall trees.","We are tall tree.","Them are tall trees."], c:0, t:"plu", e:"It->They, is->are, tree->trees."},
+            {q:"She is a teacher.", o:["They are teachers.","She are teachers.","We is teachers.","Thems are teacher."], c:0, t:"plu", e:"She->They, teacher->teachers."},
+            {q:"I am a student.", o:["We are students.","They are student.","We is student.","I are students."], c:0, t:"plu", e:"I->We, student->students."},
+            {q:"It is a sweet apple.", o:["They are sweet apples.","It are sweet apples.","We are sweet apple.","They is sweet apples."], c:0, t:"plu", e:"It->They, apple->apples."}
         ],
         [ // Đề 2
             {q:"We go to bed _______ midnight.", o:optPrep, c:2, t:"prep", e:"'at midnight'."},
-            {q:"The party is _______ December 25th.", o:optPrep, c:1, t:"prep", e:"Ngày tháng cụ thể dùng on."},
+            {q:"The party is _______ December 25th.", o:optPrep, c:1, t:"prep", e:"Ngày cụ thể dùng 'on'."},
             {q:"I saw him _______ the afternoon.", o:optPrep, c:0, t:"prep", e:"'in the afternoon'."},
-            {q:"The train arrives _______ 5:30 p.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
-            {q:"My dad reads books _______ Tuesday morning.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
+            {q:"The train arrives _______ 5:30 p.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng 'at'."},
+            {q:"My dad reads books _______ Tuesday morning.", o:optPrep, c:1, t:"prep", e:"Thứ+buổi dùng 'on'."},
             {q:"We went to the beach _______ the weekend.", o:optPrep, c:2, t:"prep", e:"'at the weekend'."},
-            {q:"The weather is very cold _______ winter.", o:optPrep, c:0, t:"prep", e:"Mùa dùng in."},
-            {q:"She will call you _______ a few minutes.", o:optPrep, c:0, t:"prep", e:"Cụm 'in a few minutes'."},
+            {q:"The weather is very cold _______ winter.", o:optPrep, c:0, t:"prep", e:"Mùa dùng 'in'."},
+            {q:"She will call you _______ a few minutes.", o:optPrep, c:0, t:"prep", e:"'in a few minutes'."},
             {q:"The grocery store closes _______ night.", o:optPrep, c:2, t:"prep", e:"'at night'."},
-            {q:"He was born _______ 2015.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"_______ sugar do you put in your tea?", o:optHow, c:0, t:"how", e:"'sugar' không đếm được -> How much."},
-            {q:"_______ brothers do you have?", o:optHow, c:1, t:"how", e:"'brothers' đếm được -> How many."},
-            {q:"_______ homework did the teacher give?", o:optHow, c:0, t:"how", e:"'homework' không đếm được -> How much."},
-            {q:"_______ chairs are in the living room?", o:optHow, c:1, t:"how", e:"'chairs' đếm được -> How many."},
-            {q:"_______ juice is left in the glass?", o:optHow, c:0, t:"how", e:"'juice' không đếm được -> How much."},
-            {q:"_______ cars are driving on the highway?", o:optHow, c:1, t:"how", e:"'cars' đếm được -> How many."},
-            {q:"_______ advice did your father give you?", o:optHow, c:0, t:"how", e:"'advice' không đếm được -> How much."},
-            {q:"_______ days are there in August?", o:optHow, c:1, t:"how", e:"'days' đếm được -> How many."},
-            {q:"_______ bread is on the table?", o:optHow, c:0, t:"how", e:"'bread' không đếm được -> How much."},
-            {q:"_______ friends are playing outside?", o:optHow, c:1, t:"how", e:"'friends' đếm được -> How many."},
+            {q:"He was born _______ 2015.", o:optPrep, c:0, t:"prep", e:"Năm dùng 'in'."},
+            {q:"_______ sugar do you put in your tea?", o:optHow, c:0, t:"how", e:"Sugar không đếm được."},
+            {q:"_______ brothers do you have?", o:optHow, c:1, t:"how", e:"Brothers đếm được."},
+            {q:"_______ homework did the teacher give?", o:optHow, c:0, t:"how", e:"Homework không đếm được."},
+            {q:"_______ chairs are in the living room?", o:optHow, c:1, t:"how", e:"Chairs đếm được."},
+            {q:"_______ juice is left in the glass?", o:optHow, c:0, t:"how", e:"Juice không đếm được."},
+            {q:"_______ cars are driving on the highway?", o:optHow, c:1, t:"how", e:"Cars đếm được."},
+            {q:"_______ advice did your father give you?", o:optHow, c:0, t:"how", e:"Advice không đếm được."},
+            {q:"_______ days are there in August?", o:optHow, c:1, t:"how", e:"Days đếm được."},
+            {q:"_______ bread is on the table?", o:optHow, c:0, t:"how", e:"Bread không đếm được."},
+            {q:"_______ friends are playing outside?", o:optHow, c:1, t:"how", e:"Friends đếm được."},
             {q:"We need _______ avocados for breakfast.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"She doesn't read _______ books in the evening.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"Do you have _______ free time today?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"There are _______ ducks swimming in the lake.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"There isn't _______ meat in the soup.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
-            {q:"The dictionary is heavy. (Sang số nhiều)", o:["The dictionaries are heavy.", "The dictionarys are heavy.", "The dictionaries is heavy.", "The dictionary are heavy."], c:0, t:"plu", e:"y->ies (dictionaries); is->are."},
-            {q:"He has a new car. (Sang số nhiều)", o:["They have new cars.", "They has new cars.", "He have new cars.", "They are new cars."], c:0, t:"plu", e:"He->They; has->have; car->cars."},
-            {q:"It is a sharp knife. (Sang số nhiều)", o:["They are sharp knives.", "They are sharp knifes.", "It are sharp knives.", "They is sharp knives."], c:0, t:"plu", e:"knife đổi fe thành ves (knives)."},
-            {q:"She is a happy woman. (Sang số nhiều)", o:["They are happy women.", "They are happy womans.", "She are happy women.", "They is happy women."], c:0, t:"plu", e:"woman->women."},
-            {q:"It is a beautiful flower. (Sang số nhiều)", o:["They are beautiful flowers.", "It are beautiful flowers.", "They is beautiful flowers.", "We are beautiful flower."], c:0, t:"plu", e:"flower->flowers."}
+            {q:"The dictionary is heavy.", o:["The dictionaries are heavy.","The dictionarys are heavy.","The dictionaries is heavy.","The dictionary are heavy."], c:0, t:"plu", e:"y->ies (dictionaries)."},
+            {q:"He has a new car.", o:["They have new cars.","They has new cars.","He have new cars.","They are new cars."], c:0, t:"plu", e:"has->have, car->cars."},
+            {q:"It is a sharp knife.", o:["They are sharp knives.","They are sharp knifes.","It are sharp knives.","They is sharp knives."], c:0, t:"plu", e:"knife->knives."},
+            {q:"She is a happy woman.", o:["They are happy women.","They are happy womans.","She are happy women.","They is happy women."], c:0, t:"plu", e:"woman->women."},
+            {q:"It is a beautiful flower.", o:["They are beautiful flowers.","It are beautiful flowers.","They is beautiful flowers.","We are beautiful flower."], c:0, t:"plu", e:"flower->flowers."}
         ],
         [ // Đề 3
-            {q:"My uncle visited us _______ April 30th.", o:optPrep, c:1, t:"prep", e:"Ngày cụ thể dùng on."},
-            {q:"We always have a big dinner _______ New Year's Eve.", o:optPrep, c:1, t:"prep", e:"Dịp lễ có chữ 'Eve' dùng on."},
-            {q:"The cat is sleeping _______ the sofa.", o:optPrep, c:1, t:"prep", e:"Trên bề mặt dùng on."},
-            {q:"School finishes _______ 4:30 p.m.", o:optPrep, c:2, t:"prep", e:"Mốc giờ dùng at."},
+            {q:"My uncle visited us _______ April 30th.", o:optPrep, c:1, t:"prep", e:"Ngày cụ thể dùng 'on'."},
+            {q:"We always have a big dinner _______ New Year's Eve.", o:optPrep, c:1, t:"prep", e:"Lễ cụ thể dùng 'on'."},
+            {q:"The cat is sleeping _______ the sofa.", o:optPrep, c:1, t:"prep", e:"Trên mặt phẳng dùng 'on'."},
+            {q:"School finishes _______ 4:30 p.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng 'at'."},
             {q:"I like to read books _______ the evening.", o:optPrep, c:0, t:"prep", e:"'in the evening'."},
-            {q:"He was in Hanoi _______ 2021.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"They are waiting _______ the bus stop.", o:optPrep, c:2, t:"prep", e:"Trạm chờ (địa điểm nhỏ) dùng at."},
-            {q:"The picture hangs _______ the wall.", o:optPrep, c:1, t:"prep", e:"Trên tường dùng on."},
-            {q:"It rains a lot _______ summer.", o:optPrep, c:0, t:"prep", e:"Mùa dùng in."},
-            {q:"We have English class _______ Tuesday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng on."},
-            {q:"_______ coffee do you drink every day?", o:optHow, c:0, t:"how", e:"'coffee' không đếm được -> How much."},
-            {q:"_______ pencils are there in your pencil case?", o:optHow, c:1, t:"how", e:"'pencils' đếm được -> How many."},
-            {q:"_______ information did you find on the internet?", o:optHow, c:0, t:"how", e:"'information' không đếm được -> How much."},
-            {q:"_______ computers are there in the IT room?", o:optHow, c:1, t:"how", e:"'computers' đếm được -> How many."},
-            {q:"_______ honey do we need for the cake?", o:optHow, c:0, t:"how", e:"'honey' không đếm được -> How much."},
-            {q:"_______ trees are planted in the park?", o:optHow, c:1, t:"how", e:"'trees' đếm được -> How many."},
-            {q:"_______ sand is on the beach?", o:optHow, c:0, t:"how", e:"'sand' không đếm được -> How much."},
-            {q:"_______ windows does your house have?", o:optHow, c:1, t:"how", e:"'windows' đếm được -> How many."},
-            {q:"_______ oil is left in the bottle?", o:optHow, c:0, t:"how", e:"'oil' không đếm được -> How much."},
-            {q:"_______ pairs of socks do you want to buy?", o:optHow, c:1, t:"how", e:"'pairs' đếm được -> How many."},
-            {q:"I would like _______ tea, please.", o:optSome, c:0, t:"some", e:"Lời mời lịch sự dùng some."},
+            {q:"He was in Hanoi _______ 2021.", o:optPrep, c:0, t:"prep", e:"Năm dùng 'in'."},
+            {q:"They are waiting _______ the bus stop.", o:optPrep, c:2, t:"prep", e:"Trạm chờ dùng 'at'."},
+            {q:"The picture hangs _______ the wall.", o:optPrep, c:1, t:"prep", e:"Trên tường dùng 'on'."},
+            {q:"It rains a lot _______ summer.", o:optPrep, c:0, t:"prep", e:"Mùa dùng 'in'."},
+            {q:"We have English class _______ Tuesday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng 'on'."},
+            {q:"_______ coffee do you drink every day?", o:optHow, c:0, t:"how", e:"Coffee không đếm được."},
+            {q:"_______ pencils are there in your pencil case?", o:optHow, c:1, t:"how", e:"Pencils đếm được."},
+            {q:"_______ information did you find on the internet?", o:optHow, c:0, t:"how", e:"Information không đếm được."},
+            {q:"_______ computers are there in the IT room?", o:optHow, c:1, t:"how", e:"Computers đếm được."},
+            {q:"_______ honey do we need for the cake?", o:optHow, c:0, t:"how", e:"Honey không đếm được."},
+            {q:"_______ trees are planted in the park?", o:optHow, c:1, t:"how", e:"Trees đếm được."},
+            {q:"_______ sand is on the beach?", o:optHow, c:0, t:"how", e:"Sand không đếm được."},
+            {q:"_______ windows does your house have?", o:optHow, c:1, t:"how", e:"Windows đếm được."},
+            {q:"_______ oil is left in the bottle?", o:optHow, c:0, t:"how", e:"Oil không đếm được."},
+            {q:"_______ pairs of socks do you want to buy?", o:optHow, c:1, t:"how", e:"Pairs đếm được."},
+            {q:"I would like _______ tea, please.", o:optSome, c:0, t:"some", e:"Lời mời/yêu cầu dùng some."},
             {q:"There aren't _______ oranges in the basket.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"Do you have _______ water?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"She doesn't have _______ pens in her bag.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"We need _______ butter for this recipe.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
-            {q:"The baby is crying. (Sang số nhiều)", o:["The babies are crying.", "The babys are crying.", "The babies is crying.", "The baby are crying."], c:0, t:"plu", e:"baby->babies; is->are."},
-            {q:"She is a kind person. (Sang số nhiều)", o:["They are kind people.", "They are kind persons.", "She are kind people.", "Cả A và B đều được"], c:3, t:"plu", e:"person có thể thành people hoặc persons."},
-            {q:"It is a sharp tooth. (Sang số nhiều)", o:["They are sharp teeth.", "They are sharp tooths.", "It are sharp teeth.", "They is sharp teeth."], c:0, t:"plu", e:"tooth->teeth."},
-            {q:"He is a tall man. (Sang số nhiều)", o:["They are tall men.", "They are tall mans.", "He are tall men.", "They is tall men."], c:0, t:"plu", e:"man->men."},
-            {q:"It is a wild wolf. (Sang số nhiều)", o:["They are wild wolves.", "They are wild wolfs.", "It are wild wolves.", "They is wild wolves."], c:0, t:"plu", e:"wolf->wolves."}
+            {q:"The baby is crying.", o:["The babies are crying.","The babys are crying.","The babies is crying.","The baby are crying."], c:0, t:"plu", e:"baby->babies."},
+            {q:"She is a kind person.", o:["They are kind persons.","They are kind people.","Both are correct.","She are kind people."], c:2, t:"plu", e:"Person -> people/persons đều đúng."},
+            {q:"It is a sharp tooth.", o:["They are sharp teeth.","They are sharp tooths.","It are sharp teeth.","They is sharp teeth."], c:0, t:"plu", e:"tooth->teeth."},
+            {q:"He is a tall man.", o:["They are tall men.","They are tall mans.","He are tall men.","They is tall men."], c:0, t:"plu", e:"man->men."},
+            {q:"It is a wild wolf.", o:["They are wild wolves.","They are wild wolfs.","It are wild wolves.","They is wild wolves."], c:0, t:"plu", e:"wolf->wolves."}
         ],
         [ // Đề 4
-            {q:"The flowers bloom _______ spring.", o:optPrep, c:0, t:"prep", e:"Mùa dùng in."},
-            {q:"We have lunch _______ 12 o'clock.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
-            {q:"I will see you _______ Wednesday morning.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
-            {q:"The project started _______ 2020.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"We get presents _______ Christmas Day.", o:optPrep, c:1, t:"prep", e:"Dịp lễ có chữ Day dùng on."},
-            {q:"There are many apples _______ the tree.", o:optPrep, c:1, t:"prep", e:"Mọc trên cây dùng on."},
-            {q:"My keys are _______ my bag.", o:optPrep, c:0, t:"prep", e:"Bên trong dùng in."},
-            {q:"My mother is cooking _______ the kitchen.", o:optPrep, c:0, t:"prep", e:"Không gian phòng dùng in."},
+            {q:"The flowers bloom _______ spring.", o:optPrep, c:0, t:"prep", e:"Mùa dùng 'in'."},
+            {q:"We have lunch _______ 12 o'clock.", o:optPrep, c:2, t:"prep", e:"Giờ dùng 'at'."},
+            {q:"I will see you _______ Wednesday morning.", o:optPrep, c:1, t:"prep", e:"Thứ+buổi dùng 'on'."},
+            {q:"The project started _______ 2020.", o:optPrep, c:0, t:"prep", e:"Năm dùng 'in'."},
+            {q:"We get presents _______ Christmas Day.", o:optPrep, c:1, t:"prep", e:"Ngày lễ có Day dùng 'on'."},
+            {q:"There are many apples _______ the tree.", o:optPrep, c:1, t:"prep", e:"Trên cây dùng 'on'."},
+            {q:"My keys are _______ my bag.", o:optPrep, c:0, t:"prep", e:"Bên trong dùng 'in'."},
+            {q:"My mother is cooking _______ the kitchen.", o:optPrep, c:0, t:"prep", e:"Bên trong phòng dùng 'in'."},
             {q:"He exercises _______ the morning.", o:optPrep, c:0, t:"prep", e:"'in the morning'."},
-            {q:"Independence Day is _______ September 2nd.", o:optPrep, c:1, t:"prep", e:"Ngày tháng cụ thể dùng on."},
-            {q:"_______ salt is in this soup?", o:optHow, c:0, t:"how", e:"salt không đếm được."},
-            {q:"_______ animals live in the zoo?", o:optHow, c:1, t:"how", e:"animals đếm được."},
-            {q:"_______ pepper should I add?", o:optHow, c:0, t:"how", e:"pepper không đếm được."},
-            {q:"_______ planets are there in the solar system?", o:optHow, c:1, t:"how", e:"planets đếm được."},
-            {q:"_______ flour do you need to make bread?", o:optHow, c:0, t:"how", e:"flour không đếm được."},
-            {q:"_______ stars can you see tonight?", o:optHow, c:1, t:"how", e:"stars đếm được."},
-            {q:"_______ soup is left in the pot?", o:optHow, c:0, t:"how", e:"soup không đếm được."},
-            {q:"_______ houses are there in this village?", o:optHow, c:1, t:"how", e:"houses đếm được."},
-            {q:"_______ cheese is on the pizza?", o:optHow, c:0, t:"how", e:"cheese không đếm được."},
-            {q:"_______ shoes are outside the door?", o:optHow, c:1, t:"how", e:"shoes đếm được."},
+            {q:"Independence Day is _______ September 2nd.", o:optPrep, c:1, t:"prep", e:"Ngày cụ thể dùng 'on'."},
+            {q:"_______ salt is in this soup?", o:optHow, c:0, t:"how", e:"Salt không đếm được."},
+            {q:"_______ animals live in the zoo?", o:optHow, c:1, t:"how", e:"Animals đếm được."},
+            {q:"_______ pepper should I add?", o:optHow, c:0, t:"how", e:"Pepper không đếm được."},
+            {q:"_______ planets are there in the solar system?", o:optHow, c:1, t:"how", e:"Planets đếm được."},
+            {q:"_______ flour do you need to make bread?", o:optHow, c:0, t:"how", e:"Flour không đếm được."},
+            {q:"_______ stars can you see tonight?", o:optHow, c:1, t:"how", e:"Stars đếm được."},
+            {q:"_______ soup is left in the pot?", o:optHow, c:0, t:"how", e:"Soup không đếm được."},
+            {q:"_______ houses are there in this village?", o:optHow, c:1, t:"how", e:"Houses đếm được."},
+            {q:"_______ cheese is on the pizza?", o:optHow, c:0, t:"how", e:"Cheese không đếm được."},
+            {q:"_______ shoes are outside the door?", o:optHow, c:1, t:"how", e:"Shoes đếm được."},
             {q:"There is _______ jam on the bread.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"Is there _______ honey in the jar?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"We don't have _______ cats in our house.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"There are _______ monkeys in the zoo.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"I cannot find _______ flour in the cupboard.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
-            {q:"The leaf is green. (Sang số nhiều)", o:["The leaves are green.", "The leafs are green.", "The leaves is green.", "The leaf are green."], c:0, t:"plu", e:"leaf->leaves."},
-            {q:"It is a small mouse. (Sang số nhiều)", o:["They are small mice.", "They are small mouses.", "It are small mice.", "They is small mice."], c:0, t:"plu", e:"mouse->mice."},
-            {q:"She has a pretty foot. (Sang số nhiều)", o:["They have pretty feet.", "They has pretty foots.", "She have pretty feet.", "They are pretty feet."], c:0, t:"plu", e:"foot->feet."},
-            {q:"He is a strong child. (Sang số nhiều)", o:["They are strong children.", "They are strong childs.", "He are strong children.", "They is strong children."], c:0, t:"plu", e:"child->children."},
-            {q:"The box is heavy. (Sang số nhiều)", o:["The boxes are heavy.", "The boxs are heavy.", "The boxes is heavy.", "The box are heavy."], c:0, t:"plu", e:"box->boxes."}
+            {q:"The leaf is green.", o:["The leaves are green.","The leafs are green.","The leaves is green.","The leaf are green."], c:0, t:"plu", e:"leaf->leaves."},
+            {q:"It is a small mouse.", o:["They are small mice.","They are small mouses.","It are small mice.","They is small mice."], c:0, t:"plu", e:"mouse->mice."},
+            {q:"She has a pretty foot.", o:["They have pretty feet.","They has pretty foots.","She have pretty feet.","They are pretty feet."], c:0, t:"plu", e:"foot->feet."},
+            {q:"He is a strong child.", o:["They are strong children.","They are strong childs.","He are strong children.","They is strong children."], c:0, t:"plu", e:"child->children."},
+            {q:"The box is heavy.", o:["The boxes are heavy.","The boxs are heavy.","The boxes is heavy.","The box are heavy."], c:0, t:"plu", e:"box->boxes."}
         ],
         [ // Đề 5
             {q:"We usually take a nap _______ noon.", o:optPrep, c:2, t:"prep", e:"'at noon'."},
-            {q:"The concert is _______ Thursday afternoon.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
-            {q:"My brother graduated _______ 2010.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
+            {q:"The concert is _______ Thursday afternoon.", o:optPrep, c:1, t:"prep", e:"Thứ+buổi dùng 'on'."},
+            {q:"My brother graduated _______ 2010.", o:optPrep, c:0, t:"prep", e:"Năm dùng 'in'."},
             {q:"They go camping _______ the weekend.", o:optPrep, c:2, t:"prep", e:"'at the weekend'."},
-            {q:"The movie ends _______ 10:45 p.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
-            {q:"The dog is lying _______ the floor.", o:optPrep, c:1, t:"prep", e:"Trên mặt sàn dùng on."},
-            {q:"The cups are _______ the cupboard.", o:optPrep, c:0, t:"prep", e:"Bên trong tủ dùng in."},
-            {q:"The TV is _______ the living room.", o:optPrep, c:0, t:"prep", e:"Không gian phòng dùng in."},
-            {q:"We have a long holiday _______ July.", o:optPrep, c:0, t:"prep", e:"Tháng dùng in."},
-            {q:"Children wear costumes _______ Halloween.", o:optPrep, c:2, t:"prep", e:"Dịp lễ hội dùng at."},
-            {q:"_______ meat do you eat every week?", o:optHow, c:0, t:"how", e:"meat không đếm được."},
-            {q:"_______ dogs are barking outside?", o:optHow, c:1, t:"how", e:"dogs đếm được."},
-            {q:"_______ traffic is there in the city?", o:optHow, c:0, t:"how", e:"traffic không đếm được."},
-            {q:"_______ buses stop at this station?", o:optHow, c:1, t:"how", e:"buses đếm được."},
-            {q:"_______ pollution is in the air?", o:optHow, c:0, t:"how", e:"pollution không đếm được."},
-            {q:"_______ rivers flow through this country?", o:optHow, c:1, t:"how", e:"rivers đếm được."},
-            {q:"_______ grass is in the garden?", o:optHow, c:0, t:"how", e:"grass không đếm được."},
-            {q:"_______ mountains did you climb?", o:optHow, c:1, t:"how", e:"mountains đếm được."},
-            {q:"_______ jam do you want on your toast?", o:optHow, c:0, t:"how", e:"jam không đếm được."},
-            {q:"_______ oceans are there in the world?", o:optHow, c:1, t:"how", e:"oceans đếm được."},
+            {q:"The movie ends _______ 10:45 p.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng 'at'."},
+            {q:"The dog is lying _______ the floor.", o:optPrep, c:1, t:"prep", e:"Trên sàn dùng 'on'."},
+            {q:"The cups are _______ the cupboard.", o:optPrep, c:0, t:"prep", e:"Bên trong tủ dùng 'in'."},
+            {q:"The TV is _______ the living room.", o:optPrep, c:0, t:"prep", e:"Trong phòng dùng 'in'."},
+            {q:"We have a long holiday _______ July.", o:optPrep, c:0, t:"prep", e:"Tháng dùng 'in'."},
+            {q:"Children wear costumes _______ Halloween.", o:optPrep, c:2, t:"prep", e:"Lễ hội dùng 'at'."},
+            {q:"_______ meat do you eat every week?", o:optHow, c:0, t:"how", e:"Meat không đếm được."},
+            {q:"_______ dogs are barking outside?", o:optHow, c:1, t:"how", e:"Dogs đếm được."},
+            {q:"_______ traffic is there in the city?", o:optHow, c:0, t:"how", e:"Traffic không đếm được."},
+            {q:"_______ buses stop at this station?", o:optHow, c:1, t:"how", e:"Buses đếm được."},
+            {q:"_______ pollution is in the air?", o:optHow, c:0, t:"how", e:"Pollution không đếm được."},
+            {q:"_______ rivers flow through this country?", o:optHow, c:1, t:"how", e:"Rivers đếm được."},
+            {q:"_______ grass is in the garden?", o:optHow, c:0, t:"how", e:"Grass không đếm được."},
+            {q:"_______ mountains did you climb?", o:optHow, c:1, t:"how", e:"Mountains đếm được."},
+            {q:"_______ jam do you want on your toast?", o:optHow, c:0, t:"how", e:"Jam không đếm được."},
+            {q:"_______ oceans are there in the world?", o:optHow, c:1, t:"how", e:"Oceans đếm được."},
             {q:"Is there _______ milk in the fridge?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"I saw _______ dogs in the park.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"There isn't _______ sugar in my coffee.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
-            {q:"_______ children are playing football.", o:["Some", "Any", "A", "An"], c:0, t:"some", e:"Khẳng định dùng Some."},
+            {q:"_______ children are playing football.", o:["Some","Any","A","An"], c:0, t:"some", e:"Khẳng định dùng Some."},
             {q:"We don't have _______ rice left.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
-            {q:"It is a fast bus. (Sang số nhiều)", o:["They are fast buses.", "They are fast bus.", "It are fast buses.", "They is fast buses."], c:0, t:"plu", e:"bus->buses."},
-            {q:"She is a good wife. (Sang số nhiều)", o:["They are good wives.", "They are good wifes.", "She are good wives.", "They is good wives."], c:0, t:"plu", e:"wife->wives."},
-            {q:"He is a smart student. (Sang số nhiều)", o:["They are smart students.", "They are smart student.", "He are smart students.", "They is smart students."], c:0, t:"plu", e:"student->students."},
-            {q:"The watch is gold. (Sang số nhiều)", o:["The watches are gold.", "The watchs are gold.", "The watches is gold.", "The watch are gold."], c:0, t:"plu", e:"watch->watches."},
-            {q:"It is a ripe tomato. (Sang số nhiều)", o:["They are ripe tomatoes.", "They are ripe tomatos.", "It are ripe tomatoes.", "They is ripe tomatoes."], c:0, t:"plu", e:"tomato->tomatoes."}
+            {q:"It is a fast bus.", o:["They are fast buses.","They are fast bus.","It are fast buses.","They is fast buses."], c:0, t:"plu", e:"bus->buses."},
+            {q:"She is a good wife.", o:["They are good wives.","They are good wifes.","She are good wives.","They is good wives."], c:0, t:"plu", e:"wife->wives."},
+            {q:"He is a smart student.", o:["They are smart students.","They are smart student.","He are smart students.","They is smart students."], c:0, t:"plu", e:"student->students."},
+            {q:"The watch is gold.", o:["The watches are gold.","The watchs are gold.","The watches is gold.","The watch are gold."], c:0, t:"plu", e:"watch->watches."},
+            {q:"It is a ripe tomato.", o:["They are ripe tomatoes.","They are ripe tomatos.","It are ripe tomatoes.","They is ripe tomatoes."], c:0, t:"plu", e:"tomato->tomatoes."}
         ],
         [ // Đề 6
             {q:"The stars shine _______ night.", o:optPrep, c:2, t:"prep", e:"'at night'."},
-            {q:"We celebrate Valentine's Day _______ February 14th.", o:optPrep, c:1, t:"prep", e:"Ngày tháng cụ thể dùng on."},
-            {q:"My flight leaves _______ 7:15 a.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
-            {q:"She was born _______ 1985.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"He likes to relax _______ Sunday evening.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
-            {q:"Don't sit _______ the grass.", o:optPrep, c:1, t:"prep", e:"Trên mặt cỏ dùng on."},
-            {q:"The money is _______ the wallet.", o:optPrep, c:0, t:"prep", e:"Bên trong dùng in."},
-            {q:"I will meet you _______ the library.", o:optPrep, c:2, t:"prep", e:"Địa điểm dùng at."},
-            {q:"The leaves fall _______ autumn.", o:optPrep, c:0, t:"prep", e:"Mùa dùng in."},
-            {q:"I have a meeting _______ Friday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng on."},
-            {q:"_______ luggage are you carrying?", o:optHow, c:0, t:"how", e:"luggage (hành lý) không đếm được."},
-            {q:"_______ passengers are on the train?", o:optHow, c:1, t:"how", e:"passengers đếm được."},
-            {q:"_______ furniture is in the new house?", o:optHow, c:0, t:"how", e:"furniture (nội thất) không đếm được."},
-            {q:"_______ tables are in the restaurant?", o:optHow, c:1, t:"how", e:"tables đếm được."},
-            {q:"_______ equipment do you need for the gym?", o:optHow, c:0, t:"how", e:"equipment không đếm được."},
-            {q:"_______ exercises did you do?", o:optHow, c:1, t:"how", e:"exercises đếm được."},
-            {q:"_______ toothpaste is on the brush?", o:optHow, c:0, t:"how", e:"toothpaste không đếm được."},
-            {q:"_______ brushes are in the bathroom?", o:optHow, c:1, t:"how", e:"brushes đếm được."},
-            {q:"_______ dust is under the bed?", o:optHow, c:0, t:"how", e:"dust (bụi) không đếm được."},
-            {q:"_______ coins are in your pocket?", o:optHow, c:1, t:"how", e:"coins đếm được."},
+            {q:"We celebrate Valentine's Day _______ February 14th.", o:optPrep, c:1, t:"prep", e:"Ngày tháng dùng 'on'."},
+            {q:"My flight leaves _______ 7:15 a.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng 'at'."},
+            {q:"She was born _______ 1985.", o:optPrep, c:0, t:"prep", e:"Năm dùng 'in'."},
+            {q:"He likes to relax _______ Sunday evening.", o:optPrep, c:1, t:"prep", e:"Thứ+buổi dùng 'on'."},
+            {q:"Don't sit _______ the grass.", o:optPrep, c:1, t:"prep", e:"Trên bề mặt dùng 'on'."},
+            {q:"The money is _______ the wallet.", o:optPrep, c:0, t:"prep", e:"Bên trong dùng 'in'."},
+            {q:"I will meet you _______ the library.", o:optPrep, c:2, t:"prep", e:"Địa điểm dùng 'at'."},
+            {q:"The leaves fall _______ autumn.", o:optPrep, c:0, t:"prep", e:"Mùa dùng 'in'."},
+            {q:"I have a meeting _______ Friday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng 'on'."},
+            {q:"_______ luggage are you carrying?", o:optHow, c:0, t:"how", e:"Luggage không đếm được."},
+            {q:"_______ passengers are on the train?", o:optHow, c:1, t:"how", e:"Passengers đếm được."},
+            {q:"_______ furniture is in the new house?", o:optHow, c:0, t:"how", e:"Furniture không đếm được."},
+            {q:"_______ tables are in the restaurant?", o:optHow, c:1, t:"how", e:"Tables đếm được."},
+            {q:"_______ equipment do you need for the gym?", o:optHow, c:0, t:"how", e:"Equipment không đếm được."},
+            {q:"_______ exercises did you do?", o:optHow, c:1, t:"how", e:"Exercises đếm được."},
+            {q:"_______ toothpaste is on the brush?", o:optHow, c:0, t:"how", e:"Toothpaste không đếm được."},
+            {q:"_______ brushes are in the bathroom?", o:optHow, c:1, t:"how", e:"Brushes đếm được."},
+            {q:"_______ dust is under the bed?", o:optHow, c:0, t:"how", e:"Dust không đếm được."},
+            {q:"_______ coins are in your pocket?", o:optHow, c:1, t:"how", e:"Coins đếm được."},
             {q:"I bought _______ apples at the market.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"Do you know _______ good restaurants here?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"She hasn't got _______ brothers.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"There is _______ water on the floor.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"Are there _______ messages for me?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
-            {q:"The child is happy. (Sang số nhiều)", o:["The children are happy.", "The childs are happy.", "The children is happy.", "The child are happy."], c:0, t:"plu", e:"child->children."},
-            {q:"It is a long dictionary. (Sang số nhiều)", o:["They are long dictionaries.", "They are long dictionarys.", "It are long dictionaries.", "They is long dictionaries."], c:0, t:"plu", e:"dictionary->dictionaries."},
-            {q:"He is a brave policeman. (Sang số nhiều)", o:["They are brave policemen.", "They are brave policemans.", "He are brave policemen.", "They is brave policemen."], c:0, t:"plu", e:"policeman->policemen."},
-            {q:"The glass is empty. (Sang số nhiều)", o:["The glasses are empty.", "The glasss are empty.", "The glasses is empty.", "The glass are empty."], c:0, t:"plu", e:"glass->glasses."},
-            {q:"She has a white goose. (Sang số nhiều)", o:["They have white geese.", "They has white gooses.", "She have white geese.", "They are white geese."], c:0, t:"plu", e:"goose->geese."}
+            {q:"The child is happy.", o:["The children are happy.","The childs are happy.","The children is happy.","The child are happy."], c:0, t:"plu", e:"child->children."},
+            {q:"It is a long dictionary.", o:["They are long dictionaries.","They are long dictionarys.","It are long dictionaries.","They is long dictionaries."], c:0, t:"plu", e:"dictionary->dictionaries."},
+            {q:"He is a brave policeman.", o:["They are brave policemen.","They are brave policemans.","He are brave policemen.","They is brave policemen."], c:0, t:"plu", e:"policeman->policemen."},
+            {q:"The glass is empty.", o:["The glasses are empty.","The glasss are empty.","The glasses is empty.","The glass are empty."], c:0, t:"plu", e:"glass->glasses."},
+            {q:"She has a white goose.", o:["They have white geese.","They has white gooses.","She have white geese.","They are white geese."], c:0, t:"plu", e:"goose->geese."}
         ],
         [ // Đề 7
-            {q:"I usually wake up _______ sunrise.", o:optPrep, c:2, t:"prep", e:"Mốc rạng sáng dùng at."},
-            {q:"We have a test _______ November 20th.", o:optPrep, c:1, t:"prep", e:"Ngày tháng cụ thể dùng on."},
-            {q:"The shop opens _______ 8:00 a.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
-            {q:"They got married _______ 2005.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"He plays tennis _______ Saturday afternoon.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
-            {q:"Look at the birds _______ the sky.", o:optPrep, c:0, t:"prep", e:"Không gian bầu trời dùng in."},
-            {q:"The toys are _______ the box.", o:optPrep, c:0, t:"prep", e:"Trong hộp dùng in."},
-            {q:"He works _______ an office.", o:optPrep, c:0, t:"prep", e:"Văn phòng dùng in."},
-            {q:"We go skiing _______ winter.", o:optPrep, c:0, t:"prep", e:"Mùa dùng in."},
-            {q:"The party is _______ Thursday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng on."},
-            {q:"_______ homework do you have tonight?", o:optHow, c:0, t:"how", e:"homework không đếm được."},
-            {q:"_______ mistakes did you make?", o:optHow, c:1, t:"how", e:"mistakes đếm được."},
-            {q:"_______ time is left?", o:optHow, c:0, t:"how", e:"time không đếm được."},
-            {q:"_______ pages are in this book?", o:optHow, c:1, t:"how", e:"pages đếm được."},
-            {q:"_______ music do you listen to?", o:optHow, c:0, t:"how", e:"music không đếm được."},
-            {q:"_______ songs are on your phone?", o:optHow, c:1, t:"how", e:"songs đếm được."},
-            {q:"_______ bread did you buy?", o:optHow, c:0, t:"how", e:"bread không đếm được."},
-            {q:"_______ sandwiches do we need?", o:optHow, c:1, t:"how", e:"sandwiches đếm được."},
-            {q:"_______ juice is in the carton?", o:optHow, c:0, t:"how", e:"juice không đếm được."},
-            {q:"_______ cups of tea did you drink?", o:optHow, c:1, t:"how", e:"cups (cốc) đếm được."},
+            {q:"I usually wake up _______ sunrise.", o:optPrep, c:2, t:"prep", e:"'at sunrise'."},
+            {q:"We have a test _______ November 20th.", o:optPrep, c:1, t:"prep", e:"Ngày tháng dùng 'on'."},
+            {q:"The shop opens _______ 8:00 a.m.", o:optPrep, c:2, t:"prep", e:"Giờ dùng 'at'."},
+            {q:"They got married _______ 2005.", o:optPrep, c:0, t:"prep", e:"Năm dùng 'in'."},
+            {q:"He plays tennis _______ Saturday afternoon.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng 'on'."},
+            {q:"Look at the birds _______ the sky.", o:optPrep, c:0, t:"prep", e:"Bầu trời dùng 'in'."},
+            {q:"The toys are _______ the box.", o:optPrep, c:0, t:"prep", e:"Trong hộp dùng 'in'."},
+            {q:"He works _______ an office.", o:optPrep, c:0, t:"prep", e:"Văn phòng dùng 'in'."},
+            {q:"We go skiing _______ winter.", o:optPrep, c:0, t:"prep", e:"Mùa dùng 'in'."},
+            {q:"The party is _______ Thursday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng 'on'."},
+            {q:"_______ homework do you have tonight?", o:optHow, c:0, t:"how", e:"Homework không đếm được."},
+            {q:"_______ mistakes did you make?", o:optHow, c:1, t:"how", e:"Mistakes đếm được."},
+            {q:"_______ time is left?", o:optHow, c:0, t:"how", e:"Time không đếm được."},
+            {q:"_______ pages are in this book?", o:optHow, c:1, t:"how", e:"Pages đếm được."},
+            {q:"_______ music do you listen to?", o:optHow, c:0, t:"how", e:"Music không đếm được."},
+            {q:"_______ songs are on your phone?", o:optHow, c:1, t:"how", e:"Songs đếm được."},
+            {q:"_______ bread did you buy?", o:optHow, c:0, t:"how", e:"Bread không đếm được."},
+            {q:"_______ sandwiches do we need?", o:optHow, c:1, t:"how", e:"Sandwiches đếm được."},
+            {q:"_______ juice is in the carton?", o:optHow, c:0, t:"how", e:"Juice không đếm được."},
+            {q:"_______ cups of tea did you drink?", o:optHow, c:1, t:"how", e:"Cups đếm được."},
             {q:"Let's listen to _______ music.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"I can't see _______ clouds in the sky.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"Do you need _______ help with your homework?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"There are _______ beautiful flowers here.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"We didn't take _______ photos.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
-            {q:"The foot is big. (Sang số nhiều)", o:["The feet are big.", "The foots are big.", "The feet is big.", "The foot are big."], c:0, t:"plu", e:"foot->feet."},
-            {q:"It is a wild deer. (Sang số nhiều)", o:["They are wild deer.", "They are wild deers.", "It are wild deer.", "They is wild deer."], c:0, t:"plu", e:"deer giữ nguyên dạng."},
-            {q:"She is a famous actress. (Sang số nhiều)", o:["They are famous actresses.", "They are famous actresss.", "She are famous actresses.", "They is famous actresses."], c:0, t:"plu", e:"actress->actresses."},
-            {q:"The class is noisy. (Sang số nhiều)", o:["The classes are noisy.", "The classs are noisy.", "The classes is noisy.", "The class are noisy."], c:0, t:"plu", e:"class->classes."},
-            {q:"It is a delicious strawberry. (Sang số nhiều)", o:["They are delicious strawberries.", "They are delicious strawberrys.", "It are delicious strawberries.", "They is delicious strawberries."], c:0, t:"plu", e:"strawberry->strawberries."}
+            {q:"The foot is big.", o:["The feet are big.","The foots are big.","The feet is big.","The foot are big."], c:0, t:"plu", e:"foot->feet."},
+            {q:"It is a wild deer.", o:["They are wild deer.","They are wild deers.","It are wild deer.","They is wild deer."], c:0, t:"plu", e:"deer giữ nguyên dạng."},
+            {q:"She is a famous actress.", o:["They are famous actresses.","They are famous actresss.","She are famous actresses.","They is famous actresses."], c:0, t:"plu", e:"actress->actresses."},
+            {q:"The class is noisy.", o:["The classes are noisy.","The classs are noisy.","The classes is noisy.","The class are noisy."], c:0, t:"plu", e:"class->classes."},
+            {q:"It is a delicious strawberry.", o:["They are delicious strawberries.","They are delicious strawberrys.","It are delicious strawberries.","They is delicious strawberries."], c:0, t:"plu", e:"strawberry->strawberries."}
         ]
     ];
 
-    const qBank = { prep:[], how:[], some:[], plu:[], obj:[], be:[], wh:[] };
-    
-    // Tự sinh dữ liệu ngẫu nhiên cho kho hỗn hợp
-    const prepWords = [{w:"Monday",c:1},{w:"2025",c:0},{w:"7:00 AM",c:2},{w:"the weekend",c:2},{w:"October",c:0},{w:"the morning",c:0},{w:"night",c:2},{w:"Sunday",c:1},{w:"spring",c:0},{w:"noon",c:2}];
-    const prepSents = ["I will go there", "She arrives", "The class starts", "We play games", "My father works"];
-    for(let i=0; i<40; i++) {
-        let w = prepWords[i%prepWords.length], s = prepSents[i%prepSents.length];
-        qBank.prep.push({q:`${s} _______ ${w.w}.`, o:optPrep, c:w.c, t:"prep", e:"Áp dụng quy tắc In/On/At."});
-    }
+    const qBank = {
+        plu: [{q:"I have two ___ in my pencil case.", o:["pen","pens","a pen","penes"], c:1, e:"Số nhiều của pen là pens."},{q:"There is ___ cat under the table.", o:["a","an","two","some"], c:0, e:"Số ít dùng a."},{q:"How many ___ are there in the classroom?", o:["child","childs","children","baby"], c:2, e:"Số nhiều bất quy tắc của child là children."},{q:"My mother bought three ___ at the market.", o:["fish","fishes","fishs","fihesh"], c:0, e:"Fish giữ nguyên dạng số nhiều."},{q:"Look at those ___ running!", o:["dog","dogs","doges","doggies"], c:1, e:"Those đi với số nhiều dogs."}],
+        obj: [{q:"Mary is talking to Tom. She likes ___.", o:["he","him","his","himself"], c:1, e:"Tân ngữ của he là him."},{q:"This gift is for you. Do you like ___?", o:["it","its","they","them"], c:0, e:"Tân ngữ vật số ít là it."},{q:"We are waiting for ___ at the bus stop.", o:["they","them","their","theirs"], c:1, e:"Tân ngữ của they là them."},{q:"Can you help ___?", o:["I","my","me","mine"], c:2, e:"Tân ngữ của I là me."},{q:"Peter is my friend. I trust ___.", o:["he","him","his","it"], c:1, e:"Tân ngữ chỉ nam là him."}],
+        be: [{q:"I ___ a student.", o:["am","is","are","be"], c:0, e:"I am."},{q:"My mother ___ a teacher.", o:["am","is","are","be"], c:1, e:"Ngôi thứ 3 số ít dùng is."},{q:"They ___ playing football.", o:["am","is","are","be"], c:2, e:"Số nhiều dùng are."},{q:"___ you happy today?", o:["Am","Is","Are","Do"], c:2, e:"You dùng are."},{q:"The weather ___ nice.", o:["am","is","are","be"], c:1, e:"Danh từ không đếm được dùng is."}],
+        wh: [{q:"___ is your name?", o:["What","Who","Where","When"], c:0, e:"Hỏi tên dùng What."},{q:"___ old are you?", o:["What","How","Where","Who"], c:1, e:"Hỏi tuổi dùng How old."},{q:"___ do you live?", o:["What","Who","Where","When"], c:2, e:"Hỏi nơi chốn dùng Where."},{q:"___ is that man?", o:["What","Who","Where","When"], c:1, e:"Hỏi người dùng Who."},{q:"___ do you like English? - Because it is fun.", o:["What","Where","Why","Who"], c:2, e:"Hỏi lý do dùng Why."}],
+        prep: [{q:"My birthday is ___ June.", o:optPrep, c:0, e:"Tháng dùng in."},{q:"We don't go to school ___ Sundays.", o:optPrep, c:1, e:"Thứ dùng on."},{q:"The film starts ___ 8:00 PM.", o:optPrep, c:2, e:"Giờ dùng at."},{q:"Birds fly to the south ___ winter.", o:optPrep, c:0, e:"Mùa dùng in."},{q:"We celebrate Christmas ___ December 25th.", o:optPrep, c:1, e:"Ngày cụ thể dùng on."}],
+        some: [{q:"I have ___ apples.", o:optSome, c:0, e:"Khẳng định dùng some."},{q:"Do you have ___ questions?", o:optSome, c:1, e:"Câu hỏi dùng any."},{q:"There isn't ___ milk.", o:optSome, c:1, e:"Phủ định dùng any."},{q:"Would you like ___ tea?", o:optSome, c:0, e:"Mời lịch sự dùng some."},{q:"She doesn't want ___ help.", o:optSome, c:1, e:"Phủ định dùng any."}],
+        how: [{q:"___ books do you have?", o:optHow, c:1, e:"Books đếm được -> How many."},{q:"___ is this dress?", o:optHow, c:0, e:"Hỏi giá tiền -> How much."},{q:"___ water do you drink?", o:optHow, c:0, e:"Water không đếm được -> How much."},{q:"___ apples do you want?", o:optHow, c:1, e:"Apples đếm được -> How many."},{q:"___ money do you have?", o:optHow, c:0, e:"Money không đếm được -> How much."}]
+    };
 
-    const howWords = [{w:"apples",c:1},{w:"water",c:0},{w:"money",c:0},{w:"students",c:1},{w:"sugar",c:0}];
-    const howSents = ["do you have?", "do you need?", "are there?"];
-    for(let i=0; i<40; i++) {
-        let hw = howWords[i%howWords.length], hs = howSents[i%howSents.length];
-        qBank.how.push({q:`_______ ${hw.w} ${hs}`, o:optHow, c:hw.c, t:"how", e:`'${hw.w}' ${hw.c===1?'đếm được':'không đếm được'}.`});
-    }
-
-    const someWords = ["apples", "water", "books", "money"];
-    const someSents = [{s:"I have",c:0},{s:"Do you have",c:1},{s:"There isn't",c:1},{s:"Would you like",c:0}];
-    for(let i=0; i<40; i++) {
-        let sw = someWords[i%someWords.length], ss = someSents[i%someSents.length];
-        qBank.some.push({q:`${ss.s} _______ ${sw}.`, o:optSome, c:ss.c, t:"some", e:ss.c===0?'Khẳng định/mời dùng some.':'Phủ định/hỏi dùng any.'});
-    }
-
-    const pluWords = [{s:"cat",p:"cats"},{s:"box",p:"boxes"},{s:"child",p:"children"},{s:"man",p:"men"},{s:"tooth",p:"teeth"}];
-    for(let i=0; i<40; i++) {
-        let pw = pluWords[i%pluWords.length];
-        qBank.plu.push({q:`Chuyển sang số nhiều: a ${pw.s}`, o:[`${pw.p}`, `a ${pw.p}`, `${pw.s}s`, `many ${pw.s}`], c:0, t:"plu", e:`Số nhiều của '${pw.s}' là '${pw.p}'.`});
-    }
-
-    const objPairs = [{s:"Mary",c:3,o:["he","him","his","her"]},{s:"Tom",c:1,o:["he","him","his","her"]},{s:"my friends",c:2,o:["they","their","them","us"]}];
-    for(let i=0; i<40; i++) {
-        let op = objPairs[i%objPairs.length];
-        qBank.obj.push({q:`Please help _______. (${op.s})`, o:op.o, c:op.c, t:"obj", e:`Tân ngữ cho '${op.s}'.`});
-    }
-
-    const beSubj = [{s:"I",c:0},{s:"He",c:1},{s:"She",c:1},{s:"We",c:2},{s:"They",c:2}];
-    for(let i=0; i<40; i++) {
-        let bs = beSubj[i%beSubj.length];
-        qBank.be.push({q:`${bs.s} _______ happy.`, o:["am","is","are","be"], c:bs.c, t:"be", e:`'${bs.s}' dùng to be tương ứng.`});
-    }
-
-    const whData = [{a:"What",q:"_______ is your name?"},{a:"How",q:"_______ old are you?"},{a:"Where",q:"_______ do you live?"},{a:"When",q:"_______ is your birthday?"}];
-    for(let i=0; i<40; i++) {
-        let wd = whData[i%whData.length];
-        let opts = ["What","Who","Where","When","Why","How"].sort(()=>0.5-Math.random()).slice(0,3);
-        if(!opts.includes(wd.a)) opts[0] = wd.a;
-        opts.push("Do"); opts = opts.sort(()=>0.5-Math.random());
-        qBank.wh.push({q:wd.q, o:opts, c:opts.indexOf(wd.a), t:"wh", e:"Chọn từ để hỏi phù hợp ngữ cảnh."});
-    }
-
-    // ==========================================
-    // PHẦN 2: THUẬT TOÁN ĐIỀU HƯỚNG & LÀM BÀI
-    // ==========================================
     let allExams = [], curIdx = 0, curQIdx = 0, uAns = [], curMode = 'mixed';
     const shuffle = a => [...a].sort(()=>0.5-Math.random());
 
     function genMixed() {
         allExams = []; let keys = Object.keys(qBank);
-        let counts = { plu:4, obj:4, be:4, wh:4, prep:3, some:3, how:3 };
         for(let i=0; i<20; i++){
             let ex = [];
             keys.forEach(k => {
                 let pool = shuffle(qBank[k]);
-                pool.slice(0, counts[k]).forEach(item => ex.push({...item}));
+                pool.slice(0, 4).forEach(item => ex.push({...item, t:k}));
             });
             allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q}` })));
         }
@@ -633,7 +687,7 @@
                 let ex = [];
                 for(let j=0; j<25; j++) {
                     let itm = sPool[j%sPool.length];
-                    ex.push({...itm, id:j+1, q:`(${j+1}) ${itm.q}`});
+                    ex.push({...itm, id:j+1, q:`(${j+1}) ${itm.q}`, t:k});
                 }
                 allExams.push(ex);
             }
@@ -659,7 +713,7 @@
             
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen-theory').classList.add('active');
-            document.getElementById('theoryContentArea').innerHTML = fullTheoryHTML;
+            renderTheoryMenu(); // Hàm render menu lý thuyết
             return;
         }
 
@@ -669,39 +723,101 @@
         document.getElementById('historyWrapper').style.display = 'block';
         
         let desc = document.getElementById('selectDesc');
-        if(mode==='mixed') { desc.innerText = "Chọn đề tổng hợp bên dưới (25 câu - Phân bổ đều không trùng lặp)"; genMixed(); }
+        if(mode==='mixed') { desc.innerText = "Chọn đề tổng hợp bên dưới (Phân bổ đều)"; genMixed(); }
         else if(mode==='practice') { desc.innerText = "Chọn đề ôn tập thực chiến bên dưới (30 câu/đề)"; genPractice(); }
         else { desc.innerText = "Chọn chuyên đề ôn luyện sâu bên dưới (25 câu/đề)"; genTopic(); }
         
         const grid = document.getElementById('examGrid'); grid.innerHTML = '';
-        if(mode !== 'topic') {
-            let len = mode==='mixed' ? 20 : pExams.length;
+        if(mode!=='topic') {
+            let len = mode==='mixed'?20:7;
             for(let i=0; i<len; i++) {
-                let b = document.createElement('button'); b.className = 'exam-btn'; 
-                b.innerText = mode==='mixed' ? `Đề Tổng Hợp ${i+1} 🌟` : `Đề Ôn Tập ${i+1} 📚`;
-                b.onclick = () => start(i); grid.appendChild(b);
+                let b = document.createElement('button'); b.className='exam-btn'; 
+                b.innerText = mode==='mixed'?`Đề Tổng Hợp ${i+1} 🌟`:`Đề Ôn Tập ${i+1} 📚`;
+                b.onclick = ()=>start(i); grid.appendChild(b);
             }
         } else {
             Object.keys(topics).forEach((k, tI) => {
                 for(let s=0; s<8; s++) {
-                    let b = document.createElement('button'); b.className = 'exam-btn';
-                    b.innerText = `${tI+1}.${s+1} ${topics[k].name.substring(0,10)}... 🎯`;
-                    b.onclick = () => start(tI*8+s); grid.appendChild(b);
+                    let b = document.createElement('button'); b.className='exam-btn';
+                    b.innerText = `${tI+1}.${s+1} ${k.substring(0,4)}... 🎯`;
+                    b.onclick = ()=>start(tI*8+s); grid.appendChild(b);
                 }
             });
         }
     }
 
+    function init() { switchTab('mixed'); }
+
+    // ==========================================
+    // CÁC HÀM XỬ LÝ LÝ THUYẾT CHI TIẾT
+    // ==========================================
+    function renderTheoryMenu() {
+        document.getElementById('theoryMenu').style.display = 'block';
+        document.getElementById('theoryLesson').style.display = 'none';
+        
+        const theoryGrid = document.getElementById('theoryGrid');
+        theoryGrid.innerHTML = '';
+        
+        Object.keys(theoryLessons).forEach(key => {
+            let b = document.createElement('button');
+            b.className = 'theory-menu-btn';
+            b.innerHTML = `📚 ${theoryLessons[key].title}`;
+            b.onclick = () => openTheoryLesson(key);
+            theoryGrid.appendChild(b);
+        });
+    }
+
+    function openTheoryLesson(key) {
+        document.getElementById('theoryMenu').style.display = 'none';
+        document.getElementById('theoryLesson').style.display = 'block';
+        document.getElementById('theoryContentArea').innerHTML = theoryLessons[key].content;
+    }
+
+    function backToTheoryMenu() {
+        document.getElementById('theoryMenu').style.display = 'block';
+        document.getElementById('theoryLesson').style.display = 'none';
+        document.getElementById('theoryContentArea').innerHTML = '';
+    }
+
+    function checkPracInput(el) {
+        let val = el.value.trim().toLowerCase();
+        let ans = el.getAttribute('data-ans').toLowerCase();
+        if(val === "") {
+            el.style.borderColor = '#cbd5e1'; el.style.backgroundColor = '#fff'; el.style.color = '#334155';
+            return;
+        }
+        if(val === ans) {
+            el.style.borderColor = 'var(--success)'; el.style.backgroundColor = '#d1fae5'; el.style.color = '#065f46';
+        } else {
+            el.style.borderColor = 'var(--danger)'; el.style.backgroundColor = '#ffe4e6'; el.style.color = '#9f1239';
+        }
+    }
+
+    function checkPracSelect(el) {
+        let val = el.value;
+        let ans = el.getAttribute('data-ans');
+        if(val === "") {
+            el.style.borderColor = '#cbd5e1'; el.style.backgroundColor = '#fff'; el.style.color = '#334155';
+        } else if(val === ans) {
+            el.style.borderColor = 'var(--success)'; el.style.backgroundColor = '#d1fae5'; el.style.color = '#065f46';
+        } else {
+            el.style.borderColor = 'var(--danger)'; el.style.backgroundColor = '#ffe4e6'; el.style.color = '#9f1239';
+        }
+    }
+
+    // ==========================================
+    // CÁC HÀM XỬ LÝ LÀM BÀI & KẾT QUẢ
+    // ==========================================
     function start(idx) {
         curIdx = idx; curQIdx = 0; 
         uAns = new Array(allExams[curIdx].length).fill(null);
         let tt = "";
-        if(curMode==='mixed') tt = `🚀 Đề Tổng Hợp Số ${idx+1}`;
-        else if(curMode==='practice') tt = `📚 Ôn Tập Thực Chiến: Đề Số ${idx+1}`;
-        else tt = `🎯 Ôn Tập Chuyên Đề ${ (idx%8)+1 }`;
+        if(curMode==='mixed') tt = `🚀 Tổng Hợp: Đề ${idx+1}`;
+        else if(curMode==='practice') tt = `📚 Ôn Tập: Đề ${idx+1}`;
+        else tt = `🎯 Chuyên Đề ${ (idx%8)+1 }`;
         
         document.getElementById('examTitle').innerText = tt;
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
         document.getElementById('screen-quiz').classList.add('active');
         renderQ();
     }
@@ -712,34 +828,25 @@
         document.getElementById('questionText').innerText = q.q;
         let opts = document.getElementById('optionsList'); opts.innerHTML = '';
         q.o.forEach((opt, i) => {
-            let d = document.createElement('div'); 
-            d.className = 'option-item ' + (uAns[curQIdx]===i ? 'selected' : '');
+            let d = document.createElement('div'); d.className = 'option-item '+(uAns[curQIdx]===i?'selected':'');
             d.innerText = `${String.fromCharCode(65+i)}. ${opt}`;
-            d.onclick = () => { uAns[curQIdx] = i; renderQ(); }; 
-            opts.appendChild(d);
+            d.onclick = ()=>{ uAns[curQIdx]=i; renderQ(); }; opts.appendChild(d);
         });
-        document.getElementById('prevBtn').style.display = curQIdx===0 ? 'none' : 'block';
-        document.getElementById('nextBtn').innerText = curQIdx===tot-1 ? 'Nộp Bài 🎯' : 'Câu tiếp theo ➡';
+        document.getElementById('prevBtn').style.display = curQIdx===0?'none':'block';
+        document.getElementById('nextBtn').innerText = curQIdx===tot-1?'Nộp Bài 🎯':'Câu tiếp theo ➡';
     }
 
-    function confirmHome() {
-        if(confirm("Bạn có muốn dừng làm bài và quay về trang chủ? Tiến trình sẽ bị hủy.")) {
-            returnToSelect();
-        }
-    }
-    
-    function returnToSelect() {
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    function confirmHome() { if(confirm("Bạn muốn quay về trang chủ? Tiến trình sẽ không lưu.")) {
+        returnToSelect();
+    }}
+    function returnToSelect() { 
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
         document.getElementById('screen-select').classList.add('active');
-        switchTab('mixed'); // Reset tab về mặc định
+        switchTab('mixed'); 
     }
-    
-    function prevQuestion() { if(curQIdx > 0) { curQIdx--; renderQ(); } }
+    function prevQuestion() { if(curQIdx>0) { curQIdx--; renderQ(); } }
     function nextQuestion() { if(curQIdx < allExams[curIdx].length-1) { curQIdx++; renderQ(); } else finish(); }
 
-    // ==========================================
-    // PHẦN 3: LỊCH SỬ & CHẤM ĐIỂM
-    // ==========================================
     function saveHistory(examName, score, total) {
         let history = JSON.parse(localStorage.getItem('quizHistory2') || '[]');
         let date = new Date();
@@ -754,7 +861,7 @@
         let tbody = document.getElementById('historyTableBody');
         tbody.innerHTML = '';
         if(history.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: #64748b;">Bạn chưa làm bài thi nào. Hãy thử sức ngay nhé!</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: #64748b;">Bạn chưa làm bài thi nào.</td></tr>';
         } else {
             history.forEach(h => {
                 tbody.innerHTML += `<tr>
@@ -777,25 +884,17 @@
 
     function finish() {
         let sc = 0, stats = {};
-        for(let k in topics) stats[k] = { w:0, n:topics[k].name, theory:topics[k].theory };
+        for(let k in topics) stats[k] = { w:0, n:topics[k].name, th:topics[k].theory };
         let tbody = document.getElementById('resultTableBody'); tbody.innerHTML = '';
-        
         allExams[curIdx].forEach((q, i) => {
-            let isC = uAns[i] === q.c; 
-            if(isC) sc++; else if(stats[q.t]) stats[q.t].w++;
-            
+            let isC = uAns[i]===q.c; if(isC) sc++; else if(stats[q.t]) stats[q.t].w++;
             let uT = uAns[i]!==null ? `${String.fromCharCode(65+uAns[i])}. ${q.o[uAns[i]]}` : "Chưa chọn";
             let cT = `${String.fromCharCode(65+q.c)}. ${q.o[q.c]}`;
-            
-            tbody.innerHTML += `<tr>
-                <td><b>${i+1}</b></td>
+            tbody.innerHTML += `<tr><td><b>${i+1}</b></td>
                 <td><div>${q.q}</div><div style="font-size:13px;margin-top:4px;">Bạn chọn: <span style="color:var(--${isC?'success':'danger'})">${uT}</span></div></td>
-                <td>
-                    <div><span class="${isC?'text-correct':'text-incorrect'}">${isC?'Đúng':'Sai'}</span></div>
-                    ${!isC ? `<div style="font-size:13px; margin-top:3px;">Đáp án đúng: <b>${cT}</b></div>` : ''}
-                    <div class="explanation"><b>Hướng dẫn:</b> ${q.e}</div>
-                </td>
-            </tr>`;
+                <td><div><span class="${isC?'text-correct':'text-incorrect'}">${isC?'Đúng':'Sai'}</span></div>
+                ${!isC?`<div style="font-size:13px;">Đáp án đúng: <b>${cT}</b></div>`:''}
+                <div class="explanation"><b>Hướng dẫn:</b> ${q.e}</div></td></tr>`;
         });
         
         let totalQ = allExams[curIdx].length;
@@ -803,54 +902,18 @@
         
         let examName = document.getElementById('examTitle').innerText.replace('🚀 ', '').replace('📚 ', '').replace('🎯 ', '');
         saveHistory(examName, sc, totalQ);
-
+        
         let badT = null, maxW = -1;
         for(let k in stats) if(stats[k].w > maxW) { maxW = stats[k].w; badT = stats[k]; }
-        
         let txt = document.getElementById('analysisText');
-        if(maxW === 0) {
-            txt.innerHTML = "🌟 <b>Hoàn hảo!</b> Bạn đã trả lời đúng 100%. Nền tảng ngữ pháp của bạn vô cùng tuyệt vời!";
-        } else {
-            txt.innerHTML = `📌 Điểm yếu cần khắc phục: <b style="color:var(--danger)">${badT.n}</b> (sai ${maxW} câu).<br>
-            <div style="background:#ffffff; padding:12px; border-radius:8px; border:1px solid #fde68a; margin-top:10px; font-weight:normal;">${badT.theory}</div>`;
-        }
+        if(maxW===0) txt.innerHTML = "🌟 <b>Hoàn hảo!</b> Bạn đã đúng 100%.";
+        else txt.innerHTML = `📌 Bạn cần ôn thêm: <b style="color:var(--danger)">${badT.n}</b> (sai ${maxW} câu).<br><div style="background:#fff;padding:10px;border-radius:8px;border:1px dashed #fcd34d;margin-top:8px;">${badT.th}</div>`;
         
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
         document.getElementById('screen-result').classList.add('active');
     }
 
-    // ==========================================
-    // PHẦN 4: HÀM CHECK TƯƠNG TÁC LÝ THUYẾT
-    // ==========================================
-    function checkPracInput(el) {
-        let val = el.value.trim().toLowerCase();
-        let ans = el.getAttribute('data-ans').toLowerCase();
-        
-        if(val === "") {
-            el.style.borderColor = '#cbd5e1'; el.style.backgroundColor = '#fff'; el.style.color = '#334155';
-            return;
-        }
-        if(val === ans) {
-            el.style.borderColor = 'var(--success)'; el.style.backgroundColor = '#d1fae5'; el.style.color = '#065f46';
-        } else {
-            el.style.borderColor = 'var(--danger)'; el.style.backgroundColor = '#ffe4e6'; el.style.color = '#9f1239';
-        }
-    }
-
-    function checkPracSelect(el) {
-        let val = el.value;
-        let ans = el.getAttribute('data-ans');
-        
-        if(val === "") {
-            el.style.borderColor = '#cbd5e1'; el.style.backgroundColor = '#fff'; el.style.color = '#334155';
-        } else if(val === ans) {
-            el.style.borderColor = 'var(--success)'; el.style.backgroundColor = '#d1fae5'; el.style.color = '#065f46';
-        } else {
-            el.style.borderColor = 'var(--danger)'; el.style.backgroundColor = '#ffe4e6'; el.style.color = '#9f1239';
-        }
-    }
-
-    window.onload = () => switchTab('mixed');
+    window.onload = init;
 </script>
 </body>
 </html>
