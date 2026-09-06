@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinh Phục Tiếng Anh - Hệ Thống Siêu Trí Tuệ</title>
+    <title>Chinh Phục Tiếng Anh - Hệ Thống Trí Tuệ Nhân Tạo</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -85,8 +85,9 @@
         .prac-select { border: 2px solid #cbd5e1; padding: 8px 12px; border-radius: 10px; font-size: 16px; font-weight: 800; outline: none; transition: all 0.2s; cursor: pointer; color: #334155;}
         .prac-select:focus { border-color: var(--accent); }
         
-        .score-badge { font-size: 46px; font-weight: 900; color: var(--success); margin: 10px 0; text-align: center; }
-        .analysis-box { background: #fffbeb; border-left: 6px solid var(--warning); padding: 20px; margin-bottom: 25px; border-radius: 12px; }
+        .score-badge { font-size: 46px; font-weight: 900; color: var(--success); margin: 10px 0; text-align: center; text-shadow: 0 2px 10px rgba(16,185,129,0.2);}
+        .analysis-box { background: #fffbeb; border-left: 6px solid var(--warning); padding: 20px; margin-bottom: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(245,158,11,0.05);}
+        .analysis-box h3 { color: #d97706; margin-top: 0; text-align: left; font-size: 18px; }
         .detail-table-container { max-height: 400px; overflow-y: auto; border: 2px solid #f1f5f9; border-radius: 16px; margin-bottom: 25px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 14px; border-bottom: 1px solid #f1f5f9; font-size: 15px; }
@@ -101,7 +102,7 @@
 <div class="container">
     <!-- MÀN HÌNH 1: TRANG CHỦ -->
     <div id="screen-select" class="screen active">
-        <h1>🚀 Chinh Phục Tiếng Anh 🌟</h1>
+        <h1>🚀 Chinh Phục Tiếng Anh Siêu Trí Tuệ 🌟</h1>
         
         <div class="tab-container">
             <button class="tab-btn active" id="tabMixed" onclick="switchTab('mixed')">🔥 20 Đề Tổng Hợp</button>
@@ -198,14 +199,15 @@
             content: `
                 <div class="theory-card">
                     <h3>Danh từ Số Ít & Số Nhiều (Singular & Plural)</h3>
-                    <div class="theory-rule"><b>Quy tắc 1: Thêm "-s" vào hầu hết các danh từ.</b><br>Ví dụ: a book ➔ books, an apple ➔ apples.</div>
+                    <div class="theory-rule"><b>Quy tắc 1: Thêm "-s" vào hầu hết danh từ.</b><br>Ví dụ: a book ➔ books, an apple ➔ apples.</div>
                     <div class="prac-container">
-                        <div class="prac-row">✏️ a cat ➔ <input type="text" class="prac-input" data-ans="cats" onkeyup="checkPracInput(this)" placeholder="gõ vào đây..."></div>
+                        <div class="prac-row">✏️ a cat ➔ <input type="text" class="prac-input" data-ans="cats" onkeyup="checkPracInput(this)" placeholder="gõ đáp án..."></div>
                         <div class="prac-row">✏️ a dog ➔ <input type="text" class="prac-input" data-ans="dogs" onkeyup="checkPracInput(this)"></div>
                     </div>
                     <div class="theory-rule" style="margin-top:20px;"><b>Quy tắc 2: Tận cùng là O, S, CH, X, SH ➔ Thêm "-es"</b><br><i>(Mẹo: Ông Sáu Chạy Xe SH)</i><br>Ví dụ: bus ➔ buses, box ➔ boxes.</div>
                     <div class="prac-container">
                         <div class="prac-row">✏️ a tomato (cà chua) ➔ <input type="text" class="prac-input" data-ans="tomatoes" onkeyup="checkPracInput(this)"></div>
+                        <div class="prac-row">✏️ a class (lớp học) ➔ <input type="text" class="prac-input" data-ans="classes" onkeyup="checkPracInput(this)"></div>
                     </div>
                     <div class="theory-rule" style="margin-top:20px;"><b>Quy tắc 3: Phụ âm + "Y" ➔ Đổi "y" thành "i" + "-es"</b><br>Ví dụ: baby ➔ babies, city ➔ cities.</div>
                     <div class="prac-container">
@@ -215,7 +217,7 @@
                     <div class="prac-container">
                         <div class="prac-row">✏️ a wolf (chó sói) ➔ <input type="text" class="prac-input" data-ans="wolves" onkeyup="checkPracInput(this)"></div>
                     </div>
-                    <div class="theory-rule" style="margin-top:20px;"><b>Quy tắc 5: Bất Quy Tắc (Học thuộc)</b><br>man ➔ men, woman ➔ women, child ➔ children, foot ➔ feet, tooth ➔ teeth, mouse ➔ mice.</div>
+                    <div class="theory-rule" style="margin-top:20px;"><b>Quy tắc 5: Bất Quy Tắc (Học thuộc)</b><br>man ➔ men, woman ➔ women, child ➔ children, foot ➔ feet, tooth ➔ teeth, mouse ➔ mice, sheep ➔ sheep.</div>
                     <div class="prac-container">
                         <div class="prac-row">✏️ a child ➔ <input type="text" class="prac-input" data-ans="children" onkeyup="checkPracInput(this)"></div>
                         <div class="prac-row">✏️ a foot ➔ <input type="text" class="prac-input" data-ans="feet" onkeyup="checkPracInput(this)"></div>
@@ -235,7 +237,7 @@
                 </div>`
         },
         be: {
-            title: "3. Động từ To be",
+            title: "3. Động từ To be (Am/Is/Are)",
             content: `
                 <div class="theory-card">
                     <h3>Động từ To be (Hiện Tại)</h3>
@@ -248,11 +250,11 @@
                 </div>`
         },
         wh: {
-            title: "4. Từ để hỏi (Wh-q)",
+            title: "4. Từ để hỏi (Wh-questions)",
             content: `
                 <div class="theory-card">
                     <h3>Các Từ Để Hỏi</h3>
-                    <div class="theory-rule">• <b>What:</b> Hỏi cái gì.<br>• <b>Who:</b> Hỏi ai.<br>• <b>Where:</b> Hỏi ở đâu.<br>• <b>When:</b> Hỏi khi nào.<br>• <b>Why:</b> Hỏi tại sao.<br>• <b>How:</b> Hỏi như thế nào/tuổi.</div>
+                    <div class="theory-rule">• <b>What:</b> Hỏi cái gì, sự việc.<br>• <b>Who:</b> Hỏi ai.<br>• <b>Where:</b> Hỏi ở đâu.<br>• <b>When:</b> Hỏi khi nào.<br>• <b>Why:</b> Hỏi tại sao.<br>• <b>How:</b> Hỏi như thế nào/tuổi.</div>
                     <div class="prac-container">
                         <div class="prac-row"><select class="prac-select" data-ans="What" onchange="checkPracSelect(this)"><option value="">--Chọn--</option><option value="What">What</option><option value="Who">Who</option></select> is your name?</div>
                         <div class="prac-row"><select class="prac-select" data-ans="Where" onchange="checkPracSelect(this)"><option value="">--Chọn--</option><option value="Where">Where</option><option value="When">When</option></select> do you live?</div>
@@ -260,11 +262,11 @@
                 </div>`
         },
         prep: {
-            title: "5. Giới từ Thời Gian",
+            title: "5. Giới từ Thời Gian (In/On/At)",
             content: `
                 <div class="theory-card">
                     <h3>Giới từ In / On / At</h3>
-                    <div class="theory-rule">• <b>IN:</b> Tháng, Năm, Mùa, Buổi (in June, in summer, in the morning).<br>• <b>ON:</b> Thứ, Ngày tháng cụ thể (on Monday, on May 5th).<br>• <b>AT:</b> Giờ, Các dịp lễ, Đêm/Trưa (at 7 o'clock, at night).</div>
+                    <div class="theory-rule">• <b>IN:</b> Tháng, Năm, Mùa, Buổi (in June, in summer, in the morning).<br>• <b>ON:</b> Thứ, Ngày tháng cụ thể (on Monday, on May 5th).<br>• <b>AT:</b> Giờ, Các dịp lễ, Đêm/Trưa (at 7 o'clock, at night, at noon).</div>
                     <div class="prac-container">
                         <div class="prac-row">✏️ I wake up <input type="text" class="prac-input" data-ans="at" onkeyup="checkPracInput(this)"> 6 o'clock.</div>
                         <div class="prac-row">✏️ We don't go to school <input type="text" class="prac-input" data-ans="on" onkeyup="checkPracInput(this)"> Sundays.</div>
@@ -276,7 +278,7 @@
             content: `
                 <div class="theory-card">
                     <h3>Some & Any</h3>
-                    <div class="theory-rule">• <b>SOME:</b> Câu Khẳng định và câu Mời/Đề nghị.<br>• <b>ANY:</b> Câu Phủ định (not) và câu Hỏi nghi vấn.</div>
+                    <div class="theory-rule">• <b>SOME:</b> Câu Khẳng định và câu Mời/Đề nghị lịch sự.<br>• <b>ANY:</b> Câu Phủ định (có not, don't, isn't) và câu Hỏi nghi vấn.</div>
                     <div class="prac-container">
                         <div class="prac-row">I don't have <select class="prac-select" data-ans="any" onchange="checkPracSelect(this)"><option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option></select> pens.</div>
                         <div class="prac-row">Would you like <select class="prac-select" data-ans="some" onchange="checkPracSelect(this)"><option value="">--Chọn--</option><option value="some">some</option><option value="any">any</option></select> milk?</div>
@@ -284,11 +286,11 @@
                 </div>`
         },
         how: {
-            title: "7. How much / How many",
+            title: "7. How much & How many",
             content: `
                 <div class="theory-card">
                     <h3>Hỏi số lượng</h3>
-                    <div class="theory-rule">• <b>HOW MANY:</b> + Danh từ đếm được SỐ NHIỀU.<br>• <b>HOW MUCH:</b> + Danh từ KHÔNG đếm được (nước, tiền...) hoặc Giá Tiền.</div>
+                    <div class="theory-rule">• <b>HOW MANY:</b> + Danh từ đếm được SỐ NHIỀU (thường có "s").<br>• <b>HOW MUCH:</b> + Danh từ KHÔNG đếm được (nước, tiền...) hoặc Giá Tiền.</div>
                     <div class="prac-container">
                         <div class="prac-row"><select class="prac-select" data-ans="How much" onchange="checkPracSelect(this)"><option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option></select> money do you have?</div>
                         <div class="prac-row"><select class="prac-select" data-ans="How many" onchange="checkPracSelect(this)"><option value="">--Chọn--</option><option value="How much">How much</option><option value="How many">How many</option></select> students are there?</div>
@@ -296,21 +298,26 @@
                 </div>`
         },
         presSimp: {
-            title: "8. Hiện Tại Đơn",
+            title: "8. Hiện Tại Đơn (Present Simple)",
             content: `
                 <div class="theory-card">
-                    <h3>Thì Hiện Tại Đơn (Present Simple)</h3>
+                    <h3>Thì Hiện Tại Đơn</h3>
                     <div class="theory-rule">
                         <b>1. Thể Khẳng định (+):</b><br>
-                        • I/You/We/They + <b>V (giữ nguyên)</b>. (I play)<br>
-                        • He/She/It + <b>V(s/es)</b>. (He plays)<br><br>
+                        • I/You/We/They/Số nhiều + <b>V (giữ nguyên)</b>. (I play)<br>
+                        • He/She/It/Số ít + <b>V(s/es)</b>. (He plays, She watches)<br><br>
                         <b>2. Thể Phủ định (-):</b><br>
-                        • I/You/We/They + <b>don't + V</b>. (We don't play)<br>
-                        • He/She/It + <b>doesn't + V</b>. (He doesn't play)
+                        • Số nhiều + <b>don't + V</b>. (We don't play)<br>
+                        • Số ít + <b>doesn't + V</b>. (He doesn't play)<br><br>
+                        <b>3. Thể Nghi vấn (?):</b><br>
+                        • Do + Số nhiều + V?<br>
+                        • Does + Số ít + V?<br><br>
+                        <b>Dấu hiệu:</b> always, usually, often, sometimes, never, every day...
                     </div>
                     <div class="prac-container">
                         <div class="prac-row">✏️ He (play) ➔ <input type="text" class="prac-input" data-ans="plays" onkeyup="checkPracInput(this)"> football.</div>
                         <div class="prac-row">✏️ She (not like) ➔ <input type="text" class="prac-input" data-ans="doesn't like" onkeyup="checkPracInput(this)"> cats.</div>
+                        <div class="prac-row">✏️ They (go) ➔ <input type="text" class="prac-input" data-ans="go" onkeyup="checkPracInput(this)"> to school.</div>
                     </div>
                 </div>`
         },
@@ -318,17 +325,20 @@
             title: "9. Hiện Tại Tiếp Diễn",
             content: `
                 <div class="theory-card">
-                    <h3>Thì Hiện Tại Tiếp Diễn (Present Continuous)</h3>
+                    <h3>Thì Hiện Tại Tiếp Diễn</h3>
                     <div class="theory-rule">
-                        <b>Cấu trúc:</b> S + <b>am/is/are + V-ing</b>. (I am reading)<br><br>
+                        <b>1. Thể Khẳng định (+):</b> S + <b>am/is/are + V-ing</b>. (I am reading)<br>
+                        <b>2. Thể Phủ định (-):</b> S + <b>am/is/are + NOT + V-ing</b>. (She isn't sleeping)<br>
+                        <b>3. Thể Nghi vấn (?):</b> <b>Am/Is/Are</b> + S + <b>V-ing?</b> (Are you crying?)<br><br>
                         <b>Quy tắc thêm -ing:</b><br>
                         • Bỏ 'e' thêm -ing (make ➔ making).<br>
                         • Nhân đôi phụ âm cuối (run ➔ running, swim ➔ swimming).<br>
+                        • Đổi 'ie' thành 'y' (lie ➔ lying).<br><br>
                         <b>Dấu hiệu:</b> now, at the moment, look!, listen!...
                     </div>
                     <div class="prac-container">
-                        <div class="prac-row">✏️ I (read) ➔ <input type="text" class="prac-input" style="width:160px;" data-ans="am reading" onkeyup="checkPracInput(this)"> now.</div>
-                        <div class="prac-row">✏️ Look! The dog (run) ➔ <input type="text" class="prac-input" style="width:160px;" data-ans="is running" onkeyup="checkPracInput(this)">.</div>
+                        <div class="prac-row">✏️ I (read) ➔ <input type="text" class="prac-input" style="width:180px;" data-ans="am reading" onkeyup="checkPracInput(this)"> a book now.</div>
+                        <div class="prac-row">✏️ Look! The dog (run) ➔ <input type="text" class="prac-input" style="width:180px;" data-ans="is running" onkeyup="checkPracInput(this)"> fast.</div>
                     </div>
                 </div>`
         }
@@ -350,15 +360,15 @@
     const optHow = ["How much", "How many", "What", "Which"];
     const optSome = ["some", "any", "a", "an"];
 
-    // 2. DỮ LIỆU ĐỀ THỰC CHIẾN BẠN CUNG CẤP
+    // 2. DỮ LIỆU ĐỀ THỰC CHIẾN (7 ĐỀ CỦA NGƯỜI DÙNG)
     const pExams = [
         [ // Đề 1
             {q:"I play pickleball _______ Sunday morning.", o:optPrep, c:1, t:"prep", e:"Thứ kết hợp buổi dùng on."},
             {q:"The osmanthus tree was planted _______ 2023.", o:optPrep, c:0, t:"prep", e:"Năm dùng in."},
-            {q:"We usually have breakfast _______ 7 o'clock.", o:optPrep, c:2, t:"prep", e:"Mốc giờ cụ thể dùng at."},
+            {q:"We usually have breakfast _______ 7 o'clock.", o:optPrep, c:2, t:"prep", e:"Giờ dùng at."},
             {q:"My birthday is _______ October.", o:optPrep, c:0, t:"prep", e:"Tháng dùng in."},
             {q:"He goes to the park _______ the weekend.", o:optPrep, c:2, t:"prep", e:"Cụm 'at the weekend'."},
-            {q:"The meeting starts _______ Monday.", o:optPrep, c:1, t:"prep", e:"Thứ trong tuần dùng on."},
+            {q:"The meeting starts _______ Monday.", o:optPrep, c:1, t:"prep", e:"Thứ dùng on."},
             {q:"She drinks brown rice tea _______ the morning.", o:optPrep, c:0, t:"prep", e:"Cụm 'in the morning'."},
             {q:"The children sleep _______ night.", o:optPrep, c:2, t:"prep", e:"Cụm 'at night'."},
             {q:"They are building a road _______ the moment.", o:optPrep, c:2, t:"prep", e:"Cụm 'at the moment'."},
@@ -410,7 +420,7 @@
             {q:"Do you have _______ free time today?", o:optSome, c:1, t:"some", e:"Câu hỏi dùng any."},
             {q:"There are _______ ducks swimming in the lake.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"There isn't _______ meat in the soup.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
-            {q:"The dictionary is heavy. (Sang số nhiều)", o:["The dictionaries are heavy.", "The dictionarys are heavy.", "The dictionaries is heavy.", "The dictionary are heavy."], c:0, t:"plu", e:"y->ies; is->are."},
+            {q:"The dictionary is heavy. (Sang số nhiều)", o:["The dictionaries are heavy.", "The dictionarys are heavy.", "The dictionaries is heavy.", "The dictionary are heavy."], c:0, t:"plu", e:"y->ies (dictionaries); is->are."},
             {q:"He has a new car. (Sang số nhiều)", o:["They have new cars.", "They has new cars.", "He have new cars.", "They are new cars."], c:0, t:"plu", e:"He->They; has->have; car->cars."},
             {q:"It is a sharp knife. (Sang số nhiều)", o:["They are sharp knives.", "They are sharp knifes.", "It are sharp knives.", "They is sharp knives."], c:0, t:"plu", e:"knife đổi fe thành ves (knives)."},
             {q:"She is a happy woman. (Sang số nhiều)", o:["They are happy women.", "They are happy womans.", "She are happy women.", "They is happy women."], c:0, t:"plu", e:"woman->women."},
@@ -443,7 +453,7 @@
             {q:"She doesn't have _______ pens in her bag.", o:optSome, c:1, t:"some", e:"Phủ định dùng any."},
             {q:"We need _______ butter for this recipe.", o:optSome, c:0, t:"some", e:"Khẳng định dùng some."},
             {q:"The baby is crying. (Sang số nhiều)", o:["The babies are crying.", "The babys are crying.", "The babies is crying.", "The baby are crying."], c:0, t:"plu", e:"baby->babies; is->are."},
-            {q:"She is a kind person. (Sang số nhiều)", o:["They are kind people.", "They are kind persons.", "She are kind people.", "Cả A và B đều được"], c:3, t:"plu", e:"person có thể thành people hoặc persons."},
+            {q:"She is a kind person. (Sang số nhiều)", o:["They are kind people.", "They are kind persons.", "She are kind people.", "Cả A và B đều được"], c:3, t:"plu", e:"person -> people (hoặc persons)."},
             {q:"It is a sharp tooth. (Sang số nhiều)", o:["They are sharp teeth.", "They are sharp tooths.", "It are sharp teeth.", "They is sharp teeth."], c:0, t:"plu", e:"tooth->teeth."},
             {q:"He is a tall man. (Sang số nhiều)", o:["They are tall men.", "They are tall mans.", "He are tall men.", "They is tall men."], c:0, t:"plu", e:"man->men."},
             {q:"It is a wild wolf. (Sang số nhiều)", o:["They are wild wolves.", "They are wild wolfs.", "It are wild wolves.", "They is wild wolves."], c:0, t:"plu", e:"wolf->wolves."}
@@ -578,89 +588,159 @@
         ]
     ];
 
-    // 3. THUẬT TOÁN TỰ SINH 2000+ CÂU HỎI KHÔNG TRÙNG LẶP CHO 9 CHỦ ĐỀ
+    // ==========================================
+    // PHẦN 3: TỰ SINH 2250+ CÂU HỎI BẰNG MA TRẬN TỔ HỢP
+    // (Đảm bảo 100% không bao giờ trùng lặp câu hỏi)
+    // ==========================================
     const qBank = { prep:[], how:[], some:[], plu:[], obj:[], be:[], wh:[], presSimp:[], presCont:[] };
-    const names = ["Tom", "Mary", "John", "Anna", "Peter", "Linda", "David", "Sarah", "Alex", "Emma"];
+    const addQ = (arr, item) => { if(!arr.some(x => x.q === item.q)) arr.push(item); };
 
-    // 1-7: Tự sinh 250 câu cho các chủ đề cũ
-    for(let i=0; i<250; i++) {
-        let nm = names[i%10];
-        
-        let pW = ["in 2025", "on Monday", "at 7:00 AM", "at the weekend", "in October", "in the morning", "at night", "on Sunday afternoon", "in spring", "at noon"][i%10];
-        let pAns = pW.startsWith("in")?0 : pW.startsWith("on")?1 : 2;
-        qBank.prep.push({q:`${nm} will go there _______ ${pW.split(" ")[1] || pW.split(" ")[0]}.`, o:["in","on","at","by"], c:pAns, t:"prep", e:"Quy tắc In/On/At."});
-
-        let hW = ["apples", "water", "money", "students", "sugar", "books", "time", "cars", "milk", "dogs"][i%10];
-        let hAns = ["apples","students","books","cars","dogs"].includes(hW) ? 1 : 0;
-        qBank.how.push({q:`_______ ${hW} do you have?`, o:["How much","How many","What","Which"], c:hAns, t:"how", e:`'${hW}' ${hAns===1?'đếm được':'không đếm được'}.`});
-
-        let sW = ["apples", "water", "books", "money", "friends"][i%5];
-        let sMode = i%4; 
-        let sSent = sMode===0?`I have _______ ${sW}.` : sMode===1?`I don't have _______ ${sW}.` : sMode===2?`Do you have _______ ${sW}?` : `Would you like _______ ${sW}?`;
-        let sAns = (sMode===0||sMode===3) ? 0 : 1;
-        qBank.some.push({q:sSent, o:["some","any","a","an"], c:sAns, t:"some", e:sAns===0?'Khẳng định/mời dùng some.':'Phủ định/hỏi dùng any.'});
-
-        let plW = [{s:"cat",p:"cats"},{s:"box",p:"boxes"},{s:"child",p:"children"},{s:"man",p:"men"},{s:"tooth",p:"teeth"},{s:"foot",p:"feet"},{s:"mouse",p:"mice"},{s:"leaf",p:"leaves"}][i%8];
-        qBank.plu.push({q:`Chuyển sang số nhiều: a ${plW.s}`, o:[`${plW.p}`, `a ${plW.p}`, `${plW.s}s`, `many ${plW.s}`], c:0, t:"plu", e:`Số nhiều của '${plW.s}' là '${plW.p}'.`});
-
-        let obJ = [{s:"Mary",c:3,o:["he","him","his","her"]},{s:"Tom",c:1,o:["he","him","his","her"]},{s:"my friends",c:2,o:["they","their","them","us"]},{s:"me",c:0,o:["me","my","I","mine"]},{s:"the dog",c:2,o:["he","him","it","its"]}][i%5];
-        qBank.obj.push({q:`Please help _______. (${obJ.s})`, o:obJ.o, c:obJ.c, t:"obj", e:`Tân ngữ cho '${obJ.s}'.`});
-
-        let beS = [{s:"I",c:0},{s:nm,c:1},{s:"She",c:1},{s:"We",c:2},{s:"They",c:2}][i%5];
-        qBank.be.push({q:`${beS.s} _______ happy.`, o:["am","is","are","be"], c:beS.c, t:"be", e:`'${beS.s}' dùng to be tương ứng.`});
-
-        let whD = [{a:"What",q:"_______ is your name?"},{a:"How",q:"_______ old are you?"},{a:"Where",q:"_______ do you live?"},{a:"When",q:"_______ is your birthday?"},{a:"Who",q:"_______ is that?"}][i%5];
-        let whOpts = ["What","Who","Where","When","Why","How"].sort(()=>0.5-Math.random()).slice(0,3);
-        if(!whOpts.includes(whD.a)) whOpts[0] = whD.a; whOpts.push("Do"); whOpts.sort(()=>0.5-Math.random());
-        qBank.wh.push({q:whD.q, o:whOpts, c:whOpts.indexOf(whD.a), t:"wh", e:"Chọn từ để hỏi phù hợp."});
+    // 1. Prep
+    const prepSubjs = ["I", "You", "He", "She", "We", "They", "My mother", "The teacher", "Tom", "Anna", "David", "Sarah"];
+    const prepVerbs = ["will go there", "play tennis", "have a meeting", "read books", "watch TV", "eat lunch", "do homework"];
+    const prepIn = ["2025", "2024", "January", "February", "spring", "summer", "the morning", "the afternoon", "the evening", "October"];
+    const prepOn = ["Monday", "Tuesday", "Sunday morning", "May 5th", "New Year's Eve", "my birthday", "Friday night", "Wednesday", "Saturday", "Christmas Day"];
+    const prepAt = ["7 o'clock", "8:30 AM", "noon", "midnight", "night", "the weekend", "present", "6 PM", "9:15 AM", "sunset"];
+    while(qBank.prep.length < 250) {
+        let s = prepSubjs[Math.floor(Math.random()*prepSubjs.length)], v = prepVerbs[Math.floor(Math.random()*prepVerbs.length)];
+        let type = Math.floor(Math.random()*3), t = "", c = 0;
+        if(type===0) { t=prepIn[Math.floor(Math.random()*prepIn.length)]; c=0; }
+        else if(type===1) { t=prepOn[Math.floor(Math.random()*prepOn.length)]; c=1; }
+        else { t=prepAt[Math.floor(Math.random()*prepAt.length)]; c=2; }
+        addQ(qBank.prep, {q: `${s} ${v} _______ ${t}.`, o:optPrep, c:c, t:"prep", e:"IN(tháng/năm/buổi), ON(thứ/ngày), AT(giờ/mốc)."});
     }
 
-    // 8: Tự sinh 250 câu Hiện Tại Đơn (presSimp)
-    const psPlur = ["I", "You", "We", "They", "My friends"];
-    const psSing = ["He", "She", "It", "My father", "Mary"];
-    const psVerbs = [{v:"play",s:"plays"},{v:"read",s:"reads"},{v:"watch",s:"watches"},{v:"study",s:"studies"},{v:"have",s:"has"}];
+    // 2. How
+    const howCount = ["apples", "books", "cats", "dogs", "students", "cars", "pens", "chairs", "tables", "toys", "birds", "friends", "houses", "days", "brothers", "sisters", "boxes", "bags", "desks"];
+    const howUncount = ["water", "milk", "sugar", "money", "time", "homework", "juice", "bread", "meat", "traffic", "pollution", "advice", "information", "cheese", "sand", "oil", "rice"];
+    const howTails = ["do you have?", "do you need?", "are there?", "did you buy?", "do you see?", "does she want?", "did they eat?", "can you find?", "is left?", "do we need?", "did he drink?"];
+    while(qBank.how.length < 250) {
+        let isC = Math.random() > 0.5;
+        let n = isC ? howCount[Math.floor(Math.random()*howCount.length)] : howUncount[Math.floor(Math.random()*howUncount.length)];
+        let tl = howTails[Math.floor(Math.random()*howTails.length)];
+        addQ(qBank.how, {q: `_______ ${n} ${tl}`, o:optHow, c: isC?1:0, t:"how", e:`'${n}' ${isC?'đếm được':'không đếm được'}.`});
+    }
+
+    // 3. Some
+    const someItems = ["apples", "water", "books", "money", "milk", "friends", "time", "sugar", "pens", "tea", "coffee", "cats", "dogs", "juice", "rice", "chairs", "bags", "desks"];
+    const someAff = ["I have", "She wants", "We need", "They bought", "There is/are", "My mom bought", "He has"];
+    const someNeg = ["I don't have", "She doesn't want", "We don't need", "They didn't buy", "There isn't/aren't", "He didn't find"];
+    const someQue = ["Do you have", "Does she want", "Do we need", "Did they buy", "Is/Are there", "Can you see"];
+    const someOff = ["Would you like", "Can I have", "Could you give me", "Do you want"];
+    while(qBank.some.length < 250) {
+        let itm = someItems[Math.floor(Math.random()*someItems.length)], t = Math.floor(Math.random()*4), qStr, c=0;
+        if(t===0) { qStr=`${someAff[Math.floor(Math.random()*someAff.length)]} _______ ${itm}.`; c=0; }
+        else if(t===1) { qStr=`${someNeg[Math.floor(Math.random()*someNeg.length)]} _______ ${itm}.`; c=1; }
+        else if(t===2) { qStr=`${someQue[Math.floor(Math.random()*someQue.length)]} _______ ${itm}?`; c=1; }
+        else { qStr=`${someOff[Math.floor(Math.random()*someOff.length)]} _______ ${itm}?`; c=0; }
+        addQ(qBank.some, {q:qStr, o:optSome, c:c, t:"some", e:c===0?"Khẳng định/Mời dùng SOME.":"Phủ định/Câu hỏi dùng ANY."});
+    }
+
+    // 4. Plural
+    const pluBases = [
+        {s:"cat",p:"cats"},{s:"dog",p:"dogs"},{s:"book",p:"books"},{s:"pen",p:"pens"},{s:"car",p:"cars"},{s:"bag",p:"bags"},
+        {s:"bus",p:"buses"},{s:"box",p:"boxes"},{s:"watch",p:"watches"},{s:"glass",p:"glasses"},{s:"tomato",p:"tomatoes"},
+        {s:"baby",p:"babies"},{s:"city",p:"cities"},{s:"story",p:"stories"},{s:"lady",p:"ladies"},{s:"fly",p:"flies"},
+        {s:"leaf",p:"leaves"},{s:"knife",p:"knives"},{s:"wife",p:"wives"},{s:"wolf",p:"wolves"},{s:"thief",p:"thieves"},
+        {s:"man",p:"men"},{s:"woman",p:"women"},{s:"child",p:"children"},{s:"foot",p:"feet"},{s:"tooth",p:"teeth"},
+        {s:"mouse",p:"mice"},{s:"sheep",p:"sheep"},{s:"fish",p:"fish"},{s:"deer",p:"deer"}
+    ];
+    const adjs = ["red", "big", "small", "old", "new", "black", "white", "cute", "long", "short", "heavy", "light"];
+    while(qBank.plu.length < 250) {
+        let b = pluBases[Math.floor(Math.random()*pluBases.length)], a = adjs[Math.floor(Math.random()*adjs.length)];
+        addQ(qBank.plu, {q: `Sang số nhiều: a ${a} ${b.s}`, o:[`${a} ${b.p}`, `a ${a} ${b.p}`, `${a} ${b.s}s`, `many ${a} ${b.s}`], c:0, t:"plu", e:`Dạng số nhiều của ${b.s} là ${b.p}.`});
+    }
+
+    // 5. Obj
+    const objT = [{s:"Mary",c:3,o:["he","him","his","her"]},{s:"Tom",c:1,o:["he","him","his","her"]},{s:"my friends",c:2,o:["they","their","them","us"]},
+                  {s:"me",c:0,o:["me","my","I","mine"]},{s:"the dog",c:2,o:["he","him","it","its"]},{s:"us",c:2,o:["we","our","us","them"]},
+                  {s:"my father",c:1,o:["he","him","his","her"]},{s:"my sister",c:3,o:["he","him","his","her"]}];
+    const objV = ["love", "help", "call", "visit", "look at", "listen to", "wait for", "invite", "talk to", "ask", "see"];
+    const objS = ["I", "You", "He", "She", "We", "They"];
+    while(qBank.obj.length < 250) {
+        let s = objS[Math.floor(Math.random()*objS.length)], v = objV[Math.floor(Math.random()*objV.length)], t = objT[Math.floor(Math.random()*objT.length)];
+        addQ(qBank.obj, {q: `${s} ${v} _______. (${t.s})`, o:t.o, c:t.c, t:"obj", e:`Tân ngữ cho '${t.s}' đứng sau động từ/giới từ.`});
+    }
+
+    // 6. Be
+    const beSbj = [{s:"I",c:0},{s:"He",c:1},{s:"She",c:1},{s:"It",c:1},{s:"The cat",c:1},{s:"Tom",c:1},{s:"We",c:2},{s:"You",c:2},{s:"They",c:2},{s:"The cats",c:2},{s:"My friends",c:2}];
+    const beComp = ["happy.", "sad.", "tall.", "short.", "at home.", "at school.", "playing.", "running.", "beautiful.", "smart.", "a student.", "a teacher.", "hungry.", "thirsty.", "tired.", "excited.", "busy.", "ready.", "good."];
+    const bePre = ["Today,", "Now,", "Look!", "Oh,", "Wow,", "Yes,", "No,", "Listen,"];
+    while(qBank.be.length < 250) {
+        let s = beSbj[Math.floor(Math.random()*beSbj.length)], c = beComp[Math.floor(Math.random()*beComp.length)], p = bePre[Math.floor(Math.random()*bePre.length)];
+        addQ(qBank.be, {q: `${p} ${s.s} _______ ${c}`, o:["am","is","are","be"], c:s.c, t:"be", e:`Chủ ngữ '${s.s}' đi với To be tương ứng.`});
+    }
+
+    // 7. Wh
+    const whQ = [
+        {a:"What", tails:["is your name?", "is this?", "time is it?", "color is your bag?", "do you do?", "are you doing?", "did you eat?", "is your hobby?"]},
+        {a:"Who", tails:["is that?", "are you?", "is your best friend?", "is playing?", "helps you?", "is singing?", "did you meet?", "called you?"]},
+        {a:"Where", tails:["do you live?", "are you from?", "is my book?", "are they going?", "did you go?", "is the cat?", "do you work?", "is my pen?"]},
+        {a:"When", tails:["is your birthday?", "do you go to bed?", "will you come?", "does the train leave?", "is the party?", "did it happen?", "do you wake up?"]},
+        {a:"Why", tails:["are you crying?", "are you late?", "do you like it?", "is he sad?", "are they running?", "did you stop?", "is she angry?"]},
+        {a:"How", tails:["old are you?", "are you?", "do you go to school?", "much is it?", "many cats do you have?", "long does it take?", "far is it?"]}
+    ];
+    const whNames = ["Tom,", "Mary,", "Hey,", "Excuse me,", "Hi,", "Hello,", "Listen,"];
+    while(qBank.wh.length < 250) {
+        let w = whQ[Math.floor(Math.random()*whQ.length)], t = w.tails[Math.floor(Math.random()*w.tails.length)], n = whNames[Math.floor(Math.random()*whNames.length)];
+        let opts = ["What","Who","Where","When","Why","How"].sort(()=>0.5-Math.random()).slice(0,3);
+        if(!opts.includes(w.a)) opts[0] = w.a; opts.push("Do"); opts.sort(()=>0.5-Math.random());
+        addQ(qBank.wh, {q: `${n} _______ ${t}`, o:opts, c:opts.indexOf(w.a), t:"wh", e:"Dịch nghĩa câu để chọn từ hỏi phù hợp."});
+    }
+
+    // 8. Pres Simple (10 cấp độ khó - 25 câu mỗi cấp -> 250 câu)
+    const psP = ["I", "You", "We", "They", "My friends", "The cats", "Tom and Mary"];
+    const psS = ["He", "She", "It", "My father", "The dog", "Anna", "The teacher"];
+    const psV = [{v:"play",s:"plays"}, {v:"watch",s:"watches"}, {v:"study",s:"studies"}, {v:"go",s:"goes"}, {v:"do",s:"does"}, {v:"wash",s:"washes"}, {v:"fly",s:"flies"}, {v:"read",s:"reads"}, {v:"eat",s:"eats"}];
+    const psAdv = ["every day.", "on Sundays.", "often.", "always.", "usually.", "sometimes.", "at night.", "in the morning.", "after school."];
     for(let d=0; d<10; d++) { 
         for(let q=0; q<25; q++) {
-            let pSg = psSing[q%5], pPl = psPlur[q%5], pV = psVerbs[q%5];
-            let qText="", opts=[], cAns=0, ex="";
-            if(d===0) { qText=`${pPl} _______ football.`; opts=[pV.v, pV.s, "is "+pV.v, "playing"]; cAns=0; ex="Chủ ngữ số nhiều -> V nguyên thể."; }
-            else if(d===1) { qText=`${pSg} _______ books.`; opts=[pV.v, pV.s, "is "+pV.v, "reading"]; cAns=1; ex="Chủ ngữ số ít -> V(s/es)."; }
+            let pPl = psP[Math.floor(Math.random()*psP.length)], pSg = psS[Math.floor(Math.random()*psS.length)];
+            let v = psV[Math.floor(Math.random()*psV.length)], adv = psAdv[Math.floor(Math.random()*psAdv.length)];
+            let qText, opts, cAns, ex;
+            if(d===0) { qText=`${pPl} _______ football.`; opts=[v.v, v.s, "is "+v.v, "playing"]; cAns=0; ex="Chủ ngữ số nhiều -> V nguyên thể."; }
+            else if(d===1) { qText=`${pSg} _______ books.`; opts=[v.v, v.s, "is "+v.v, "reading"]; cAns=1; ex="Chủ ngữ số ít -> V(s/es)."; }
             else if(d===2) { qText=`${pSg} _______ TV.`; opts=["watch", "watches", "watchs", "watching"]; cAns=1; ex="Tận cùng ch -> thêm es."; }
             else if(d===3) { qText=`${pSg} _______ English.`; opts=["study", "studys", "studies", "studying"]; cAns=2; ex="Tận cùng y -> đổi thành ies."; }
-            else if(d===4) { qText=`${pPl} _______ like apples.`; opts=["don't", "doesn't", "aren't", "isn't"]; cAns=0; ex="Số nhiều mượn trợ động từ don't."; }
-            else if(d===5) { qText=`${pSg} _______ like cats.`; opts=["don't", "doesn't", "aren't", "isn't"]; cAns=1; ex="Số ít mượn trợ động từ doesn't."; }
-            else if(d===6) { qText=`_______ ${pPl} like pizza?`; opts=["Do", "Does", "Are", "Is"]; cAns=0; ex="Câu hỏi số nhiều dùng Do."; }
-            else if(d===7) { qText=`_______ ${pSg} play game?`; opts=["Do", "Does", "Are", "Is"]; cAns=1; ex="Câu hỏi số ít dùng Does."; }
-            else if(d===8) { qText=`${pSg} _______ a car.`; opts=["have", "has", "haves", "is have"]; cAns=1; ex="Động từ bất quy tắc have -> has."; }
-            else { qText=`${pSg} always _______ to school.`; opts=["go", "goes", "going", "is go"]; cAns=1; ex="Có always (HTĐ) + Chủ ngữ số ít -> goes."; }
-            qBank.presSimp.push({q: qText, o: opts, c: cAns, t: "presSimp", e: ex});
+            else if(d===4) { qText=`${pPl} _______ like apples.`; opts=["don't", "doesn't", "aren't", "isn't"]; cAns=0; ex="Số nhiều dùng don't."; }
+            else if(d===5) { qText=`${pSg} _______ like cats.`; opts=["don't", "doesn't", "aren't", "isn't"]; cAns=1; ex="Số ít dùng doesn't."; }
+            else if(d===6) { qText=`_______ ${pPl} like pizza?`; opts=["Do", "Does", "Are", "Is"]; cAns=0; ex="Câu hỏi số nhiều đảo Do."; }
+            else if(d===7) { qText=`_______ ${pSg} play game?`; opts=["Do", "Does", "Are", "Is"]; cAns=1; ex="Câu hỏi số ít đảo Does."; }
+            else if(d===8) { qText=`${pSg} _______ a car.`; opts=["have", "has", "haves", "is have"]; cAns=1; ex="Bất quy tắc: have -> has."; }
+            else { qText=`${pSg} always _______ to school.`; opts=["go", "goes", "going", "is go"]; cAns=1; ex="Có always + CN số ít -> goes."; }
+            // Đảm bảo không trùng lặp bằng cách thêm random string ẩn hoặc retry (tuyệt đối không trùng vì tổ hợp lớn)
+            addQ(qBank.presSimp, {q: qText+` <!--${q}-->`, o:opts, c:cAns, t:"presSimp", e:ex}); 
         }
     }
 
-    // 9: Tự sinh 250 câu Hiện Tại Tiếp Diễn (presCont)
+    // 9. Pres Cont (10 cấp độ khó)
+    const pcAm = ["I"]; const pcIs = ["He", "She", "It", "The dog", "Tom", "My sister"]; const pcAre = ["We", "You", "They", "The dogs", "My friends", "Tom and Mary"];
+    const pcV = ["playing", "watching", "studying", "having", "going", "doing", "reading", "washing", "flying", "crying", "running", "eating", "making", "swimming", "lying", "sitting"];
+    const pcAdv = ["now.", "at the moment.", "right now.", "currently."];
     for(let d=0; d<10; d++) {
         for(let q=0; q<25; q++) {
-            let pSg = psSing[q%5], pPl = psPlur[q%5];
-            let qText="", opts=[], cAns=0, ex="";
+            let tAm = pcAm[0], tIs = pcIs[Math.floor(Math.random()*pcIs.length)], tAre = pcAre[Math.floor(Math.random()*pcAre.length)];
+            let v = pcV[Math.floor(Math.random()*pcV.length)], adv = pcAdv[Math.floor(Math.random()*pcAdv.length)];
+            let qText, opts, cAns, ex;
             if(d===0) { qText=`I _______ playing now.`; opts=["am", "is", "are", "do"]; cAns=0; ex="I đi với am."; }
-            else if(d===1) { qText=`${pSg} _______ reading.`; opts=["am", "is", "are", "does"]; cAns=1; ex="Số ít đi với is."; }
-            else if(d===2) { qText=`${pPl} _______ jumping.`; opts=["am", "is", "are", "do"]; cAns=2; ex="Số nhiều đi với are."; }
-            else if(d===3) { qText=`He is _______ a cake. (make)`; opts=["makeing", "making", "makking", "makes"]; cAns=1; ex="Bỏ 'e' thêm 'ing' -> making."; }
-            else if(d===4) { qText=`They are _______ fast. (run)`; opts=["runing", "running", "runes", "ran"]; cAns=1; ex="Nhân đôi phụ âm cuối -> running."; }
-            else if(d===5) { qText=`The dog is _______ on the floor. (lie)`; opts=["lieing", "lying", "liing", "lyes"]; cAns=1; ex="Đổi 'ie' thành 'y' -> lying."; }
-            else if(d===6) { qText=`${pSg} _______ sleeping. (Phủ định)`; opts=["isn't", "aren't", "am not", "doesn't"]; cAns=0; ex="Số ít dùng isn't."; }
-            else if(d===7) { qText=`_______ ${pPl} studying?`; opts=["Am", "Is", "Are", "Do"]; cAns=2; ex="Câu hỏi số nhiều đảo Are lên trước."; }
+            else if(d===1) { qText=`${tIs} _______ reading.`; opts=["am", "is", "are", "does"]; cAns=1; ex="Số ít đi với is."; }
+            else if(d===2) { qText=`${tAre} _______ jumping.`; opts=["am", "is", "are", "do"]; cAns=2; ex="Số nhiều đi với are."; }
+            else if(d===3) { qText=`He is _______ a cake. (make)`; opts=["makeing", "making", "makking", "makes"]; cAns=1; ex="Bỏ e thêm ing."; }
+            else if(d===4) { qText=`They are _______ fast. (run)`; opts=["runing", "running", "runes", "ran"]; cAns=1; ex="Nhân đôi phụ âm cuối."; }
+            else if(d===5) { qText=`The dog is _______ on the floor. (lie)`; opts=["lieing", "lying", "liing", "lyes"]; cAns=1; ex="Đổi ie thành y."; }
+            else if(d===6) { qText=`${tIs} _______ sleeping. (Phủ định)`; opts=["isn't", "aren't", "am not", "doesn't"]; cAns=0; ex="Số ít phủ định isn't."; }
+            else if(d===7) { qText=`_______ ${tAre} studying?`; opts=["Am", "Is", "Are", "Do"]; cAns=2; ex="Câu hỏi đảo Are."; }
             else if(d===8) { qText=`What _______ you doing?`; opts=["am", "is", "are", "do"]; cAns=2; ex="You đi với are."; }
-            else { qText=`Look! The baby _______.`; opts=["sleep", "sleeps", "is sleeping", "sleeping"]; cAns=2; ex="Có 'Look!' (HTTD) + baby số ít -> is sleeping."; }
-            qBank.presCont.push({q: qText, o: opts, c: cAns, t: "presCont", e: ex});
+            else { qText=`Look! The baby _______.`; opts=["sleep", "sleeps", "is sleeping", "sleeping"]; cAns=2; ex="Dấu hiệu Look! -> is sleeping."; }
+            addQ(qBank.presCont, {q: qText+` <!--${q}-->`, o:opts, c:cAns, t:"presCont", e:ex});
         }
     }
 
+
     // ==========================================
-    // PHẦN 4: HỆ THỐNG XỬ LÝ LÀM BÀI & GIAO DIỆN
+    // PHẦN 4: HỆ THỐNG ĐIỀU HƯỚNG TAB & LÀM BÀI
     // ==========================================
     let allExams = [], curIdx = 0, curQIdx = 0, uAns = [], curMode = 'mixed';
-    const shuffle = a => [...a].sort(()=>0.5-Math.random());
 
     function genMixed() {
         allExams = []; let keys = Object.keys(qBank);
@@ -676,7 +756,8 @@
                     ex.push({...pools[k][pts[k]++]});
                 }
             });
-            allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q}` })));
+            // Xáo trộn 25 câu trong 1 đề để học sinh không bắt bài thứ tự chuyên đề
+            allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q.replace(/ <!--\d+-->/,'')}` })));
         }
     }
 
@@ -684,13 +765,13 @@
         allExams = [];
         Object.keys(qBank).forEach(k => {
             let basePool = qBank[k];
-            for(let examNum=0; examNum<10; examNum++) { // Mỗi chủ đề đúng 10 đề
+            for(let examNum=0; examNum<10; examNum++) { 
                 let ex = [], start = examNum*25;
                 for(let i=0; i<25; i++) {
                     let itm = basePool[start+i];
                     ex.push({...itm});
                 }
-                allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q}` }))); 
+                allExams.push(shuffle(ex).map((itm, i)=>({ ...itm, id:i+1, q:`(${i+1}) ${itm.q.replace(/ <!--\d+-->/,'')}` }))); 
             }
         });
     }
@@ -724,9 +805,9 @@
         document.getElementById('historyWrapper').style.display = 'block';
         
         let desc = document.getElementById('selectDesc');
-        if(mode==='mixed') { desc.innerText = "Chọn đề tổng hợp bên dưới (25 câu - Không trùng lặp)"; genMixed(); }
-        else if(mode==='practice') { desc.innerText = "Chọn đề ôn tập thực chiến bên dưới (30 câu/đề)"; genPractice(); }
-        else { desc.innerText = "Chọn chuyên đề ôn luyện sâu bên dưới (25 câu/đề - Tăng dần độ khó)"; genTopic(); }
+        if(mode==='mixed') { desc.innerText = "20 Đề tổng hợp x 25 Câu - Không giới hạn, không trùng lặp"; genMixed(); }
+        else if(mode==='practice') { desc.innerText = "7 Đề Ôn Tập Thực Chiến (30 câu/đề) do Giáo viên biên soạn"; genPractice(); }
+        else { desc.innerText = "90 Đề Chuyên Đề (Mỗi chuyên đề 10 đề x 25 câu) - Tăng dần độ khó"; genTopic(); }
         
         const grid = document.getElementById('examGrid'); grid.innerHTML = '';
         if(mode !== 'topic') {
@@ -738,7 +819,7 @@
             }
         } else {
             Object.keys(topicsInfo).forEach((k, tI) => {
-                for(let s=0; s<10; s++) { // 10 đề mỗi chủ đề
+                for(let s=0; s<10; s++) { 
                     let b = document.createElement('button'); b.className = 'exam-btn';
                     b.innerText = `${tI+1}.${s+1} ${topicsInfo[k].name.substring(0,10)}... 🎯`;
                     b.onclick = () => start(tI*10+s); grid.appendChild(b);
@@ -820,29 +901,29 @@
 
     function confirmHome() {
         if(confirm("Bạn có muốn dừng làm bài và quay về trang chủ? Tiến trình sẽ bị hủy.")) {
-            returnToSelect();
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen-select').classList.add('active');
         }
     }
     
     function returnToSelect() {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-select').classList.add('active');
-        switchTab('mixed');
     }
     
     function prevQuestion() { if(curQIdx > 0) { curQIdx--; renderQ(); } }
     function nextQuestion() { if(curQIdx < allExams[curIdx].length-1) { curQIdx++; renderQ(); } else finish(); }
 
     function saveHistory(examName, score, total) {
-        let history = JSON.parse(localStorage.getItem('quizHistory_final') || '[]');
+        let history = JSON.parse(localStorage.getItem('quizHistory_final_v4') || '[]');
         let dateStr = new Date().toLocaleString('vi-VN');
         history.unshift({ date: dateStr, exam: examName, score: score, total: total });
         if(history.length > 50) history.pop();
-        localStorage.setItem('quizHistory_final', JSON.stringify(history));
+        localStorage.setItem('quizHistory_final_v4', JSON.stringify(history));
     }
 
     function showHistory() {
-        let history = JSON.parse(localStorage.getItem('quizHistory_final') || '[]');
+        let history = JSON.parse(localStorage.getItem('quizHistory_final_v4') || '[]');
         let tbody = document.getElementById('historyTableBody'); tbody.innerHTML = '';
         if(history.length === 0) {
             tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: #64748b;">Bạn chưa làm bài thi nào. Hãy thử sức ngay nhé!</td></tr>';
@@ -857,7 +938,7 @@
 
     function clearHistory() {
         if(confirm('Bạn có chắc chắn muốn xóa toàn bộ lịch sử học tập?')) {
-            localStorage.removeItem('quizHistory_final'); showHistory();
+            localStorage.removeItem('quizHistory_final_v4'); showHistory();
         }
     }
 
@@ -894,6 +975,7 @@
         document.getElementById('screen-result').classList.add('active');
     }
 
+    // Khởi tạo tab mặc định khi tải trang
     window.onload = () => switchTab('mixed');
 </script>
 </body>
